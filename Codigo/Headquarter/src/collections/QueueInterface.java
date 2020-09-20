@@ -10,4 +10,6 @@ public interface QueueInterface<E> {
 
 	public boolean isEmpty();
 	
+	public int size();
+	
 }

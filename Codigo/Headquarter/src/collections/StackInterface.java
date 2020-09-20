@@ -12,4 +12,6 @@ public void push(H newValue);
 	
 	public boolean isEmpty();
 	
+	public int size();
+	
 }

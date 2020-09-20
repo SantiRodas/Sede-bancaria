@@ -14,6 +14,7 @@ public class Queue<T> implements QueueInterface<T>{
 		size = 0;
 	}
 	
+	@Override
 	public int size() {
 		return size;
 	}

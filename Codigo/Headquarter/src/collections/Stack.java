@@ -42,12 +42,9 @@ public class Stack<B> implements StackInterface<B>{
 			return null;
 	}
 	
+	@Override
 	public int size() {
 		return size;
-	}
-	
-	public Node<B> getTop(){
-		return top;
 	}
 	
 	@Override
