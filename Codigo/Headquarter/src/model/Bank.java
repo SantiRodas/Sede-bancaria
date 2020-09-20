@@ -117,6 +117,10 @@ public class Bank {
 		
 	}
 	
+	private Client searchClientbyId(String id) {
+		
+	}
+	
 	//------------------------------------------------------------------------------------
 
 }
