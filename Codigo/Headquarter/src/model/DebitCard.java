@@ -1,6 +1,6 @@
 package model;
 
-public class DebitCart {
+public class DebitCard {
 	
 	//------------------------------------------------------------------------------------
 	
@@ -9,10 +9,16 @@ public class DebitCart {
 	private String number;
 	
 	//------------------------------------------------------------------------------------
+
+	// Relations of the DebitCard class
+	
+	private SavingsAccount associatedAccount;
+	
+	//------------------------------------------------------------------------------------
 	
 	// Constructor method of the DebitCard class
 
-	public DebitCart(String number) {
+	public DebitCard(String number) {
 
 		this.number = number;
 		
@@ -32,6 +38,18 @@ public class DebitCart {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Operations of the debit card
+	
+	public boolean debit(double amount) {
+		
+	}
+	
+	public boolean credit(double amount) {
+		
 	}
 	
 	//------------------------------------------------------------------------------------

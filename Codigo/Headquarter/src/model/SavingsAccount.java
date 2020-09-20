@@ -8,13 +8,17 @@ public class SavingsAccount {
 	
 	private double balance;
 	
+	private String number;
+	
 	//------------------------------------------------------------------------------------
 	
 	// Constructor method of the SavingsAccount class
 
-	public SavingsAccount(double balance) {
+	public SavingsAccount(double balance, String number) {
 
 		this.balance = balance;
+		
+		this.number = number;
 		
 	}
 	
@@ -26,12 +30,20 @@ public class SavingsAccount {
 		return balance;
 	}
 	
+	public String getNumber() {
+		return number;
+	}
+	
 	//------------------------------------------------------------------------------------
 	
 	// Set's methods of the SavingsAccount class
 
 	public void setBalance(double balance) {
 		this.balance = balance;
+	}
+	
+	public void setNumber(String number) {
+		this.number = number;
 	}
 	
 	//------------------------------------------------------------------------------------

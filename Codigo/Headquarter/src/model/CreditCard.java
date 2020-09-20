@@ -10,6 +10,13 @@ public class CreditCard {
 	
 	//------------------------------------------------------------------------------------
 	
+	// Relations of the CreditCard class
+	
+	private CurrentAccount associatedAccount;
+	
+	//------------------------------------------------------------------------------------
+	
+	
 	// Constructor method of the CreditCard class
 
 	public CreditCard(String number) {
@@ -32,6 +39,18 @@ public class CreditCard {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Operations of the debit card
+	
+	public boolean pay(double amount) {
+		
+	}
+	
+	public boolean use(double amount) {
+		
 	}
 	
 	//------------------------------------------------------------------------------------
