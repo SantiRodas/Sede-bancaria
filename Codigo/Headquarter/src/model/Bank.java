@@ -243,10 +243,20 @@ public class Bank {
 	
 	//------------------------------------------------------------------------------------
 	
-	//Method to sort the clients by date
+	//Method to sort the clients by date using bubble sort
 	
 	private void sortClientsByStartDate(ActiveClient[] ac) {
-		
+		if(ac!=null && ac.length>1) {
+			for(int i = ac.length;i > 0;i--) {
+				for(int j = 0;j < i-1;j++) {
+					if(ac[j].getStartDate().compareTo(ac[j+1].getStartDate())>0) {
+						ActiveClient temp = ac[j];
+						ac[j] = ac[j+1];
+						ac[j+1] = temp;
+					}
+				}
+			}
+		}
 	}
 	
 	//------------------------------------------------------------------------------------
