@@ -6,6 +6,9 @@
 
 package model;
 
-public enum SortCriteria {
-
+public enum SortCriteria {	
+	NAME,
+	ID,
+	START_DATE,
+	LAST_CREDIT_CARD_PAY_DAY;
 }

@@ -20,11 +20,11 @@ public class SavingsAccount {
 	
 	// Constructor method of the SavingsAccount class
 
-	public SavingsAccount(double balance, String number) {
+	public SavingsAccount(String number) {
 
-		this.balance = balance;
-		
 		this.number = number;
+		
+		balance = 0;
 		
 	}
 	

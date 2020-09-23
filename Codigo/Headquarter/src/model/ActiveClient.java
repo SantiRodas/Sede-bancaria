@@ -14,9 +14,9 @@ public class ActiveClient extends Client {
 	
 	//Constants of the CurrentAccount class
 	
-	public static int MAX_DEBIT_CARDS = 1;
+	public static int MAX_DEBIT_CARDS = 2;
 	
-	public static int MAX_CREDIT_CARDS = 1;
+	public static int MAX_CREDIT_CARDS = 5;
 		
 	//------------------------------------------------------------------------------------
 		
@@ -30,13 +30,14 @@ public class ActiveClient extends Client {
 	
 	// Relations of the ActiveClient class
 	
-	private CurrentAccount cAccount;
+	//Not used but kept for model purposes
+	private CurrentAccount[] cAccounts;
 	
-	private CreditCard cCard;
+	private CreditCard[] cCards;
 	
-	private DebitCard dCard;
+	private DebitCard[] dCards;
 	
-	private SavingsAccount sAccount;
+	private SavingsAccount[] sAccounts;
 	
 	//------------------------------------------------------------------------------------
 
@@ -79,13 +80,16 @@ public class ActiveClient extends Client {
 
 	//Operations of class ActiveClient
 	
-	public boolean payCreditCard(double amount) {
+	public boolean payCreditCard(String cardNumber, double amount) {
 		
-		if(cCard != null) {
+		int i = searchCreditCard(cardNumber); 
+		
+		if(i != -1) {
 			
-			return cCard.pay(amount);
+			return cCards[i].pay(amount);
 			
-		} else {
+		}
+		else {
 			
 			return false;
 			
@@ -95,13 +99,16 @@ public class ActiveClient extends Client {
 	
 	// *****************************************************
 	
-	public boolean retrieveCredit(double amount) {
+	public boolean retrieveCredit(String cardNumber, double amount) {
 		
-		if(cCard != null) {
+		int i = searchCreditCard(cardNumber); 
+		
+		if(i != -1) {
 			
-			return cCard.use(amount);
+			return cCards[i].use(amount);
 			
-		} else {
+		}
+		else {
 			
 			return false;
 			
@@ -111,13 +118,16 @@ public class ActiveClient extends Client {
 	
 	// *****************************************************
 	
-	public boolean retrieveSavings(double amount) {
+	public boolean retrieveSavings(String accountNumber, double amount) {
 		
-		if(dCard != null) {
+		int i = searchSavingsAccount(accountNumber); 
+		
+		if(i != -1) {
 			
-			return dCard.debit(amount);
+			return sAccounts[i].debit(amount);
 			
-		} else {
+		}
+		else {
 			
 			return false;
 			
@@ -127,54 +137,136 @@ public class ActiveClient extends Client {
 	
 	// *****************************************************
 	
-	public boolean addSavings(double amount) {
+	public boolean addSavings(String accountNumber, double amount) {
 		
-		if(dCard != null) {
+		int i = searchSavingsAccount(accountNumber); 
+		
+		if(i != -1) {
 			
-			return dCard.credit(amount);
+			return sAccounts[i].credit(amount);
 			
-		} else {
+		}
+		else {
 			
 			return false;
 			
 		}
-		
 	}
 	
 	// *****************************************************
 	
-	public boolean createDebitCard(String number) {
+	public boolean createSavingsAccount(String accountNumber, String cardNumber) {
 		
-		if(dCard != null) {
+		if(searchSavingsAccount(accountNumber) == -1) {
 			
-			dCard = new DebitCard(number);
+			int emptySlotIndex = -1;
 			
-			return true;
+			for (int i = 0; i < sAccounts.length; i++) {
+				
+				if(sAccounts[i] == null) {
+					
+					emptySlotIndex = i;
+					
+				}
+				
+			}
 			
-		} else {
+			if(emptySlotIndex != -1) {
+				
+				sAccounts[emptySlotIndex] = new SavingsAccount(accountNumber);
+				
+				dCards[emptySlotIndex] = new DebitCard(cardNumber);
+				
+				dCards[emptySlotIndex].setAssociatedSAccount(sAccounts[emptySlotIndex]);
+			
+				return true;
+				
+			}
+			else {
+				
+				return false;
+				
+			}
+		}
+		else {
 			
 			return false;
-			
+		
 		}
 		
 	}
 	
-	// *****************************************************
-	
-	public boolean createCreditCard(String number) {
+	private int searchSavingsAccount(String accountNumber) {
 		
-		if(cCard != null) {
-			
-			cCard = new CreditCard(number);
-			
-			return true;
-			
-		} else {
-			
-			return false;
+		for (int i = 0 ; i < sAccounts.length ; i++) {
+		
+			if(sAccounts[i].getNumber().equals(accountNumber)) {
+				
+				return i;
+				
+			}
 			
 		}
 		
+		return -1;		
+	}
+	
+	// *****************************************************
+	
+	public boolean createCreditCard(String cardNumber, String accountNumber) {
+		
+		if(searchCreditCard(cardNumber) == -1) {
+			
+			int emptySlotIndex = -1;
+			
+			for (int i = 0; i < cCards.length; i++) {
+				
+				if(cCards[i] == null) {
+					
+					emptySlotIndex = i;
+					
+				}
+				
+			}
+			
+			if(emptySlotIndex != -1) {
+				
+				cCards[emptySlotIndex] = new CreditCard(cardNumber);
+				
+				cAccounts[emptySlotIndex] = new CurrentAccount(accountNumber);
+				
+				cCards[emptySlotIndex].setAssociatedCAccount(cAccounts[emptySlotIndex]);
+			
+				return true;
+				
+			}
+			else {
+				
+				return false;
+				
+			}
+		}
+		else {
+			
+			return false;
+		
+		}
+	
+	}	
+	
+	private int searchCreditCard(String cardNumber) {
+		
+		for (int i = 0 ; i < cCards.length ; i++) {
+		
+			if(cCards[i].getNumber().equals(cardNumber)) {
+				
+				return i;
+				
+			}
+			
+		}
+		
+		return -1;		
 	}
 	
 	//------------------------------------------------------------------------------------
