@@ -12,7 +12,7 @@ public class DebitCard {
 
 	// Relations of the DebitCard class
 	
-	private SavingsAccount associatedAccount;
+	private SavingsAccount associatedSAccount;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -32,24 +32,28 @@ public class DebitCard {
 		return number;
 	}
 	
+	public String getAssociatedAccountNumber() {
+		return associatedSAccount.getNumber();
+	}
+	
+	public double getBalance() {
+		return associatedSAccount.getBalance();
+	}
+	
 	//------------------------------------------------------------------------------------
 	
 	// Set's methods of the DebitCard class
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
 	
 	//------------------------------------------------------------------------------------
 	
 	//Operations of the debit card
 	
 	public boolean debit(double amount) {
-		
+		return associatedSAccount.debit(amount);
 	}
 	
 	public boolean credit(double amount) {
-		
+		return associatedSAccount.credit(amount);
 	}
 	
 	//------------------------------------------------------------------------------------

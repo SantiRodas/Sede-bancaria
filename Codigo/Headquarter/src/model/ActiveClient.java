@@ -8,7 +8,7 @@ public class ActiveClient extends Client {
 	
 	//Constants of the CurrentAccount class
 	
-	public static int MAX_DEBIT_CARDS = 5;
+	public static int MAX_DEBIT_CARDS = 1;
 	
 	public static int MAX_CREDIT_CARDS = 1;
 		
@@ -24,13 +24,13 @@ public class ActiveClient extends Client {
 	
 	// Relations of the ActiveClient class
 	
-	private CurrentAccount cAcount;
+	private CurrentAccount cAccount;
 	
 	private CreditCard cCard;
 	
-	private DebitCard[] dCard;
+	private DebitCard dCard;
 	
-	private SavingsAccount[] sAccount;
+	private SavingsAccount sAccount;
 	
 	//------------------------------------------------------------------------------------
 
@@ -41,11 +41,7 @@ public class ActiveClient extends Client {
 		
 		super(name, id);
 		
-		this.startDate = startDate;
-		
-		dCard = new DebitCard[5];
-		
-		sAccount = new SavingsAccount[5];
+		this.startDate = startDate;	
 
 	}
 	
@@ -77,28 +73,60 @@ public class ActiveClient extends Client {
 
 	//Operations of class ActiveClient
 	
-	public void payCreditCard(double amount) {
-		
+	public boolean payCreditCard(double amount) {
+		if(cCard != null) {
+			return cCard.pay(amount);
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public boolean retrieveCredit(double amount) {
-		
+		if(cCard != null) {
+			return cCard.use(amount);
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public boolean retrieveSavings(double amount) {
-		
+		if(dCard != null) {
+			return dCard.debit(amount);
+		}
+		else {
+			return false;
+		}
 	}
 	
-	public void addSavings(double amount) {
-		
+	public boolean addSavings(double amount) {
+		if(dCard != null) {
+			return dCard.credit(amount);
+		}
+		else {
+			return false;
+		}
 	}
 	
-	public boolean createDebitCard() {
-		
+	public boolean createDebitCard(String number) {
+		if(dCard != null) {
+			dCard = new DebitCard(number);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
-	public boolean createCreditCard() {
-		
+	public boolean createCreditCard(String number) {
+		if(cCard != null) {
+			cCard = new CreditCard(number);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	//------------------------------------------------------------------------------------

@@ -45,6 +45,25 @@ public class SavingsAccount {
 	public void setNumber(String number) {
 		this.number = number;
 	}
+
+	//------------------------------------------------------------------------------------
+	
+	// operations of the SavingsAccount class
+	
+	public boolean debit(double amount) {
+		if(balance > amount) {
+			balance -= amount;
+			return true;
+		}
+		else {
+			return false;
+		}		
+	}
+
+	public boolean credit(double amount) {
+		balance += amount;
+		return true;
+	}
 	
 	//------------------------------------------------------------------------------------
 

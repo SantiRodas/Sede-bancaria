@@ -8,6 +8,8 @@ public class CurrentAccount {
 	
 	public static double DEFAULT_CREDIT = 5000000;
 	
+	public static double POLICY_RATE = 0.05;
+	
 	//------------------------------------------------------------------------------------
 	
 	// Attributes of the CurrentAccount class
@@ -59,6 +61,34 @@ public class CurrentAccount {
 
 	public void setAvailableCredit(double availableCredit) {
 		this.availableCredit = availableCredit;
+	}
+
+	//------------------------------------------------------------------------------------
+	
+	// Operations of the DebitCard class
+	
+	public boolean pay(double amount) {
+		if(balanceToPay - amount > 0) {
+			balanceToPay -= amount;
+			availableCredit += amount*(1/(1 + POLICY_RATE));
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
+	}
+
+	public boolean use(double amount) {
+		if(availableCredit > 0) {
+			availableCredit -= amount;
+			balanceToPay += amount*(1 + POLICY_RATE);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	//------------------------------------------------------------------------------------

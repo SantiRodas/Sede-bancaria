@@ -12,7 +12,7 @@ public class CreditCard {
 	
 	// Relations of the CreditCard class
 	
-	private CurrentAccount associatedAccount;
+	private CurrentAccount associatedCAccount;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -33,24 +33,28 @@ public class CreditCard {
 		return number;
 	}
 
+	public double getBalanceTopPay() {
+		return associatedCAccount.getBalanceToPay();
+	}
+	
+	public double getAvailableCredit() {
+		return associatedCAccount.getAvailableCredit();
+	}
 	//------------------------------------------------------------------------------------
 	
 	// Set's methods of the CreditCard class
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
+	
 	
 	//------------------------------------------------------------------------------------
 	
-	//Operations of the debit card
+	//Operations of the Credit card class
 	
 	public boolean pay(double amount) {
-		
+		return associatedCAccount.pay(amount);
 	}
 	
 	public boolean use(double amount) {
-		
+		return associatedCAccount.use(amount);
 	}
 	
 	//------------------------------------------------------------------------------------

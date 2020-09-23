@@ -6,7 +6,7 @@ public class HashTable<K,V> implements HashTableInterface<K,V> {
 	//Node's array size
 	private int capacity;
 	//Number of elements in the table
-	private int length;
+	private int size;
 	
 	private HashTableNode<K,V>[] nodesArray;		
 	
@@ -32,7 +32,7 @@ public class HashTable<K,V> implements HashTableInterface<K,V> {
 		else {						
 			nodesArray[i] = new HashTableNode<K,V>(key,value,null,nodesArray[i]);			
 		}	
-		length++;
+		size++;
 	}
 	
 	public V delete(K key) {
@@ -69,7 +69,7 @@ public class HashTable<K,V> implements HashTableInterface<K,V> {
 					temp.getPrevNode().setNextNode(temp.getNextNode());
 				}	
 				
-				length--;
+				size--;
 				return temp.getValue();
 			}
 			else {
@@ -103,8 +103,8 @@ public class HashTable<K,V> implements HashTableInterface<K,V> {
 		return (key.hashCode()%capacity < 0)? (key.hashCode()%capacity)*-1 : key.hashCode()%capacity;
 	}
 	
-	public int getLength() {
-		return length;
+	public int size() {
+		return size;
 	}
 	
 	public int getCapacity() {
@@ -112,6 +112,6 @@ public class HashTable<K,V> implements HashTableInterface<K,V> {
 	}
 	
 	public boolean isEmpty() {
-		return length == 0;
+		return size == 0;
 	}
 }
