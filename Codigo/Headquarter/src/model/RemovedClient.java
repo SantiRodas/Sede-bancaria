@@ -21,13 +21,13 @@ public class RemovedClient extends Client {
 	
 	// Constructor method of the RemovedClient class
 	
-	public RemovedClient(String name, String id, LocalDate removalDate, String removalReason) {
+	public RemovedClient(String name, String id, LocalDate birthday, LocalDate removalDate, String removalReason) {
 		
-		super(name, id);
+		super(name, id, birthday);
 		
 		this.removalDate = removalDate;
 		
-		this.removalReason = removalReason;
+		this.removalReason = removalReason;	
 
 	}
 	

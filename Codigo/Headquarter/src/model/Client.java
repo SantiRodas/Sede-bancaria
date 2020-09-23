@@ -6,6 +6,8 @@
 
 package model;
 
+import java.time.LocalDate;
+
 public class Client {
 	
 	//------------------------------------------------------------------------------------
@@ -14,16 +16,17 @@ public class Client {
 	
 	private String name;
 	private String id;
+	private LocalDate birthday;
 	
 	//------------------------------------------------------------------------------------
 	
 	// Constructor method of the Client class
 	
-	public Client(String name, String id) {
+	public Client(String name, String id, LocalDate birthday) {
 
 		this.name = name;
 		this.id = id;
-		
+		this.birthday = birthday;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -38,6 +41,10 @@ public class Client {
 		return id;
 	}
 	
+	public LocalDate getBirthday() {
+		return birthday;
+	}
+	
 	//------------------------------------------------------------------------------------
 	
 	// Set's methods of the Client class
@@ -50,6 +57,9 @@ public class Client {
 		this.id = id;
 	}
 	
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
+	}
 	//------------------------------------------------------------------------------------	
 
 }

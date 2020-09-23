@@ -6,9 +6,10 @@
 
 package model;
 
-import collections.HashTableInterface;
-import collections.PriorityQueueInterface;
-import collections.StackInterface;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import collections.*;
 
 public class Bank {
 	
@@ -22,13 +23,15 @@ public class Bank {
 
 	//Relations of the CurrentAccount class
 	
-	private HashTableInterface activeClients; 
+	private HashTableInterface<String, ActiveClient> activeClients; 
 
-	private HashTableInterface removedClients; 
+	private HashTableInterface<String, RemovedClient> removedClients; 
 
-	private StackInterface currentClientActions; 
+	private StackInterface<?> currentClientActions; //Pending
 	
-	private PriorityQueueInterface priorityQueue; 
+	private PriorityQueueInterface<ActiveClient> priorityQueue; 
+	
+	private QueueInterface<ActiveClient> queue;
 
 	private ActiveClient currentActiveClient;
 	
@@ -38,9 +41,27 @@ public class Bank {
 	// Constructor method of the Bank class
 
 	public Bank(String n) {
-		
 		bankName = n;
+		activeClients = new HashTable<>();
+		removedClients = new HashTable<>();
+		currentClientActions = new Stack<>();
+		priorityQueue = new PriorityQueue<>(new Comparator<ActiveClient>() {
+			@Override
+			public int compare(ActiveClient ac1, ActiveClient ac2) {
+				if(ac1.getBirthday().compareTo(ac2.getBirthday()) > 0) {
+					return 1;
+				}
+				else if(ac1.getBirthday().compareTo(ac2.getBirthday()) < 0) {
+					return -1;
+				}
+				else {
+					return 0;
+				}
+			};
 		
+		});
+		queue = new Queue<>();
+		currentActiveClient = null;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -169,7 +190,20 @@ public class Bank {
 	//Method to sort the clients by name
 	
 	private void sortClientsByName(ActiveClient[] ac) {
-		
+		ac = PriorityQueue.heapsort(ac, new Comparator<ActiveClient>() {			
+			public int compare(ActiveClient ac1, ActiveClient ac2) {
+				if(ac1.getName().compareTo(ac2.getName()) > 0) {
+					return 1;
+				}
+				else if(ac1.getName().compareTo(ac2.getName()) < 0) {
+					return -1;
+				}
+				else {
+					return 0;
+				}
+			}
+			
+		});
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -263,8 +297,22 @@ public class Bank {
 	
 	//Method to sort clients by last credit card pay date
 	
-	private void sortClientsByLastCreditCardPayDate(ActiveClient[] ac) {
+	private void sortClientsByBirthday(ActiveClient[] ac) {
+		Arrays.sort(ac, new Comparator<ActiveClient>() {
+			@Override
+			public int compare(ActiveClient ac1, ActiveClient ac2) {
+				if(ac1.getBirthday().compareTo(ac2.getBirthday()) > 0) {
+					return 1;
+				}
+				else if(ac1.getBirthday().compareTo(ac2.getBirthday()) < 0) {
+					return -1;
+				}
+				else {
+					return 0;
+				}
+			};
 		
+		});
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -272,8 +320,7 @@ public class Bank {
 	//Method to search a client by id
 	
 	private Client searchClientbyId(String id) {
-		return null;
-		
+		return activeClients.search(id);		
 	}
 	
 	//------------------------------------------------------------------------------------

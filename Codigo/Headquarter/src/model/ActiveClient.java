@@ -44,9 +44,9 @@ public class ActiveClient extends Client {
 	
 	// Constructor method of the ActiveClient class
 
-	public ActiveClient(String name, String id, LocalDate startDate) {
+	public ActiveClient(String name, String id, LocalDate birthday, LocalDate startDate) {
 		
-		super(name, id);
+		super(name, id, birthday);
 		
 		this.startDate = startDate;	
 
