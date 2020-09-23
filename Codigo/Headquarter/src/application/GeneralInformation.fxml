@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="clientsTable" layoutX="16.0" layoutY="71.0" prefHeight="485.0" prefWidth="720.0">
+        <columns>
+          <TableColumn fx:id="columnName" prefWidth="87.0" text="Nombre" />
+          <TableColumn fx:id="columnId" prefWidth="91.0" text="Id" />
+            <TableColumn fx:id="columnDateSatart" prefWidth="124.0" text="F - Inicio" />
+            <TableColumn fx:id="columnDatePay" prefWidth="122.0" text="F - Pago" />
+            <TableColumn fx:id="columnMonto" prefWidth="118.0" text="Monto" />
+            <TableColumn fx:id="columnSaldo" prefWidth="114.0" text="Saldo" />
+            <TableColumn fx:id="columnsAccounts" prefWidth="63.0" text="Cuentas" />
+        </columns>
+      </TableView>
+      <Button fx:id="comeBackButton" layoutX="298.0" layoutY="28.0" mnemonicParsing="false" onAction="#comeBack" text="Regresar al menu principal" />
+   </children>
+</Pane>
