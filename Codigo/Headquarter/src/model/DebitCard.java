@@ -1,3 +1,9 @@
+/*
+ * UNIVERSIDAD ICESI
+ * TAREA INTEGRADORA 1 - ESTRUCTURAS DE DATOS
+ * RODAS / DIAZ / MARTINEZ
+ */
+
 package model;
 
 public class DebitCard {
@@ -44,9 +50,17 @@ public class DebitCard {
 	
 	// Set's methods of the DebitCard class
 	
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	
+	public void setAssociatedSAccount(SavingsAccount associatedSAccount) {
+		this.associatedSAccount = associatedSAccount;
+	}
+	
 	//------------------------------------------------------------------------------------
 	
-	//Operations of the debit card
+	//Operations of the card
 	
 	public boolean debit(double amount) {
 		return associatedSAccount.debit(amount);

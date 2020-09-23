@@ -1,3 +1,9 @@
+/*
+ * UNIVERSIDAD ICESI
+ * TAREA INTEGRADORA 1 - ESTRUCTURAS DE DATOS
+ * RODAS / DIAZ / MARTINEZ
+ */
+
 package model;
 
 import java.time.LocalDate;
@@ -74,59 +80,101 @@ public class ActiveClient extends Client {
 	//Operations of class ActiveClient
 	
 	public boolean payCreditCard(double amount) {
+		
 		if(cCard != null) {
+			
 			return cCard.pay(amount);
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
+	
+	// *****************************************************
 	
 	public boolean retrieveCredit(double amount) {
+		
 		if(cCard != null) {
+			
 			return cCard.use(amount);
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
+	
+	// *****************************************************
 	
 	public boolean retrieveSavings(double amount) {
+		
 		if(dCard != null) {
+			
 			return dCard.debit(amount);
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
+	
+	// *****************************************************
 	
 	public boolean addSavings(double amount) {
+		
 		if(dCard != null) {
+			
 			return dCard.credit(amount);
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
+	
+	// *****************************************************
 	
 	public boolean createDebitCard(String number) {
+		
 		if(dCard != null) {
+			
 			dCard = new DebitCard(number);
+			
 			return true;
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
 	
+	// *****************************************************
+	
 	public boolean createCreditCard(String number) {
+		
 		if(cCard != null) {
+			
 			cCard = new CreditCard(number);
+			
 			return true;
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
 	
 	//------------------------------------------------------------------------------------

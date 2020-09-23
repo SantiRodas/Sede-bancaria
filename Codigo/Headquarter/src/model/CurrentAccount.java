@@ -1,3 +1,9 @@
+/*
+ * UNIVERSIDAD ICESI
+ * TAREA INTEGRADORA 1 - ESTRUCTURAS DE DATOS
+ * RODAS / DIAZ / MARTINEZ
+ */
+
 package model;
 
 public class CurrentAccount {
@@ -68,27 +74,41 @@ public class CurrentAccount {
 	// Operations of the DebitCard class
 	
 	public boolean pay(double amount) {
-		if(balanceToPay - amount > 0) {
-			balanceToPay -= amount;
-			availableCredit += amount*(1/(1 + POLICY_RATE));
-			return true;
-		}
-		else {
-			return false;
-		}
 		
+		if(balanceToPay - amount > 0) {
+			
+			balanceToPay -= amount;
+			
+			availableCredit += amount*(1/(1 + POLICY_RATE));
+			
+			return true;
+			
+		} else {
+			
+			return false;
+			
+		}
 		
 	}
+	
+	// *****************************************************
 
 	public boolean use(double amount) {
+		
 		if(availableCredit > 0) {
+			
 			availableCredit -= amount;
+			
 			balanceToPay += amount*(1 + POLICY_RATE);
+			
 			return true;
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
 	
 	//------------------------------------------------------------------------------------

@@ -1,3 +1,9 @@
+/*
+ * UNIVERSIDAD ICESI
+ * TAREA INTEGRADORA 1 - ESTRUCTURAS DE DATOS
+ * RODAS / DIAZ / MARTINEZ
+ */
+
 package model;
 
 public class CreditCard {
@@ -44,6 +50,13 @@ public class CreditCard {
 	
 	// Set's methods of the CreditCard class
 	
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	
+	public void setAssociatedCAccount(CurrentAccount associatedCAccount) {
+		this.associatedCAccount = associatedCAccount;
+	}
 	
 	//------------------------------------------------------------------------------------
 	

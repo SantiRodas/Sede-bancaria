@@ -1,3 +1,9 @@
+/*
+ * UNIVERSIDAD ICESI
+ * TAREA INTEGRADORA 1 - ESTRUCTURAS DE DATOS
+ * RODAS / DIAZ / MARTINEZ
+ */
+
 package model;
 
 public class SavingsAccount {
@@ -48,21 +54,34 @@ public class SavingsAccount {
 
 	//------------------------------------------------------------------------------------
 	
-	// operations of the SavingsAccount class
+	// operation of the SavingsAccount class
 	
 	public boolean debit(double amount) {
+		
 		if(balance > amount) {
+			
 			balance -= amount;
+			
 			return true;
-		}
-		else {
+			
+		} else {
+			
 			return false;
-		}		
+			
+		}	
+		
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	// operation credit of the SavingsAccount class
 
 	public boolean credit(double amount) {
+		
 		balance += amount;
+		
 		return true;
+		
 	}
 	
 	//------------------------------------------------------------------------------------
