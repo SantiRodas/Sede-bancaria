@@ -12,25 +12,26 @@ public interface PriorityQueueInterface<E> {
 	
 	//Method 1
 
-	void insert(E e);
+	public void maxHeapInsert(E e);
 	
 	//------------------------------------------------------------------------------------
 	
 	//Method 2
 	
-	E extractMax();
+	public E heapExtractMax();
 	
 	//------------------------------------------------------------------------------------
 	//Method 3
 	
-	E max();
+	public E heapMax();
 	
 	//------------------------------------------------------------------------------------
 	
 	//Method 4
 	
-	boolean isEmpty();
+	public boolean isEmpty();
 	
 	//------------------------------------------------------------------------------------
+	
 	
 }

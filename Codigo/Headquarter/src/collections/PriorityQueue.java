@@ -9,7 +9,7 @@ package collections;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class PriorityQueue<E> {
+public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 	
 	public static int DEFAULT_CAPACITY = 10;
 	private E[] heap;
@@ -134,8 +134,12 @@ public class PriorityQueue<E> {
 	
 	public int heapSize() {
 		return heapSize;
-	}
+	}	
 	
+	public boolean isEmpty() {
+		return heapSize == 0;
+	}
+		
 	private int left(int index) {
 		return 2*index + 1;
 	}
@@ -147,6 +151,7 @@ public class PriorityQueue<E> {
 	private int parent(int index) {
 		return (index - 1)/2;
 	}
+
 	
 	
 }
