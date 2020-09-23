@@ -174,10 +174,71 @@ public class Bank {
 	
 	//------------------------------------------------------------------------------------
 	
-	//Method to sort the clients by id
+	//Method to sort the clients by id using mergesort
 	
-	private void sortClientsById(ActiveClient[] ac) {
-		
+	private void sortClientsById(ActiveClient[] ac,int left, int right) {
+		if(ac!=null && ac.length>1)
+			mergesort(ac,0,ac.length-1);
+	}
+	
+	private void mergesort(ActiveClient[] ac,int left, int right) {
+		if (left < right){
+            int m=(left+right)/2;
+            mergesort(ac,left, m);
+            mergesort(ac,m+1, right);                                                                                
+            merge(ac,left, m, right);                                                                                 
+		}
+	}
+	
+	private void merge(ActiveClient[] ac,int left, int middle, int right) {
+		 //Finds the length of the sub-vectors
+		  int n1 = middle - left + 1;
+		  int n2 = right - middle;
+
+		  //Temporal arrays
+		  ActiveClient leftArray[] = new ActiveClient[n1];
+		  ActiveClient rightArray[] = new ActiveClient[n2];
+
+		  //Copies the data to the temporal arrays
+		  for (int i=0; i < n1; i++) { 
+		    leftArray[i] = ac[left+i]; 
+		  }
+		  for (int j=0; j < n2; j++) {
+		    rightArray[j] = ac[middle + j + 1]; 
+		  }
+		  /* Unites the temporal arrays */
+
+		  //Start indexes of the first and second sub-arrays.
+		  int i = 0, j = 0;
+
+		  //Start index of the sub-vector ac.
+		  int k = left;
+
+		  //Sorting.
+		  while (i < n1 && j < n2) {
+		    if (leftArray[i].getId().compareTo(rightArray[j].getId())<=0 ) {
+		      ac[k] = leftArray[i];
+		      i++;
+		    } else {
+		        ac[k] = rightArray[j];
+		        j++;
+		    }
+		    k++;
+		  }//End of the while.
+
+		  /* If there are remaining elements to sort */
+		  //Copies the remaining elements of leftArray[].
+		  while (i < n1) {
+		    ac[k] = leftArray[i];
+		    i++;
+		    k++;
+		  }
+		  //Copies the remaining elements of rightArray[].
+		  while (j < n2) {
+		    ac[k] = rightArray[j];
+		    j++;
+		    k++;
+		  }
 	}
 	
 	//------------------------------------------------------------------------------------
