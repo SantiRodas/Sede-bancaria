@@ -13,11 +13,24 @@ import collections.*;
 
 public class Bank {
 	
+	//For 7 digit account number
+	public static final long MAX_ACCOUNTS_NUMBER = 9999990; 
+	
+	//For 16 digit card number
+	public static final long MAX_CARDS_NUMBER = Long.parseLong("9999999999999990");
 	//------------------------------------------------------------------------------------
 	
 	//Attributes of the CurrentAccount class
 	
 	private String bankName;
+	
+	private HashTable<String,String> usedSavingAccountNumbers;
+	
+	private HashTable<String,String> usedDebitCardNumbers;
+	
+	private HashTable<String,String> usedCurrentAccountNumbers;
+	
+	private HashTable<String,String> usedCreditCardNumbers;
 	
 	//------------------------------------------------------------------------------------
 
@@ -37,7 +50,6 @@ public class Bank {
 	
 	//------------------------------------------------------------------------------------
 
-	
 	// Constructor method of the Bank class
 
 	public Bank(String n) {
@@ -62,6 +74,10 @@ public class Bank {
 		});
 		queue = new Queue<>();
 		currentActiveClient = null;
+		usedSavingAccountNumbers = new HashTable<>();
+		usedDebitCardNumbers = new HashTable<>();
+		usedCurrentAccountNumbers = new HashTable<>();
+		usedCreditCardNumbers = new HashTable<>();
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -92,27 +108,40 @@ public class Bank {
 	
 	//Method to pay in a credit card
 	
-	public void payCreditCard(double amount) {
-		
+	public boolean payCreditCard(String cardNumber, double amount) {
+		if(currentActiveClient != null) {
+			return currentActiveClient.payCreditCard(cardNumber, amount);
+		}
+		else {
+			return false;
+		}
 	}
 	
 	//------------------------------------------------------------------------------------
 	
 	//Method to retrieve a credit card
 	
-	public boolean retrieveCredit(double amount) {
-		
-		return true;
-		
+	public boolean retrieveCredit(String cardNumber, double amount) {
+		if(currentActiveClient != null) {
+			return currentActiveClient.retrieveCredit(cardNumber, amount);
+		}
+		else {
+			return false;
+		}		
 	}
 	
 	//------------------------------------------------------------------------------------
 	
 	//Method to retrieve savings in a credit card
 	
-	public boolean retrieveSavings(double amount) {
-		
-		return true;
+	public boolean retrieveSavings(String accountNumber, double amount) {
+		if(currentActiveClient != null) {
+			return currentActiveClient.retrieveSavings(accountNumber, amount);
+						
+		}
+		else {
+			return false;
+		}
 		
 	}
 	
@@ -120,17 +149,27 @@ public class Bank {
 	
 	//Method to add savings in a credit card
 	
-	public void addSavings(double amount) {
-		
+	public boolean addSavings(String accountNumber, double amount) {
+		if(currentActiveClient != null) {
+			return currentActiveClient.addSavings(accountNumber, amount);
+		}
+		else {
+			return false;
+		}
 	}
 	
 	//------------------------------------------------------------------------------------
 	
 	//Method to create
 	
-	public boolean createDebitCard() {
+	public boolean createSavingsAccount() {
 		
-		return true;
+		if(currentActiveClient != null) {
+			return currentActiveClient.createSavingsAccount(generateNewSavingsAccountNumber(), generateNewDebitCardNumber());
+		}
+		else {
+			return false;
+		}
 		
 	}
 	
@@ -140,8 +179,12 @@ public class Bank {
 	
 	public boolean createCreditCard() {
 		
-		return true;
-		
+		if(currentActiveClient != null) {
+			return currentActiveClient.createCreditCard(generateNewCurrentAccountNumber(), generateNewCreditCardNumber());
+		}
+		else {
+			return false;
+		}
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -149,8 +192,27 @@ public class Bank {
 	//Method to active client in the system
 	
 	public ActiveClient[] getSortedClients(SortCriteria sortCriteria) {
-		return null;
 		
+		ActiveClient[] ac = activeClients.getAll();
+			
+		switch(sortCriteria) {
+		case NAME:
+			sortClientsByName(ac);
+		break;		
+		case ID:
+			sortClientsById(ac);
+		break;
+		case START_DATE:
+			sortClientsByStartDate(ac);
+		break;
+		case BIRTHDAY:
+			sortClientsByBirthday(ac);
+		break;
+		case NONE:
+			return ac;		
+		}
+		
+		return null;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -210,7 +272,7 @@ public class Bank {
 	
 	//Method to sort the clients by id using mergesort
 	
-	private void sortClientsById(ActiveClient[] ac,int left, int right) {
+	private void sortClientsById(ActiveClient[] ac) {
 		if(ac!=null && ac.length>1)
 			mergesort(ac,0,ac.length-1);
 	}
@@ -325,4 +387,60 @@ public class Bank {
 	
 	//------------------------------------------------------------------------------------
 
+	public String[] getCurrentClientCreditCardsNumbers() {
+		return currentActiveClient.getCreditCardNumbers();
+	}
+	
+	public String[] getCurrentClientSavingsAccountsNumbers() {
+		return currentActiveClient.getSavingsAccountsNumbers();
+	}
+	
+	private String generateNewSavingsAccountNumber() {
+		if(usedSavingAccountNumbers.size() + usedCurrentAccountNumbers.size() < MAX_ACCOUNTS_NUMBER) {
+			String number;
+			do {
+				number = Long.toString((long)Math.random()*((MAX_ACCOUNTS_NUMBER) + (long)1) + (long)1000000);
+			}while(usedSavingAccountNumbers.search(number) != null && usedCurrentAccountNumbers.search(number) != null);
+			usedSavingAccountNumbers.insert(number, number);
+			return number;
+		}
+		return null;
+	}
+	
+	private String generateNewCreditCardNumber() {
+		if(usedCreditCardNumbers.size() + usedDebitCardNumbers.size() < MAX_CARDS_NUMBER) {
+			String number;
+			do {
+				number = Long.toString((long)Math.random()*((MAX_CARDS_NUMBER) + (long)1) + Long.parseLong("1000000000000000"));
+			}while(usedCreditCardNumbers.search(number) != null && usedDebitCardNumbers.search(number) != null);
+			usedCreditCardNumbers.insert(number, number);
+			return number;
+		}
+		return null;
+	}
+	
+	private String generateNewDebitCardNumber() {
+		if(usedCreditCardNumbers.size() + usedDebitCardNumbers.size() < MAX_CARDS_NUMBER) {
+			String number;
+			do {
+				number = Long.toString((long)Math.random()*((MAX_CARDS_NUMBER) + (long)1) + Long.parseLong("1000000000000000"));
+			}while(usedCreditCardNumbers.search(number) != null && usedDebitCardNumbers.search(number) != null);
+			usedDebitCardNumbers.insert(number, number);
+			return number;
+		}
+		return null;
+	}
+	
+	private String generateNewCurrentAccountNumber() {
+		if(usedSavingAccountNumbers.size() + usedCurrentAccountNumbers.size() < MAX_ACCOUNTS_NUMBER) {
+			String number;
+			do {
+				number = Long.toString((long)Math.random()*((MAX_ACCOUNTS_NUMBER) + (long)1) + (long)1000000);
+			}while(usedSavingAccountNumbers.search(number) != null && usedCurrentAccountNumbers.search(number) != null);
+			usedCurrentAccountNumbers.insert(number, number);
+			return number;
+		}
+		
+		return null;
+	}
 }

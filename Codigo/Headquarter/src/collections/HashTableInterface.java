@@ -6,6 +6,7 @@
 
 package collections;
 
+
 public interface HashTableInterface<K,V> {
 	
 	//------------------------------------------------------------------------------------
@@ -43,6 +44,8 @@ public interface HashTableInterface<K,V> {
 	//Method 6
 	
 	public int getCapacity();
+
+	public V[] getAll();
 	
 	//------------------------------------------------------------------------------------
 	

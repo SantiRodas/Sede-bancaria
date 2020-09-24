@@ -268,6 +268,69 @@ public class ActiveClient extends Client {
 		
 		return -1;		
 	}
+
+	public String[] getCreditCardNumbers() {
+		
+		String[] numbers = new String[cCards.length];
+		
+		int emptySpotsCount = 0;
+	
+		for (int i = 0 ; i < cCards.length ; i++) {
+			
+			if(cCards[i] != null) {
+				numbers[i] = cCards[i].getNumber();	
+			}
+			else {
+				emptySpotsCount++;
+			}
+			
+		}
+		
+		if(emptySpotsCount == cCards.length ) {
+			
+			return null;
+		
+		}
+		else {
+		
+			return numbers;
+		}
+		
+		
+	}
+
+	public String[] getSavingsAccountsNumbers() {
+		
+		String[] numbers = new String[sAccounts.length];
+		
+		int emptySpotsCount = 0;
+	
+		for (int i = 0 ; i < sAccounts.length ; i++) {
+			
+			if(sAccounts[i] != null) {
+				
+				numbers[i] = sAccounts[i].getNumber();	
+				
+			}
+			else {
+				
+				emptySpotsCount++;
+				
+			}
+			
+		}
+		
+		if(emptySpotsCount == sAccounts.length ) {
+			
+			return null;
+		
+		}
+		else {
+		
+			return numbers;
+			
+		}
+	}
 	
 	//------------------------------------------------------------------------------------
 

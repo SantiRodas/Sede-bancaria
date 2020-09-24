@@ -198,6 +198,26 @@ public class HashTable<K,V> implements HashTableInterface<K,V> {
 	public boolean isEmpty() {
 		return size == 0;
 	}
+
+	@Override
+	public V[] getAll() {
+		@SuppressWarnings("unchecked")
+		V[] vArray = (V[]) new Object[size];
+		int j = 0;
+		
+		for (int i = 0; i < nodesArray.length; i++) {
+			if(nodesArray[i] != null) {
+				HashTableNode<K,V> temp = nodesArray[i];
+				
+				while(temp != null) {
+					vArray[j] = temp.getValue();					
+					temp = temp.getNextNode();
+					j++;
+				}
+			}
+		}
+		return vArray;
+	}
 	
 	//------------------------------------------------------------------------------------
 	
