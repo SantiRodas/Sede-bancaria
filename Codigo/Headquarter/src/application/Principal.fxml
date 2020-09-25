@@ -7,25 +7,25 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="Cliente">
             <items>
-              <MenuItem fx:id="addClient" mnemonicParsing="false" text="Agregar cliente" />
-                  <MenuItem fx:id="asignClient" mnemonicParsing="false" text="Asignar fila" />
-                  <MenuItem fx:id="informationClient" mnemonicParsing="false" text="Informacion cliente" />
-                  <MenuItem fx:id="operationsClient" mnemonicParsing="false" text="Operaciones bancarias" />
-                  <MenuItem fx:id="generalInformation" mnemonicParsing="false" text="Informacion general" />
+              <MenuItem mnemonicParsing="false" onAction="#add" text="Agregar cliente" />
+                  <MenuItem mnemonicParsing="false" onAction="#assign" text="Asignar fila" />
+                  <MenuItem mnemonicParsing="false" onAction="#information" text="Informacion cliente" />
+                  <MenuItem mnemonicParsing="false" onAction="#operations" text="Operaciones bancarias" />
+                  <MenuItem mnemonicParsing="false" onAction="#generalInformation" text="Informacion general" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <Pane fx:id="principalPane" layoutX="4.0" layoutY="30.0" prefHeight="537.0" prefWidth="520.0">
+      <Pane layoutX="4.0" layoutY="30.0" prefHeight="537.0" prefWidth="520.0">
          <children>
             <TableView fx:id="lineTable" layoutX="524.0" prefHeight="521.0" prefWidth="219.0">
               <columns>
@@ -33,11 +33,15 @@
                 <TableColumn fx:id="line2" prefWidth="131.0" text="Fila 2 (P)" />
               </columns>
             </TableView>
-            <ImageView fitHeight="263.0" fitWidth="498.0" layoutX="11.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@logo-bancolombia.png" />
-               </image>
-            </ImageView>
+            <BorderPane fx:id="principalPane" prefHeight="537.0" prefWidth="520.0">
+               <center>
+                  <ImageView fitHeight="263.0" fitWidth="498.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@logo-bancolombia.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
          </children>
       </Pane>
    </children>

@@ -6,10 +6,10 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -33,6 +33,7 @@
       <Pane fx:id="secundaryPane" layoutX="151.0" layoutY="225.0" prefHeight="297.0" prefWidth="355.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="297.0" stroke="BLACK" strokeType="INSIDE" width="355.0" />
+            <BorderPane fx:id="panelSecundario" layoutX="2.0" layoutY="1.0" prefHeight="297.0" prefWidth="355.0" />
          </children>
       </Pane>
    </children>
