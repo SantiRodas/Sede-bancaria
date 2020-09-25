@@ -7,6 +7,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class ActiveClient extends Client {
 	
@@ -331,6 +332,13 @@ public class ActiveClient extends Client {
 			
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Name: " + getName() + "\nID: " + getId() + "\nStart date: " + startDate + "\nLast credit card pay date: " + lastCreditCardPayDate;
+	}
+	
+	
 	
 	//------------------------------------------------------------------------------------
 
