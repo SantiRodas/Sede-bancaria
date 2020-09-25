@@ -11,13 +11,11 @@
    <children>
       <TableView fx:id="clientsTable" layoutX="16.0" layoutY="71.0" prefHeight="485.0" prefWidth="720.0">
         <columns>
-          <TableColumn fx:id="columnName" prefWidth="87.0" text="Nombre" />
-          <TableColumn fx:id="columnId" prefWidth="91.0" text="Id" />
-            <TableColumn fx:id="columnDateStart" prefWidth="124.0" text="F - Inicio" />
-            <TableColumn fx:id="columnDatePay" prefWidth="122.0" text="F - Pago" />
-            <TableColumn fx:id="columnMonto" prefWidth="118.0" text="Monto" />
-            <TableColumn fx:id="columnSaldo" prefWidth="114.0" text="Saldo" />
-            <TableColumn fx:id="columnsAccounts" prefWidth="63.0" text="Cuentas" />
+          <TableColumn fx:id="columnName" prefWidth="143.33331680297852" text="Nombre" />
+          <TableColumn fx:id="columnId" prefWidth="144.66665649414062" text="Id" />
+            <TableColumn fx:id="columnDateStart" prefWidth="147.3333740234375" text="Start Date" />
+            <TableColumn fx:id="columnDatePay" prefWidth="148.00003051757812" text="Pay Date" />
+            <TableColumn fx:id="columnBirthday" prefWidth="146.6666259765625" text="Birth Date" />
         </columns>
       </TableView>
       <Button fx:id="comeBackButton" layoutY="-2.0" mnemonicParsing="false" onAction="#comeBack" text="Regresar al menu principal" />

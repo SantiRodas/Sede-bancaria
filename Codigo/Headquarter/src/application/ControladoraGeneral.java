@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.ActiveClient;
+import model.Bank;
 import model.SortCriteria;
 
 public class ControladoraGeneral {
@@ -36,6 +37,8 @@ public class ControladoraGeneral {
 	//Relations
 	
 	private ControladoraPrincipal controladora;
+	
+	private Bank bank;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -68,13 +71,7 @@ public class ControladoraGeneral {
     private TableColumn<ActiveClient, LocalDate> columnDatePay;
 
     @FXML
-    private TableColumn<ActiveClient, ?> columnMonto;
-
-    @FXML
-    private TableColumn<ActiveClient, ?> columnSaldo;
-
-    @FXML
-    private TableColumn<ActiveClient, ?> columnsAccounts;
+    private TableColumn<ActiveClient, LocalDate> columnBirthday;
 
     @FXML
     private Button comeBackButton;
@@ -90,6 +87,12 @@ public class ControladoraGeneral {
 
     @FXML
     private Button buttonSearch;
+    
+    //------------------------------------------------------------------------------------
+    
+    public void setBank(Bank b) {
+    	bank = b;
+    }
     
     //------------------------------------------------------------------------------------
     
@@ -125,7 +128,7 @@ public class ControladoraGeneral {
     //------------------------------------------------------------------------------------
     
     private void initializeTableView() {
-    	ObservableList<ActiveClient> observableList = FXCollections.observableArrayList(eq.getAccounts());
+    	ObservableList<ActiveClient> observableList = FXCollections.observableArrayList(bank.getActiveClientsArray());
     	
     	clientsTable.setItems(observableList);
     	
@@ -133,9 +136,7 @@ public class ControladoraGeneral {
     	columnId.setCellValueFactory(new PropertyValueFactory<ActiveClient,String>("id")); 
     	columnDateStart.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("startDate"));
     	columnDatePay.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("lastCreditCardPayDate"));
-     	column5.setCellValueFactory(new PropertyValueFactory<ActiveClient,String>("gender"));
-     	column6.setCellValueFactory(new PropertyValueFactory<ActiveClient,Double>("height"));
-     	column7.setCellValueFactory(new PropertyValueFactory<ActiveClient,Double>("weight"));
+     	columnBirthday.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("birthday"));
     }
     
   //------------------------------------------------------------------------------------
@@ -156,16 +157,16 @@ public class ControladoraGeneral {
 				
 				
 				if(choiceBoxSort.getValue().equals("Sort by name")) {
-					bank.sortCriteria(SortCriteria.NAME);
+					bank.getSortedClients(SortCriteria.NAME);
 				}
 				else if(choiceBoxSort.getValue().equals("Sort by start date")) {
-					bank.sortCriteria(SortCriteria.START_DATE);
+					bank.getSortedClients(SortCriteria.START_DATE);
 				}
 				else if(choiceBoxSort.getValue().equals("Sort by id")) {
-					bank.sortCriteria(SortCriteria.ID);
+					bank.getSortedClients(SortCriteria.ID);
 				}
 				else if(choiceBoxSort.getValue().equals("Sort by birthdate")) {
-					bank.sortCriteria(SortCriteria.BIRTHDAY);
+					bank.getSortedClients(SortCriteria.BIRTHDAY);
 				}
 				
 				initializeTableView();
@@ -189,7 +190,7 @@ public class ControladoraGeneral {
 			}
 			
 			else {
-				ActiveClient aux = bank.searchClientById(s);
+				ActiveClient aux = (ActiveClient)bank.searchClientbyId(s);
 					
 				if(aux!=null) {
 					Alert alert = new Alert(AlertType.INFORMATION);

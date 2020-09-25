@@ -104,6 +104,10 @@ public class Bank {
 		
 	}
 	
+	public ActiveClient[] getActiveClientsArray(){
+		return activeClients.getAll();
+	}
+	
 	//------------------------------------------------------------------------------------
 	
 	//Method to pay in a credit card
@@ -381,7 +385,7 @@ public class Bank {
 	
 	//Method to search a client by id
 	
-	private Client searchClientbyId(String id) {
+	public Client searchClientbyId(String id) {
 		return activeClients.search(id);		
 	}
 	

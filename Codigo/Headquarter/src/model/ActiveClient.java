@@ -335,7 +335,7 @@ public class ActiveClient extends Client {
 
 	@Override
 	public String toString() {
-		return "Name: " + getName() + "\nID: " + getId() + "\nStart date: " + startDate + "\nLast credit card pay date: " + lastCreditCardPayDate;
+		return "Name: " + getName() + "\nID: " + getId() + "\nBirth date: " + getBirthday() + "\nStart date: " + startDate + "\nLast credit card pay date: " + lastCreditCardPayDate;
 	}
 	
 	
