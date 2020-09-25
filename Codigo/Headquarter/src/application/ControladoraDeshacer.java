@@ -10,8 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.Bank;
 
 public class ControladoraDeshacer {
+	
+	//------------------------------------------------------------------------------------
+	
+	//Relations
+	
+	private Bank bank;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -24,6 +31,12 @@ public class ControladoraDeshacer {
     private Label deshacerLabel;
 	
 	//------------------------------------------------------------------------------------
+    
+    public void setBank(Bank bank) {
+    	this.bank = bank;
+    }
+    
+    //------------------------------------------------------------------------------------
     
     //Remove last one action method
     

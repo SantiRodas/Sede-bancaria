@@ -10,8 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import model.Bank;
 
 public class ControladoraRetirar {
+	
+	//------------------------------------------------------------------------------------
+	
+	//Relations
+	
+	private Bank bank;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -22,6 +29,12 @@ public class ControladoraRetirar {
 
     @FXML
     private Button retirarButton;
+    
+    //------------------------------------------------------------------------------------
+	
+  	public void setBank(Bank bank) {
+  		this.bank = bank;
+  	}
 	
 	//------------------------------------------------------------------------------------
     

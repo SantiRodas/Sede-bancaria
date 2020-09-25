@@ -6,6 +6,8 @@
 
 package application;
 
+import model.Bank;
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -26,6 +28,8 @@ public class ControladoraOperations {
 	//------------------------------------------------------------------------------------
 	
 	//Relations
+	
+	private Bank bank;
 	
 	ControladoraRetirar controladoraRetirar = new ControladoraRetirar();
 	
@@ -79,6 +83,12 @@ public class ControladoraOperations {
 	
 	//------------------------------------------------------------------------------------
     
+    public void setBank(Bank b) {
+    	bank = b;
+    }
+    
+    //------------------------------------------------------------------------------------
+    
     //Cancel method
 	
     @FXML
@@ -89,6 +99,8 @@ public class ControladoraOperations {
 		fxmlLoader.setController(controladoraCancelar);    
 		
 		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraCancelar.setBank(bank);
     	
 		panelSecundario.getChildren().clear();
 		
@@ -108,6 +120,8 @@ public class ControladoraOperations {
 		fxmlLoader.setController(controladoraConsignar);    
 		
 		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraConsignar.setBank(bank);
     	
 		panelSecundario.getChildren().clear();
 		
@@ -127,6 +141,8 @@ public class ControladoraOperations {
 		fxmlLoader.setController(controladoraDeshacer);    
 		
 		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraDeshacer.setBank(bank);
     	
 		panelSecundario.getChildren().clear();
 		
@@ -146,6 +162,8 @@ public class ControladoraOperations {
 		fxmlLoader.setController(controladoraPagar);    
 		
 		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraPagar.setBank(bank);
     	
 		panelSecundario.getChildren().clear();
 		
@@ -165,6 +183,8 @@ public class ControladoraOperations {
 		fxmlLoader.setController(controladoraRetirar);    
 		
 		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraRetirar.setBank(bank);
     	
 		panelSecundario.getChildren().clear();
 		

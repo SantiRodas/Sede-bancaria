@@ -10,8 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import model.Bank;
 
 public class ControladoraCancelar {
+	
+	//------------------------------------------------------------------------------------
+	
+	//Relations
+	
+	private Bank bank;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -22,6 +29,12 @@ public class ControladoraCancelar {
 
     @FXML
     private TextArea cancelText;
+    
+    //------------------------------------------------------------------------------------
+    
+    public void setBank(Bank bank) {
+    	this.bank = bank;
+    }
 	
 	//------------------------------------------------------------------------------------
     

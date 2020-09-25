@@ -11,8 +11,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import model.Bank;
 
 public class ControladoraPagar {
+	
+	//------------------------------------------------------------------------------------
+	
+	//Relations
+
+	private Bank bank;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -29,6 +36,12 @@ public class ControladoraPagar {
 
     @FXML
     private RadioButton desdeCuentaChoicen;
+    
+    //------------------------------------------------------------------------------------
+    
+    public void setBank(Bank bank) {
+    	this.bank = bank;
+    }
 	
 	//------------------------------------------------------------------------------------
     

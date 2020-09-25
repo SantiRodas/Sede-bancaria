@@ -17,12 +17,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Bank;
 
 public class ControladoraPrincipal {
 	
 	//------------------------------------------------------------------------------------
 	
 	//Relations
+	
+	private Bank bank;
 	
 	ControladoraAdd controladoraAdd = new ControladoraAdd();
 	
@@ -63,6 +66,8 @@ public class ControladoraPrincipal {
 		fxmlLoader.setController(controladoraAdd);    
 		
 		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraAdd.setBank(bank);
     	
 		principalPane.getChildren().clear();
 		
@@ -82,6 +87,8 @@ public class ControladoraPrincipal {
 		fxmlLoader.setController(controladoraAssign);    
 		
 		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraAssign.setBank(bank);
     	
 		principalPane.getChildren().clear();
 		
@@ -112,6 +119,8 @@ public class ControladoraPrincipal {
 		
 		Parent root = fxmlLoader.load();
 		
+		controladoraGeneral.setBank(bank);
+		
 		Scene scene = new Scene(root);
 		
 		primaryStage.setScene(scene);
@@ -134,6 +143,8 @@ public class ControladoraPrincipal {
 		fxmlLoader.setController(controladoraInformation);    
 		
 		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraInformation.setBank(bank);
     	
 		principalPane.getChildren().clear();
 		
@@ -150,15 +161,28 @@ public class ControladoraPrincipal {
     	
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OperationsClient.fxml"));
 		
-		fxmlLoader.setController(controladoraOperations);    
+		fxmlLoader.setController(controladoraOperations);  
 		
 		Parent addContactPane = fxmlLoader.load();
+
+		controladoraOperations.setBank(bank);
     	
 		principalPane.getChildren().clear();
 		
 		principalPane.setCenter(addContactPane);
 
     }
+    
+    //------------------------------------------------------------------------------------
+    
+    @FXML
+    void initialize() {
+		Bank bank = new Bank("Bancolombia");
+    }
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
     
     //------------------------------------------------------------------------------------
 

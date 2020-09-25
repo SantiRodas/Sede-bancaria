@@ -10,8 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import model.Bank;
 
 public class ControladoraConsignar {
+	
+	//------------------------------------------------------------------------------------
+	
+	//Relations
+	
+	private Bank bank;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -22,7 +29,13 @@ public class ControladoraConsignar {
 
     @FXML
     private Button consignarButton;
-	
+    
+  //------------------------------------------------------------------------------------
+    
+    public void setBank(Bank bank) {
+    	this.bank = bank;
+    }
+    
 	//------------------------------------------------------------------------------------
     
     //Give money method

@@ -11,8 +11,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.Bank;
 
 public class ControladoraInformation {
+	
+	//------------------------------------------------------------------------------------
+	
+	//Relations
+	
+	private Bank bank;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -50,6 +57,11 @@ public class ControladoraInformation {
     public void search(ActionEvent event) {
 
     }
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
+		
+	}
 	
 	//------------------------------------------------------------------------------------
 

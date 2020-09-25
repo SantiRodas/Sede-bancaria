@@ -8,7 +8,7 @@ package application;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
+import model.Bank;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +27,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.ActiveClient;
-import model.Bank;
 import model.SortCriteria;
 
 public class ControladoraGeneral {
@@ -115,6 +114,8 @@ public class ControladoraGeneral {
 		
 		Parent root = fxmlLoader.load();
 		
+		controladora.setBank(bank);
+		
 		Scene scene = new Scene(root);
 		
 		primaryStage.setScene(scene);
@@ -154,7 +155,6 @@ public class ControladoraGeneral {
 			}
 			
 			else {
-				
 				
 				if(choiceBoxSort.getValue().equals("Sort by name")) {
 					bank.getSortedClients(SortCriteria.NAME);

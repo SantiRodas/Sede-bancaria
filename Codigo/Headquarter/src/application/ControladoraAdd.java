@@ -6,6 +6,8 @@
 
 package application;
 
+import model.Bank;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,6 +15,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class ControladoraAdd {
+	
+	//------------------------------------------------------------------------------------
+	
+	//Relations
+	
+	private Bank bank;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -38,6 +46,11 @@ public class ControladoraAdd {
     public void addClient(ActionEvent event) {
 
     }
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
+		
+	}
     
     //------------------------------------------------------------------------------------
 
