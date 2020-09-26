@@ -332,6 +332,40 @@ public class ActiveClient extends Client implements Cloneable {
 		}
 	}	
 	
+	public String toStringSavingsAccounts() {
+		
+		String msg = "";
+	
+		for (int i = 0 ; i < sAccounts.length ; i++) {
+			
+			if(sAccounts[i] != null) {
+				
+				msg+= "Account number " + sAccounts[i].getNumber() + " - Balance:" + sAccounts[i].getBalance() + "\n";
+				
+			}
+			
+		}
+		
+		return msg;
+	}	
+	
+	public String toStringCreditCards() {
+		
+		String msg = "";
+	
+		for (int i = 0 ; i < cCards.length ; i++) {
+			
+			if(cCards[i] != null) {
+				
+				msg+= "Account number " + cCards[i].getNumber() + " - Balance to pay:" + cCards[i].getCurrentAccount().getBalanceToPay() + "\n";
+				
+			}
+			
+		}
+		
+		return msg;
+	}	
+	
 	@Override
 	public String toString() {
 		return "Name: " + getName() + "\nID: " + getId() + "\nBirth date: " + getBirthday() + "\nStart date: " + startDate + "\nLast credit card pay date: " + lastCreditCardPayDate;

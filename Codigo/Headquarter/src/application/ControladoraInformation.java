@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.ActiveClient;
 import model.Bank;
 
 public class ControladoraInformation {
@@ -55,7 +56,13 @@ public class ControladoraInformation {
     
     @FXML
     public void search(ActionEvent event) {
-
+    	ActiveClient aux = bank.searchActiveClientById(searchText.getText());
+    	nameLabel.setText(aux.getName());
+    	idLabel.setText(aux.getId());
+    	dateStartLabel.setText(aux.getStartDate().toString());
+    	datePayLabel.setText(aux.getLastCreditCardPayDate().toString());
+    	balanceLabel.setText(aux.toStringSavingsAccounts());
+    	amountCreditCard.setText(aux.toStringCreditCards());
     }
 
 	public void setBank(Bank bank) {
