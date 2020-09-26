@@ -8,15 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="176.0" layoutY="203.0" text="Id:">
+      <Label layoutX="171.0" layoutY="204.0" text="Id:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="idText" layoutX="260.0" layoutY="203.0" />
+      <TextField fx:id="idText" layoutX="238.0" layoutY="204.0" />
       <Button fx:id="asignButton" layoutX="227.0" layoutY="305.0" mnemonicParsing="false" onAction="#asignClient" text="Asignar">
          <font>
             <Font size="14.0" />

@@ -10,9 +10,11 @@ import model.Bank;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 public class ControladoraAssign {
 	
@@ -41,7 +43,18 @@ public class ControladoraAssign {
 
     @FXML
     public void asignClient(ActionEvent event) {
-
+    	int q = bank.assignClientToQueue(idText.getText());
+    	if(q!=0) {
+    		lineLabel.setText(q+"");
+    	}
+    	else {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+		    alert.setTitle("Error");
+		    alert.setHeaderText("Client not found");
+		    alert.setContentText("The client with the id '" + idText.getText() + "' is not registered in the bank");
+		
+		    alert.showAndWait();
+    	}
     }
 
 	public void setBank(Bank bank) {

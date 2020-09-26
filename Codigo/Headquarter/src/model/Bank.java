@@ -275,18 +275,20 @@ public class Bank {
 	
 	//Method put a client in a queue
 	
-	public void assignClientToQueue(String id) {
+	public int assignClientToQueue(String id) {
 		ActiveClient ac = searchActiveClientById(id);
 		
 		if(ac != null) {
 			if(Period.between(ac.getBirthday(), LocalDate.now()).getYears() >= 65) {
 				priorityQueue.maxHeapInsert(ac);
+				return 2;
 			}
 			else {
 				queue.offer(ac);
+				return 1;
 			}
-			
 		}
+		return 0;
 	}
 	
 	//------------------------------------------------------------------------------------
