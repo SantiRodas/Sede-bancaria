@@ -20,6 +20,7 @@ public class Bank {
 	
 	//For 16 digit card number
 	public static final long MAX_CARDS_NUMBER = Long.parseLong("9999999999999990");
+	
 	//------------------------------------------------------------------------------------
 	
 	//Attributes of the CurrentAccount class
@@ -55,31 +56,50 @@ public class Bank {
 	// Constructor method of the Bank class
 
 	public Bank(String n) {
+		
 		bankName = n;
+		
 		activeClients = new HashTable<>();
+		
 		removedClients = new HashTable<>();
+		
 		currentClientActions = new Stack<>();
+		
 		priorityQueue = new PriorityQueue<>(new Comparator<ActiveClient>() {
+			
 			@Override
 			public int compare(ActiveClient ac1, ActiveClient ac2) {
+				
 				if(ac1.getBirthday().compareTo(ac2.getBirthday()) > 0) {
+					
 					return 1;
-				}
-				else if(ac1.getBirthday().compareTo(ac2.getBirthday()) < 0) {
+					
+				} else if(ac1.getBirthday().compareTo(ac2.getBirthday()) < 0) {
+					
 					return -1;
-				}
-				else {
+					
+				} else {
+					
 					return 0;
+					
 				}
+				
 			};
 		
 		});
+		
 		queue = new Queue<>();
+		
 		currentActiveClient = null;
+		
 		usedSavingAccountNumbers = new HashTable<>();
+		
 		usedDebitCardNumbers = new HashTable<>();
+		
 		usedCurrentAccountNumbers = new HashTable<>();
+		
 		usedCreditCardNumbers = new HashTable<>();
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -101,17 +121,22 @@ public class Bank {
 	//------------------------------------------------------------------------------------
 
 	public boolean addNewActiveClient(String name, String id, LocalDate birthday, LocalDate startDate) {
+		
 		if(activeClients.search(id) == null) {
+			
 			activeClients.insert(id, new ActiveClient(name,id,birthday,startDate));
+			
 			return true;
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
 	
-	
-	
+	//------------------------------------------------------------------------------------
 	
 	//Operations methods of the Bank class
 
@@ -119,13 +144,24 @@ public class Bank {
 		
 	}
 	
+	//------------------------------------------------------------------------------------
+	
+	//Active clients
+	
 	public ActiveClient[] getActiveClientsArray(){
+		
 		Object[] objA = activeClients.getAll();
+		
 		ActiveClient[] ac = new ActiveClient[objA.length];
+		
 		for (int i = 0; i < ac.length; i++) {
+			
 			ac[i] = (ActiveClient)objA[i];
+			
 		}
+		
 		return ac;
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -133,12 +169,17 @@ public class Bank {
 	//Method to pay in a credit card
 	
 	public boolean payCreditCard(String cardNumber, double amount) {
+		
 		if(currentActiveClient != null) {
+			
 			return currentActiveClient.payCreditCard(cardNumber, amount);
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -146,12 +187,17 @@ public class Bank {
 	//Method to retrieve a credit card
 	
 	public boolean retrieveCredit(String cardNumber, double amount) {
+		
 		if(currentActiveClient != null) {
+			
 			return currentActiveClient.retrieveCredit(cardNumber, amount);
-		}
-		else {
+			
+		} else {
+			
 			return false;
-		}		
+			
+		}	
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -159,12 +205,15 @@ public class Bank {
 	//Method to retrieve savings in a credit card
 	
 	public boolean retrieveSavings(String accountNumber, double amount) {
+		
 		if(currentActiveClient != null) {
+			
 			return currentActiveClient.retrieveSavings(accountNumber, amount);
 						
-		}
-		else {
+		} else {
+			
 			return false;
+			
 		}
 		
 	}
@@ -174,12 +223,17 @@ public class Bank {
 	//Method to add savings in a credit card
 	
 	public boolean addSavings(String accountNumber, double amount) {
+		
 		if(currentActiveClient != null) {
+			
 			return currentActiveClient.addSavings(accountNumber, amount);
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -189,10 +243,13 @@ public class Bank {
 	public boolean createSavingsAccount() {
 		
 		if(currentActiveClient != null) {
+			
 			return currentActiveClient.createSavingsAccount(generateNewSavingsAccountNumber(), generateNewDebitCardNumber());
-		}
-		else {
+		
+		} else {
+			
 			return false;
+			
 		}
 		
 	}
@@ -204,11 +261,15 @@ public class Bank {
 	public boolean createCreditCard() {
 		
 		if(currentActiveClient != null) {
+			
 			return currentActiveClient.createCreditCard(generateNewCurrentAccountNumber(), generateNewCreditCardNumber());
-		}
-		else {
+		
+		} else {
+			
 			return false;
+			
 		}
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -218,28 +279,36 @@ public class Bank {
 	public void getSortedClients(SortCriteria sortCriteria) {
 				
 		Object[] objA = activeClients.getAll();
+		
 		ActiveClient[] ac = new ActiveClient[objA.length];
+		
 		for (int i = 0; i < ac.length; i++) {
+			
 			ac[i] = (ActiveClient)objA[i];
+			
 		}
 		
 		switch(sortCriteria) {
+		
 		case NAME:
 			sortClientsByName(ac);
 		break;		
+		
 		case ID:
 			sortClientsById(ac);
 		break;
+		
 		case START_DATE:
 			sortClientsByStartDate(ac);
 		break;
+		
 		case BIRTHDAY:
 			sortClientsByBirthday(ac);
 		break;
+		
 		case NONE:
 				
 		}
-		
 		
 	}
 	
@@ -247,9 +316,13 @@ public class Bank {
 	
 	//Method to save action in the system
 	//Only works for bank operations except remove client
+	
 	public void saveAction() {
+		
 		if(currentActiveClient != null) {
+			
 			currentClientActions.push(currentActiveClient.clone());
+			
 		}
 		
 	}
@@ -258,37 +331,59 @@ public class Bank {
 	
 	//Method to know the last action in the system
 	//Only works for bank operations except remove client
+	
 	public void undoLastAction() {
+		
 		if(currentActiveClient != null && !currentClientActions.isEmpty()) {
+			
 			currentActiveClient = currentClientActions.pop();
 			
 			activeClients.delete(currentActiveClient.getId());
+			
 			activeClients.insert(currentActiveClient.getId(), currentActiveClient);
 			
 		}
+		
 	}
+	
+	//------------------------------------------------------------------------------------
+	
 	//Clears actions history
+	
 	public void clearActions() {
+		
 		currentClientActions = new Stack<>();
+		
 	}
+	
 	//------------------------------------------------------------------------------------
 	
 	//Method put a client in a queue
 	
 	public int assignClientToQueue(String id) {
+		
 		ActiveClient ac = searchActiveClientById(id);
 		
+		
 		if(ac != null) {
+			
 			if(Period.between(ac.getBirthday(), LocalDate.now()).getYears() >= 65) {
+				
 				priorityQueue.maxHeapInsert(ac);
+				
 				return 2;
-			}
-			else {
+				
+			} else {
+				
 				queue.offer(ac);
+				
 				return 1;
 			}
+			
 		}
+		
 		return 0;
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -296,12 +391,17 @@ public class Bank {
 	//Method to attend a client in a queue
 	
 	public void attendNextClient() {
+		
 		if(priorityQueue.isEmpty()) {
+			
 			currentActiveClient = queue.poll();
-		}
-		else {
+			
+		} else {
+			
 			currentActiveClient = priorityQueue.heapExtractMax();
+			
 		}
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -309,118 +409,190 @@ public class Bank {
 	//Method to remove a client given its id
 	
 	public void removeActiveClient(String id, String removalReason) {
+		
 		ActiveClient ac = activeClients.delete(id);
 		
 		if(ac != null) {
+			
 			RemovedClient rc = new RemovedClient(ac.getName(), id, ac.getBirthday(), LocalDate.now(), removalReason);
 			
 			String[] cCNumbers = ac.getCreditCardNumbers();
+			
 			String[] sANumbers = ac.getSavingsAccountsNumbers();
 			
 			for (int i = 0; i < cCNumbers.length; i++) {
+				
 				usedCreditCardNumbers.delete(cCNumbers[i]);
+				
 				usedCurrentAccountNumbers.delete(cCNumbers[i]);
+				
 			}
 			
 			for (int i = 0; i < sANumbers.length; i++) {
+				
 				usedSavingAccountNumbers.delete(sANumbers[i]);
+				
 				usedDebitCardNumbers.delete(sANumbers[i]);
+				
 			}
 			
 			removedClients.insert(id, rc);
+			
 		}			
 		
 	}
-	
 	
 	//------------------------------------------------------------------------------------
 	
 	//Method to sort the clients by name
 	
 	private void sortClientsByName(ActiveClient[] ac) {
-		ac = PriorityQueue.heapsort(ac, new Comparator<ActiveClient>() {			
+		
+		ac = PriorityQueue.heapsort(ac, new Comparator<ActiveClient>() {
+			
 			public int compare(ActiveClient ac1, ActiveClient ac2) {
+				
 				if(ac1.getName().compareTo(ac2.getName()) > 0) {
+					
 					return 1;
-				}
-				else if(ac1.getName().compareTo(ac2.getName()) < 0) {
+					
+				} else if(ac1.getName().compareTo(ac2.getName()) < 0) {
+					
 					return -1;
-				}
-				else {
+					
+				} else {
+					
 					return 0;
+					
 				}
 			}
 			
 		});
+		
 	}
 	
 	//------------------------------------------------------------------------------------
 	
-	//Method to sort the clients by id using mergesort
+	//Method to sort the clients by id using merge sort
 	
 	private void sortClientsById(ActiveClient[] ac) {
+		
 		if(ac!=null && ac.length>1)
+			
 			mergesort(ac,0,ac.length-1);
+		
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Merge sort
 	
 	private void mergesort(ActiveClient[] ac,int left, int right) {
+		
 		if (left < right){
+			
             int m=(left+right)/2;
+            
             mergesort(ac,left, m);
-            mergesort(ac,m+1, right);                                                                                
-            merge(ac,left, m, right);                                                                                 
+            
+            mergesort(ac,m+1, right);
+            
+            merge(ac,left, m, right); 
+            
 		}
+		
 	}
 	
+	//------------------------------------------------------------------------------------
+	
+	//Final merge
+	
 	private void merge(ActiveClient[] ac,int left, int middle, int right) {
+		
 		 //Finds the length of the sub-vectors
+		
 		  int n1 = middle - left + 1;
+		  
 		  int n2 = right - middle;
+		  
 
 		  //Temporal arrays
+		  
 		  ActiveClient leftArray[] = new ActiveClient[n1];
+		  
 		  ActiveClient rightArray[] = new ActiveClient[n2];
 
 		  //Copies the data to the temporal arrays
+		  
 		  for (int i=0; i < n1; i++) { 
+			  
 		    leftArray[i] = ac[left+i]; 
+		    
 		  }
+		  
 		  for (int j=0; j < n2; j++) {
+			  
 		    rightArray[j] = ac[middle + j + 1]; 
+		    
 		  }
+		  
 		  /* Unites the temporal arrays */
 
 		  //Start indexes of the first and second sub-arrays.
+		  
 		  int i = 0, j = 0;
 
 		  //Start index of the sub-vector ac.
+		  
 		  int k = left;
 
 		  //Sorting.
+		  
 		  while (i < n1 && j < n2) {
+			  
 		    if (leftArray[i].getId().compareTo(rightArray[j].getId())<=0 ) {
+		    	
 		      ac[k] = leftArray[i];
+		      
 		      i++;
+		      
 		    } else {
+		    	
 		        ac[k] = rightArray[j];
+		        
 		        j++;
+		        
 		    }
+		    
 		    k++;
+		    
 		  }//End of the while.
 
 		  /* If there are remaining elements to sort */
 		  //Copies the remaining elements of leftArray[].
+		  
 		  while (i < n1) {
+			  
 		    ac[k] = leftArray[i];
+		    
 		    i++;
+		    
 		    k++;
+		    
 		  }
+		  
 		  //Copies the remaining elements of rightArray[].
+		  
 		  while (j < n2) {
+			  
 		    ac[k] = rightArray[j];
+		    
 		    j++;
+		    
 		    k++;
+		    
 		  }
+		 
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -428,17 +600,29 @@ public class Bank {
 	//Method to sort the clients by date using bubble sort
 	
 	private void sortClientsByStartDate(ActiveClient[] ac) {
+		
 		if(ac!=null && ac.length>1) {
+			
 			for(int i = ac.length;i > 0;i--) {
+				
 				for(int j = 0;j < i-1;j++) {
+					
 					if(ac[j].getStartDate().compareTo(ac[j+1].getStartDate())>0) {
+						
 						ActiveClient temp = ac[j];
+						
 						ac[j] = ac[j+1];
+						
 						ac[j+1] = temp;
+						
 					}
+					
 				}
+				
 			}
+			
 		}
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -446,21 +630,30 @@ public class Bank {
 	//Method to sort clients by last credit card pay date
 	
 	private void sortClientsByBirthday(ActiveClient[] ac) {
+		
 		Arrays.sort(ac, new Comparator<ActiveClient>() {
+			
 			@Override
 			public int compare(ActiveClient ac1, ActiveClient ac2) {
+				
 				if(ac1.getBirthday().compareTo(ac2.getBirthday()) > 0) {
+					
 					return 1;
-				}
-				else if(ac1.getBirthday().compareTo(ac2.getBirthday()) < 0) {
+					
+				} else if(ac1.getBirthday().compareTo(ac2.getBirthday()) < 0) {
+					
 					return -1;
-				}
-				else {
+					
+				} else {
+					
 					return 0;
+					
 				}
+				
 			};
-		
+			
 		});
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -472,6 +665,8 @@ public class Bank {
 	}
 	
 	//------------------------------------------------------------------------------------
+	
+	//Some get's method
 
 	public String[] getCurrentClientCreditCardsNumbers() {
 		return currentActiveClient.getCreditCardNumbers();
@@ -480,6 +675,10 @@ public class Bank {
 	public String[] getCurrentClientSavingsAccountsNumbers() {
 		return currentActiveClient.getSavingsAccountsNumbers();
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	// Generate new saving accounts 
 	
 	private String generateNewSavingsAccountNumber() {
 		if(usedSavingAccountNumbers.size() + usedCurrentAccountNumbers.size() < MAX_ACCOUNTS_NUMBER) {
@@ -493,6 +692,10 @@ public class Bank {
 		return null;
 	}
 	
+	//------------------------------------------------------------------------------------
+	
+	// Generate new credit card
+	
 	private String generateNewCreditCardNumber() {
 		if(usedCreditCardNumbers.size() + usedDebitCardNumbers.size() < MAX_CARDS_NUMBER) {
 			String number;
@@ -504,6 +707,10 @@ public class Bank {
 		}
 		return null;
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Generate new card
 	
 	private String generateNewDebitCardNumber() {
 		if(usedCreditCardNumbers.size() + usedDebitCardNumbers.size() < MAX_CARDS_NUMBER) {
@@ -517,6 +724,10 @@ public class Bank {
 		return null;
 	}
 	
+	//------------------------------------------------------------------------------------
+	
+	//Generate new current accounts
+	
 	private String generateNewCurrentAccountNumber() {
 		if(usedSavingAccountNumbers.size() + usedCurrentAccountNumbers.size() < MAX_ACCOUNTS_NUMBER) {
 			String number;
@@ -529,4 +740,6 @@ public class Bank {
 		
 		return null;
 	}
+	
+	//------------------------------------------------------------------------------------
 }

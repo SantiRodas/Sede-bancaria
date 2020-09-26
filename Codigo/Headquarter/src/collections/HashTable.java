@@ -134,7 +134,7 @@ public class HashTable<K,V> implements HashTableInterface<K,V> {
 	
 	//------------------------------------------------------------------------------------
 	
-	//Method serach of the hash table
+	//Method search of the hash table
 	
 	public V search(K key) {
 		

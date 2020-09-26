@@ -99,6 +99,8 @@ public class ActiveClient extends Client implements Cloneable {
 	
 	// *****************************************************
 	
+	//Retrieve credit
+	
 	public boolean retrieveCredit(String cardNumber, double amount) {
 		
 		int i = searchCreditCard(cardNumber); 
@@ -117,6 +119,8 @@ public class ActiveClient extends Client implements Cloneable {
 	}
 	
 	// *****************************************************
+	
+	//Retrieve savings
 	
 	public boolean retrieveSavings(String accountNumber, double amount) {
 		
@@ -137,6 +141,8 @@ public class ActiveClient extends Client implements Cloneable {
 	
 	// *****************************************************
 	
+	//Add savings
+	
 	public boolean addSavings(String accountNumber, double amount) {
 		
 		int i = searchSavingsAccount(accountNumber); 
@@ -154,6 +160,8 @@ public class ActiveClient extends Client implements Cloneable {
 	}
 	
 	// *****************************************************
+	
+	//Create savings accounts
 	
 	public boolean createSavingsAccount(String accountNumber, String cardNumber) {
 		
@@ -196,6 +204,10 @@ public class ActiveClient extends Client implements Cloneable {
 		
 	}
 	
+	//------------------------------------------------------------------------------------
+	
+	//Search savings accounts
+	
 	private int searchSavingsAccount(String accountNumber) {
 		
 		for (int i = 0 ; i < sAccounts.length ; i++) {
@@ -212,6 +224,8 @@ public class ActiveClient extends Client implements Cloneable {
 	}
 	
 	// *****************************************************
+	
+	//Create a new credit card
 	
 	public boolean createCreditCard(String cardNumber, String accountNumber) {
 		
@@ -254,6 +268,10 @@ public class ActiveClient extends Client implements Cloneable {
 	
 	}	
 	
+	//------------------------------------------------------------------------------------
+	
+	//Search credit card
+	
 	private int searchCreditCard(String cardNumber) {
 		
 		for (int i = 0 ; i < cCards.length ; i++) {
@@ -268,6 +286,10 @@ public class ActiveClient extends Client implements Cloneable {
 		
 		return -1;		
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Method to get the number of a credit card
 
 	public String[] getCreditCardNumbers() {
 		
@@ -298,6 +320,10 @@ public class ActiveClient extends Client implements Cloneable {
 		
 		
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Method to get savings accounts numbers
 
 	public String[] getSavingsAccountsNumbers() {
 		
@@ -332,6 +358,10 @@ public class ActiveClient extends Client implements Cloneable {
 		}
 	}	
 	
+	//------------------------------------------------------------------------------------
+	
+	//Method to string
+	
 	public String toStringSavingsAccounts() {
 		
 		String msg = "";
@@ -348,6 +378,10 @@ public class ActiveClient extends Client implements Cloneable {
 		
 		return msg;
 	}	
+	
+	//------------------------------------------------------------------------------------
+	
+	//Method to string
 	
 	public String toStringCreditCards() {
 		
@@ -366,10 +400,18 @@ public class ActiveClient extends Client implements Cloneable {
 		return msg;
 	}	
 	
+	//------------------------------------------------------------------------------------
+	
+	//Method to string
+	
 	@Override
 	public String toString() {
 		return "Name: " + getName() + "\nID: " + getId() + "\nBirth date: " + getBirthday() + "\nStart date: " + startDate + "\nLast credit card pay date: " + lastCreditCardPayDate;
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Method to clone active client
 	
 	public ActiveClient clone() {
 		ActiveClient copyAC = new ActiveClient(this.getName(), this.getId(), this.getBirthday(), this.startDate);

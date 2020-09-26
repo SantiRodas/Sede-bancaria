@@ -29,6 +29,7 @@ public class Queue<T> implements QueueInterface<T>{
 		back = null;
 		
 		size = 0;
+		
 	}
 	
 	//------------------------------------------------------------------------------------
