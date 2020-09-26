@@ -7,9 +7,8 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
-public class ActiveClient extends Client {
+public class ActiveClient extends Client implements Cloneable {
 	
 	//------------------------------------------------------------------------------------
 	
@@ -331,14 +330,30 @@ public class ActiveClient extends Client {
 			return numbers;
 			
 		}
-	}
-
+	}	
+	
 	@Override
 	public String toString() {
 		return "Name: " + getName() + "\nID: " + getId() + "\nBirth date: " + getBirthday() + "\nStart date: " + startDate + "\nLast credit card pay date: " + lastCreditCardPayDate;
 	}
 	
-	
+	public ActiveClient clone() {
+		ActiveClient copyAC = new ActiveClient(this.getName(), this.getId(), this.getBirthday(), this.startDate);
+		copyAC.setLastCreditCardPayDate(this.lastCreditCardPayDate);
+		
+		for (int i = 0; i < cCards.length; i++) {
+			copyAC.createCreditCard(cCards[i].getNumber(), cAccounts[i].getNumber());
+			copyAC.cCards[i].getCurrentAccount().setAvailableCredit(cCards[i].getAvailableCredit());
+			copyAC.cCards[i].getCurrentAccount().setBalanceToPay(cCards[i].getBalanceToPay());
+		}
+		
+		for (int i = 0; i < dCards.length; i++) {
+			copyAC.createSavingsAccount(sAccounts[i].getNumber(), dCards[i].getNumber());
+			copyAC.dCards[i].getSavingAccount().setBalance(sAccounts[i].getBalance());			
+		}
+		
+		return copyAC;
+	}
 	
 	//------------------------------------------------------------------------------------
 

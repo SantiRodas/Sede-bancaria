@@ -39,7 +39,7 @@ public class CreditCard {
 		return number;
 	}
 
-	public double getBalanceTopPay() {
+	public double getBalanceToPay() {
 		return associatedCAccount.getBalanceToPay();
 	}
 	
@@ -68,6 +68,11 @@ public class CreditCard {
 	
 	public boolean use(double amount) {
 		return associatedCAccount.use(amount);
+	}
+
+	public CurrentAccount getCurrentAccount() {
+		return associatedCAccount;
+		
 	}
 	
 	//------------------------------------------------------------------------------------

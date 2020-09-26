@@ -27,7 +27,7 @@ public class Main extends Application {
 	public Main() {
 		
 		controladora = new ControladoraPrincipal();
-		
+				
 	}
 	
 	//------------------------------------------------------------------------------------

@@ -6,6 +6,8 @@
 
 package model;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -40,7 +42,7 @@ public class Bank {
 
 	private HashTableInterface<String, RemovedClient> removedClients; 
 
-	private StackInterface<?> currentClientActions; //Pending
+	private StackInterface<ActiveClient> currentClientActions; //Pending
 	
 	private PriorityQueueInterface<ActiveClient> priorityQueue; 
 	
@@ -98,6 +100,19 @@ public class Bank {
 	
 	//------------------------------------------------------------------------------------
 
+	public boolean addNewActiveClient(String name, String id, LocalDate birthday, LocalDate startDate) {
+		if(activeClients.search(id) == null) {
+			activeClients.insert(id, new ActiveClient(name,id,birthday,startDate));
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	
+	
+	
 	//Operations methods of the Bank class
 
 	public void generateRandomClients(int activeAmount, int inactiveAmount) {
@@ -195,10 +210,10 @@ public class Bank {
 	
 	//Method to active client in the system
 	
-	public ActiveClient[] getSortedClients(SortCriteria sortCriteria) {
-		
+	public void getSortedClients(SortCriteria sortCriteria) {
+				
 		ActiveClient[] ac = activeClients.getAll();
-			
+		
 		switch(sortCriteria) {
 		case NAME:
 			sortClientsByName(ac);
@@ -213,34 +228,56 @@ public class Bank {
 			sortClientsByBirthday(ac);
 		break;
 		case NONE:
-			return ac;		
+				
 		}
 		
-		return null;
+		
 	}
 	
 	//------------------------------------------------------------------------------------
 	
 	//Method to save action in the system
-	
+	//Only works for bank operations except remove client
 	public void saveAction() {
+		if(currentActiveClient != null) {
+			currentClientActions.push(currentActiveClient.clone());
+		}
 		
 	}
 	
 	//------------------------------------------------------------------------------------
 	
 	//Method to know the last action in the system
-	
+	//Only works for bank operations except remove client
 	public void undoLastAction() {
-		
+		if(currentActiveClient != null && !currentClientActions.isEmpty()) {
+			currentActiveClient = currentClientActions.pop();
+			
+			activeClients.delete(currentActiveClient.getId());
+			activeClients.insert(currentActiveClient.getId(), currentActiveClient);
+			
+		}
 	}
-	
+	//Clears actions history
+	public void clearActions() {
+		currentClientActions = new Stack<>();
+	}
 	//------------------------------------------------------------------------------------
 	
 	//Method put a client in a queue
 	
 	public void assignClientToQueue(String id) {
+		ActiveClient ac = searchActiveClientById(id);
 		
+		if(ac != null) {
+			if(Period.between(ac.getBirthday(), LocalDate.now()).getYears() >= 65) {
+				priorityQueue.maxHeapInsert(ac);
+			}
+			else {
+				queue.offer(ac);
+			}
+			
+		}
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -248,8 +285,42 @@ public class Bank {
 	//Method to attend a client in a queue
 	
 	public void attendNextClient() {
+		if(priorityQueue.isEmpty()) {
+			currentActiveClient = queue.poll();
+		}
+		else {
+			currentActiveClient = priorityQueue.heapExtractMax();
+		}
+	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Method to remove a client given its id
+	
+	public void removeActiveClient(String id, String removalReason) {
+		ActiveClient ac = activeClients.delete(id);
+		
+		if(ac != null) {
+			RemovedClient rc = new RemovedClient(ac.getName(), id, ac.getBirthday(), LocalDate.now(), removalReason);
+			
+			String[] cCNumbers = ac.getCreditCardNumbers();
+			String[] sANumbers = ac.getSavingsAccountsNumbers();
+			
+			for (int i = 0; i < cCNumbers.length; i++) {
+				usedCreditCardNumbers.delete(cCNumbers[i]);
+				usedCurrentAccountNumbers.delete(cCNumbers[i]);
+			}
+			
+			for (int i = 0; i < sANumbers.length; i++) {
+				usedSavingAccountNumbers.delete(sANumbers[i]);
+				usedDebitCardNumbers.delete(sANumbers[i]);
+			}
+			
+			removedClients.insert(id, rc);
+		}			
 		
 	}
+	
 	
 	//------------------------------------------------------------------------------------
 	
@@ -385,7 +456,7 @@ public class Bank {
 	
 	//Method to search a client by id
 	
-	public Client searchClientbyId(String id) {
+	public ActiveClient searchActiveClientById(String id) {
 		return activeClients.search(id);		
 	}
 	

@@ -155,7 +155,7 @@ public class ControladoraGeneral {
 			}
 			
 			else {
-				
+				System.out.println(bank == null);
 				if(choiceBoxSort.getValue().equals("Sort by name")) {
 					bank.getSortedClients(SortCriteria.NAME);
 				}
@@ -190,7 +190,7 @@ public class ControladoraGeneral {
 			}
 			
 			else {
-				ActiveClient aux = (ActiveClient)bank.searchClientbyId(s);
+				ActiveClient aux = (ActiveClient)bank.searchActiveClientById(s);
 					
 				if(aux!=null) {
 					Alert alert = new Alert(AlertType.INFORMATION);

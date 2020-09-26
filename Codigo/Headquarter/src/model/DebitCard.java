@@ -69,6 +69,10 @@ public class DebitCard {
 	public boolean credit(double amount) {
 		return associatedSAccount.credit(amount);
 	}
+
+	public SavingsAccount getSavingAccount() {
+		return associatedSAccount;
+	}
 	
 	//------------------------------------------------------------------------------------
 	

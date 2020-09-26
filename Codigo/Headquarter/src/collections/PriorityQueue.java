@@ -106,18 +106,15 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 		}
 	}	
 	
-	//Out place sort, returns sorted array of type T in decreasing order
-	public static<T> T[] heapsort(T[] unorderedArray, Comparator<T> comparator){
-		PriorityQueue<T> mH = new PriorityQueue<T>(Arrays.copyOf(unorderedArray, unorderedArray.length), unorderedArray.length, comparator);
-		
-		@SuppressWarnings("unchecked")
-		T[] sortedArray = (T[]) new Object[unorderedArray.length];
-				
-		for(int i = unorderedArray.length - 1; i >= 0 ; i++) {
-			sortedArray[i] = mH.heapExtractMax();
+	
+	public static<T> T[] heapsort(T[] array, Comparator<T> comparator){
+		PriorityQueue<T> mH = new PriorityQueue<T>(array, array.length, comparator);
+						
+		for(int i = array.length - 1; i >= 0 ; i++) {
+			array[i] = mH.heapExtractMax();
 		}	
 		
-		return sortedArray;
+		return array;
 	}
 		
 	private void ensureSize(int newLength) {

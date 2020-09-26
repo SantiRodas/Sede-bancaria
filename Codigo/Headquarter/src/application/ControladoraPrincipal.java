@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.ActiveClient;
 import model.Bank;
 
 public class ControladoraPrincipal {
@@ -46,13 +47,13 @@ public class ControladoraPrincipal {
     private BorderPane principalPane;
 
     @FXML
-    private TableView<?> lineTable;
+    private TableView<ActiveClient> lineTable;
 
     @FXML
-    private TableColumn<?, ?> line1;
+    private TableColumn<ActiveClient, String> line1;
 
     @FXML
-    private TableColumn<?, ?> line2;
+    private TableColumn<ActiveClient, String> line2;
     
     //------------------------------------------------------------------------------------
     
@@ -177,7 +178,7 @@ public class ControladoraPrincipal {
     
     @FXML
     void initialize() {
-		Bank bank = new Bank("Bancolombia");
+		bank = new Bank("Bancolombia");
     }
 
 	public void setBank(Bank bank) {
