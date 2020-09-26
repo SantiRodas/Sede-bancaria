@@ -155,7 +155,7 @@ public class ControladoraGeneral {
 			}
 			
 			else {
-				System.out.println(bank == null);
+				
 				if(choiceBoxSort.getValue().equals("Sort by name")) {
 					bank.getSortedClients(SortCriteria.NAME);
 				}
