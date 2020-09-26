@@ -120,7 +120,12 @@ public class Bank {
 	}
 	
 	public ActiveClient[] getActiveClientsArray(){
-		return activeClients.getAll();
+		Object[] objA = activeClients.getAll();
+		ActiveClient[] ac = new ActiveClient[objA.length];
+		for (int i = 0; i < ac.length; i++) {
+			ac[i] = (ActiveClient)objA[i];
+		}
+		return ac;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -212,7 +217,11 @@ public class Bank {
 	
 	public void getSortedClients(SortCriteria sortCriteria) {
 				
-		ActiveClient[] ac = activeClients.getAll();
+		Object[] objA = activeClients.getAll();
+		ActiveClient[] ac = new ActiveClient[objA.length];
+		for (int i = 0; i < ac.length; i++) {
+			ac[i] = (ActiveClient)objA[i];
+		}
 		
 		switch(sortCriteria) {
 		case NAME:
