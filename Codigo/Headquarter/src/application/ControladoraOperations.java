@@ -6,6 +6,7 @@
 
 package application;
 
+import model.ActiveClient;
 import model.Bank;
 
 import java.io.IOException;
@@ -55,7 +56,7 @@ public class ControladoraOperations {
     private Label nameLabel;
 
     @FXML
-    private ChoiceBox<?> cards;
+    private ChoiceBox<String> cards;
 
     @FXML
     private RadioButton takeChoice;
@@ -185,7 +186,9 @@ public class ControladoraOperations {
 		Parent addContactPane = fxmlLoader.load();
 		
 		controladoraRetirar.setBank(bank);
-    	
+		
+		controladoraRetirar.getData(cards.getValue());
+		
 		panelSecundario.getChildren().clear();
 		
 		panelSecundario.setCenter(addContactPane);
@@ -198,8 +201,25 @@ public class ControladoraOperations {
 
     @FXML
     public void search(ActionEvent event) {
-
+    	ActiveClient aux = bank.searchActiveClientById(idText.getText());
+    	nameLabel.setText(aux.getName());
+    	String[] cc = aux.getCreditCardNumbers();
+    	String[] sa = aux.getSavingsAccountsNumbers();
+    	
+    	int i = 0;
+    	while(i<cc.length) {
+    		cards.getItems().add(cc[i]);
+    		i++;
+    	}
+    	
+    	int j = 0;
+    	while(j<sa.length) {
+    		cards.getItems().add(sa[j]);
+    		j++;
+    	}
+    	
     }
+    	
     
     //------------------------------------------------------------------------------------
 

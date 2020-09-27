@@ -30,10 +30,18 @@ public class ControladoraRetirar {
     @FXML
     private Button retirarButton;
     
+    private String cardNumber;
+    
     //------------------------------------------------------------------------------------
 	
   	public void setBank(Bank bank) {
   		this.bank = bank;
+  	}
+  	
+	//------------------------------------------------------------------------------------
+  	
+  	public void getData(String cn) {
+  		cardNumber = cn;
   	}
 	
 	//------------------------------------------------------------------------------------
@@ -42,7 +50,10 @@ public class ControladoraRetirar {
     
     @FXML
     public void retirar(ActionEvent event) {
-    	
+    	boolean x = bank.retrieveCredit(cardNumber, Double.parseDouble(retirarText.getText()));
+    	if(x==false) {
+    		bank.retrieveSavings(cardNumber, Double.parseDouble(retirarText.getText()));
+    	}
 
     }
 	
