@@ -332,7 +332,7 @@ public class Bank {
 	//Method to know the last action in the system
 	//Only works for bank operations except remove client
 	
-	public void undoLastAction() {
+	public boolean undoLastAction() {
 		
 		if(currentActiveClient != null && !currentClientActions.isEmpty()) {
 			
@@ -342,6 +342,10 @@ public class Bank {
 			
 			activeClients.insert(currentActiveClient.getId(), currentActiveClient);
 			
+			return true;
+		}
+		else {
+			return false;
 		}
 		
 	}
