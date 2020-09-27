@@ -8,13 +8,13 @@ package collections;
 
 import org.junit.jupiter.api.Test;
 
-class TestPriorityQueue {
+class TestPriorityQueue<T> {
 	
 	//------------------------------------------------------------------------------------
 	
 	//Relation with priority Queue
 	
-	PriorityQueue<?> priorityQueue;
+	PriorityQueue<T> priorityQueue;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -22,7 +22,7 @@ class TestPriorityQueue {
 	
 	void setup1() {
 		
-		
+		priorityQueue = new PriorityQueue<T>(null);
 		
 	}
 	
@@ -31,9 +31,18 @@ class TestPriorityQueue {
 	//Test build heap 
 	
 	@Test
-	void buildHeapTest() {
+	void buildHeapTest1() {
 		
+		setup1();
 		
+	}
+	
+	//****************************************
+	
+	@Test
+	void buildHeapTest2() {
+		
+		setup1();
 		
 	}
 	
@@ -42,9 +51,18 @@ class TestPriorityQueue {
 	//Test max heap insert
 	
 	@Test
-	void maxHeapInsertTest() {
+	void maxHeapInsertTest1() {
 		
+		setup1();
 		
+	}
+	
+	//****************************************
+	
+	@Test
+	void maxHeapInsertTest2() {
+		
+		setup1();
 		
 	}
 	
@@ -53,9 +71,18 @@ class TestPriorityQueue {
 	//Test heap extract max
 	
 	@Test
-	void heapExtractMaxTest() {
+	void heapExtractMaxTest1() {
 		
+		setup1();
 		
+	}
+	
+	//****************************************
+	
+	@Test
+	void heapExtractMaxTest2() {
+		
+		setup1();
 		
 	}
 	
@@ -64,9 +91,18 @@ class TestPriorityQueue {
 	//Test heap max
 	
 	@Test
-	void heapMaxTest() {
+	void heapMaxTest1() {
 		
+		setup1();
 		
+	}
+	
+	//****************************************
+	
+	@Test
+	void heapMaxTest2() {
+		
+		setup1();
 		
 	}
 	
@@ -75,9 +111,18 @@ class TestPriorityQueue {
 	//Test max
 	
 	@Test
-	void maxHeapifyTest() {
+	void maxHeapifyTest1() {
 		
+		setup1();
 		
+	}
+	
+	//****************************************
+	
+	@Test
+	void maxHeapifyTest2() {
+		
+		setup1();
 		
 	}
 	
@@ -86,9 +131,18 @@ class TestPriorityQueue {
 	//Test heap sort
 	
 	@Test
-	void heapSortTest() {
+	void heapSortTest1() {
 		
+		setup1();
 		
+	}
+	
+	//****************************************
+	
+	@Test
+	void heapSortTest2() {
+		
+		setup1();
 		
 	}
 	
@@ -97,9 +151,18 @@ class TestPriorityQueue {
 	//Test ensure size
 	
 	@Test
-	void ensureSizeTest() {
+	void ensureSizeTest1() {
 		
+		setup1();
 		
+	}
+	
+	//****************************************
+	
+	@Test
+	void ensureSizeTest2() {
+		
+		setup1();
 		
 	}
 	
@@ -108,9 +171,18 @@ class TestPriorityQueue {
 	//Test isEmpty
 	
 	@Test
-	void isEmptyTest() {
+	void isEmptyTest1() {
 		
+		setup1();
 		
+	}
+	
+	//****************************************
+	
+	@Test
+	void isEmptyTest2() {
+		
+		setup1();
 		
 	}
 	

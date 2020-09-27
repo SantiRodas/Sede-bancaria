@@ -6,15 +6,20 @@
 
 package collections;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-class TestStack {
+class TestStack<T> {
 	
 	//------------------------------------------------------------------------------------
 	
 	//Relation with stack
 	
-	Stack<?> stack;
+	Stack<T> stack;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -22,7 +27,7 @@ class TestStack {
 	
 	void setup1() {
 		
-		
+		stack = new Stack<>();
 		
 	}
 	
@@ -31,9 +36,28 @@ class TestStack {
 	//Pop test
 	
 	@Test
-	void popTest() {
+	void popTest1() {
 		
+		setup1();
 		
+		assertNull(stack.pop());
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void popTest2() {
+		
+		setup1();
+		
+		T node = null;
+		
+		stack.push(node);
+		
+		assertTrue(stack.size() == 1);
+		
+		assertTrue(stack.pop() == null);
 		
 	}
 	
@@ -42,9 +66,38 @@ class TestStack {
 	//Push test
 	
 	@Test
-	void pushTest() {
+	void pushTest1() {
 		
+		setup1();
 		
+		T node = null;
+		
+		stack.push(node);
+		
+		int size = stack.size();
+		
+		assertEquals(size, 1);
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void pushTest2() {
+		
+		setup1();
+		
+		T node1 = null;
+		
+		T node2 = null;
+		
+		stack.push(node1);
+		
+		stack.push(node2);
+		
+		int size = stack.size();
+		
+		assertTrue(size == 2);
 		
 	}
 	
@@ -53,42 +106,58 @@ class TestStack {
 	//Peek test
 	
 	@Test
-	void peekTest() {
+	void peekTest1() {
 		
+		setup1();
 		
+		T node = null;
+		
+		stack.push(node);
+		
+		assertTrue(stack.peek() == null);
 		
 	}
 	
-	//------------------------------------------------------------------------------------
-	
-	//Size test
+	//****************************************
 	
 	@Test
-	void sizeTest() {
+	void peekTest2() {
 		
+		setup1();
 		
+		int size = stack.size();
 		
-	}
-	
-	//------------------------------------------------------------------------------------
-	
-	//Empty test
-	
-	@Test
-	void emptyTest() {
+		assertEquals(size, 0);
 		
-		
+		assertTrue(stack.peek() == null);
 		
 	}
-	
+			
 	//------------------------------------------------------------------------------------
 	
 	//IsEmpty test
 	
 	@Test
-	void isEmptyTest() {
+	void isEmptyTest1() {
 		
+		setup1();
 		
+		assertTrue(stack.isEmpty());
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void isEmptyTest2() {
+		
+		setup1();
+		
+		T node = null;
+		
+		stack.push(node);
+		
+		assertFalse(stack.isEmpty());
 		
 	}
 	

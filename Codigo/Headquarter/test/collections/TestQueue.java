@@ -6,15 +6,18 @@
 
 package collections;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-class TestQueue {
+class TestQueue<T> {
 	
 	//------------------------------------------------------------------------------------
 	
 	//Relation with queue
 	
-	Queue<?> queue;
+	Queue<T> queue;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -22,29 +25,47 @@ class TestQueue {
 	
 	void setup1() {
 		
-		
-		
-	}
-	
-	//------------------------------------------------------------------------------------
-	
-	//Test size
-	
-	@Test
-	void sizeTest() {
-		
-		
+		queue = new Queue<>();
 		
 	}
-	
+		
 	//------------------------------------------------------------------------------------
 	
 	//Test offer
 	
 	@Test
-	void offerTest() {
+	void offerTest1() {
 		
+		setup1();
 		
+		T node = null;
+		
+		queue.offer(node);
+		
+		int size = queue.size();
+		
+		assertTrue(size == 1);
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void offerTest2() {
+		
+		setup1();
+		
+		T node1 = null;
+		
+		T node2 = null;
+		
+		queue.offer(node1);
+		
+		queue.offer(node2);
+		
+		int size = queue.size();
+		
+		assertTrue(size == 2);
 		
 	}
 	
@@ -53,9 +74,30 @@ class TestQueue {
 	//Test poll
 	
 	@Test
-	void pollTest() {
+	void pollTest1() {
 		
+		setup1();
 		
+		assertTrue(queue.poll() == null);
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void pollTest2() {
+		
+		setup1();
+		
+		T node = null;
+		
+		queue.offer(node);
+		
+		int size = queue.size();
+		
+		assertTrue(size == 1);
+		
+		assertTrue(queue.poll() == null);
 		
 	}
 	
@@ -64,9 +106,32 @@ class TestQueue {
 	//Test peek
 	
 	@Test
-	void peekTest() {
+	void peekTest1() {
 		
+		setup1();
 		
+		assertTrue(queue.peek() == null);
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void peekTest2() {
+		
+		setup1();
+		
+		T node = null;
+		
+		queue.offer(node);
+		
+		int size = queue.size();
+		
+		assertTrue(size == 1);
+		
+		assertFalse(size == 2);
+		
+		assertTrue(queue.peek() == null);
 		
 	}
 	
@@ -75,9 +140,30 @@ class TestQueue {
 	//Test isEmpty
 	
 	@Test
-	void isEmptyTest() {
+	void isEmptyTest1() {
 		
+		setup1();
 		
+		assertTrue(queue.isEmpty() == true);
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void isEmptyTest2() {
+		
+		setup1();
+		
+		T node = null;
+		
+		queue.offer(node);
+		
+		int size = queue.size();
+		
+		assertTrue(size == 1);
+		
+		assertFalse(queue.isEmpty());
 		
 	}
 	
