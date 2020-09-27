@@ -8,8 +8,10 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import model.Bank;
 
 public class ControladoraCancelar {
@@ -30,6 +32,8 @@ public class ControladoraCancelar {
     @FXML
     private TextArea cancelText;
     
+    private String id;
+    
     //------------------------------------------------------------------------------------
     
     public void setBank(Bank bank) {
@@ -42,8 +46,23 @@ public class ControladoraCancelar {
 
     @FXML
     public void cancel(ActionEvent event) {
+    	if(cancelText.getText().isEmpty()==false) {
+    		bank.removeActiveClient(id, cancelText.getText());
+    		bank.saveAction();
+    	}
+    	else {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Alerta");
+        	alert.setHeaderText("Campo vacío");
+        	alert.setContentText("Por favor escriba su causa de cancelación");
 
+        	alert.showAndWait();
+    	}
     }
+
+	public void getId(String id) {
+		this.id = id;
+	}
 	
 	//------------------------------------------------------------------------------------
 
