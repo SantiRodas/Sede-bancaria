@@ -61,12 +61,13 @@ class TestStack<T> {
 		
 	}
 	
-	//------------------------------------------------------------------------------------
+	//****************************************
 	
 	@Test
 	void popTest3() {
 		
 		setup1();
+		
 		Stack<Integer> h = new Stack<Integer>();
 		
 		int t = 9;
@@ -123,7 +124,7 @@ class TestStack<T> {
 		
 	}
 	
-	//------------------------------------------------------------------------------------
+	//****************************************
 	
 	@Test
 	void pushTest3() {
@@ -176,20 +177,20 @@ class TestStack<T> {
 		
 	}
 			
-	//------------------------------------------------------------------------------------
+	//****************************************
 	
 	@Test
 	void peekTest3() {
 		
 		Stack<String> p = new Stack<String>();
 		
-		String f = "testString1";
-		String g = "testString2";
+		String f = "String1";
+		String g = "String2";
 		
 		p.push(f);
 		p.push(g);
 		
-		assertTrue(p.peek().equals("testString2"));
+		assertTrue(p.peek().equals("String2"));
 		
 	}
 			
@@ -221,7 +222,7 @@ class TestStack<T> {
 		
 	}
 	
-	//------------------------------------------------------------------------------------
+	//****************************************
 	
 	@Test
 	void isEmptyTest3() {

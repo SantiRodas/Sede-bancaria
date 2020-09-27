@@ -69,20 +69,20 @@ class TestQueue<T> {
 		
 	}
 	
-	//------------------------------------------------------------------------------------
+	//****************************************
 	
 	@Test
 	void offerTest3() {
 		
 		Queue<String> theQueue = new Queue<String>();
 		
-		theQueue.offer("I hate everything about you");
+		theQueue.offer("String1");
 		
-		theQueue.offer("Why do I love you?");
+		theQueue.offer("String2");
 		
-		theQueue.offer("You hate everything about me");
+		theQueue.offer("String3");
 		
-		theQueue.offer("Why do you love me?");
+		theQueue.offer("String4");
 		
 		int size = theQueue.size();
 		
@@ -122,14 +122,12 @@ class TestQueue<T> {
 		
 	}
 	
-	//------------------------------------------------------------------------------------
+	//****************************************
 	
 	@Test
 	void pollTest3() {
 		
 		Queue<Double> v = new Queue<Double>();
-		
-		T node = null;
 		
 		v.offer(545.2);
 		v.offer(90.8);
@@ -178,7 +176,7 @@ class TestQueue<T> {
 		
 	}
 	
-	//------------------------------------------------------------------------------------
+	//****************************************
 	
 	@Test
 	void peekTest3() {
@@ -186,8 +184,8 @@ class TestQueue<T> {
 		Queue<String> q = new Queue<String>();
 		
 		q.offer("Texto de prueba");
-		q.offer("The path I walk is in the wrong direction");
-		q.offer("Your tears don't fall, they crash around me");
+		q.offer("String 1");
+		q.offer("String 2");
 		
 		int size = q.size();
 		
@@ -231,12 +229,13 @@ class TestQueue<T> {
 		
 	}
 	
-	//------------------------------------------------------------------------------------
+	//****************************************
 	
 	@Test
 	void isEmptyTest3() {
 		
 		setup1();
+		
 		Queue<Integer> q = new Queue<Integer>();
 		
 		int d = 9;
