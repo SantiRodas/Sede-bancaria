@@ -84,7 +84,7 @@ public class Bank {
 					
 				}
 				
-			};
+			}
 		
 		});
 		
@@ -367,8 +367,7 @@ public class Bank {
 	public int assignClientToQueue(String id) {
 		
 		ActiveClient ac = searchActiveClientById(id);
-		
-		
+					
 		if(ac != null) {
 			
 			if(Period.between(ac.getBirthday(), LocalDate.now()).getYears() >= 65) {
@@ -768,7 +767,7 @@ public class Bank {
 	
 	public ActiveClient[] getPriorityQueue(){
 		
-		ActiveClient[] ac = new ActiveClient[queue.size()];		
+		ActiveClient[] ac = new ActiveClient[priorityQueue.heapSize()];		
 		
 		if(priorityQueue.heapSize() > 0) {
 			for(int i = 0; i < ac.length; i++) {
@@ -777,7 +776,7 @@ public class Bank {
 			
 			for(int i = 0; i < ac.length; i++) {
 				priorityQueue.maxHeapInsert(ac[i]);
-			}
+			}			
 		}
 		
 		return ac;		

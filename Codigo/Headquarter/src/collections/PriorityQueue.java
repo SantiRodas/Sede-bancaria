@@ -37,6 +37,8 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 		
 		heapSize = 0;
 		
+		comparator = c;
+		
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -50,6 +52,8 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 		length = unorderedArray.length;
 		
 		this.heapSize = heapSize;
+		
+		comparator = c;
 		
 		buildHeap();
 		
@@ -82,10 +86,12 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 		heapSize++;	
 		
 		boolean check = false;
-		
-		for(int i = heapSize - 1; i >= 0 && !check ; i = parent(i)) {
+				
+		for(int i = heapSize - 1; i > 0 && !check ; i = parent(i)) {
 			int parent = parent(i);
-			
+			System.out.println(heap[i] == null);
+			System.out.println(heap[parent] == null);
+			System.out.println(comparator==null);
 			if(comparator.compare(heap[i],heap[parent]) > 0) {
 				E temp = heap[parent];
 				
@@ -154,7 +160,7 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 		
 		int largest;
 		
-		if(left < heapSize && comparator.compare(heap[left],heap[index]) > 0) {
+		if(left < heapSize-1 && comparator.compare(heap[left],heap[index]) > 0) {
 			
 			largest = left;
 			
@@ -164,7 +170,7 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 			
 		}
 		
-		if(right < heapSize && comparator.compare(heap[right], heap[largest]) > 0) {
+		if(right < heapSize-1 && comparator.compare(heap[right], heap[largest]) > 0) {
 			
 			largest = right;
 			
@@ -209,7 +215,7 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 		
 	private void ensureSize(int newLength) {
 		
-		if((double)length/(double)heapSize >= 0.9 && newLength > length) {
+		if((double)heapSize/(double)length >= 0.9 && newLength > length) {
 			
 			heap = Arrays.copyOf(heap, newLength);
 			
@@ -267,5 +273,5 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 		return (index - 1)/2;
 	}	
 	
-	//------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------	
 }
