@@ -169,11 +169,9 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 			
 			heap[index] = temp;		
 			
-		} else {
-			
 			maxHeapify(largest);
 			
-		}
+		} 
 		
 	}	
 	
