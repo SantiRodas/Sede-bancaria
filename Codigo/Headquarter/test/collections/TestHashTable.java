@@ -82,6 +82,31 @@ class TestHashTable<K,V> {
 	
 	//------------------------------------------------------------------------------------
 	
+	@Test
+	void insertTest3() {
+		
+		setup1();
+		
+		for(int i = 0 ; i < 3000 ; i ++) {
+			
+			@SuppressWarnings("unchecked")
+			K key = (K) new Integer((int) (Math.random()*20));
+			
+			@SuppressWarnings("unchecked")
+			V value = (V) new Integer((int) (Math.random()*20));
+			
+			hashTable.insert(key, value);
+			
+		}
+
+		int size = hashTable.size();
+		
+		assertEquals(size, 3000);
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
 	//Delete test
 	
 	@Test
@@ -118,6 +143,47 @@ class TestHashTable<K,V> {
 		hashTable.delete(key);
 		
 		assertTrue(hashTable.size() == 0);
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
+	@Test
+	void deleteTest3() {
+		
+		setup1();
+		
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer(99);
+		
+		@SuppressWarnings("unchecked")
+		V value = (V) new Integer(4);
+		
+		@SuppressWarnings("unchecked")
+		K key1 = (K) new Integer(78);
+		
+		@SuppressWarnings("unchecked")
+		V value1 = (V) new Integer(222);
+		
+		@SuppressWarnings("unchecked")
+		K key2 = (K) new Integer(60);
+		
+		@SuppressWarnings("unchecked")
+		V value2 = (V) new Integer(13);
+		
+		hashTable.insert(key, value);
+		
+		hashTable.insert(key1, value1);
+		
+		hashTable.insert(key2, value2);
+		
+		int size = hashTable.size();
+		
+		assertEquals(size, 3);
+		
+		hashTable.delete(key1);
+		
+		assertTrue(hashTable.size() == 2);
 		
 	}
 	
@@ -162,6 +228,45 @@ class TestHashTable<K,V> {
 	
 	//------------------------------------------------------------------------------------
 	
+	@Test
+	void searchTest3() {
+		
+		setup1();
+		
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer(5);
+		
+		@SuppressWarnings("unchecked")
+		V value = (V) new Integer(7);
+		
+		@SuppressWarnings("unchecked")
+		K key1 = (K) new Integer(400);
+		
+		@SuppressWarnings("unchecked")
+		V value1 = (V) new Integer(6);
+		
+		@SuppressWarnings("unchecked")
+		K key2 = (K) new Integer(68);
+		
+		@SuppressWarnings("unchecked")
+		V value2 = (V) new Integer(7568);
+		
+		hashTable.insert(key, value);
+		hashTable.insert(key2, value2);
+		hashTable.insert(key1, value1);
+		hashTable.insert(key1, value1);
+		
+		int size = hashTable.size();
+		
+		assertEquals(size, 4);
+		
+		assertNotNull(hashTable.search(key));
+		
+		assertTrue((Integer)hashTable.search(key2)==7568);
+	}	
+	
+	//------------------------------------------------------------------------------------
+	
 	//IsEmpty test
 	
 	@Test
@@ -187,6 +292,39 @@ class TestHashTable<K,V> {
 		V value = (V) new Integer(200);
 		
 		hashTable.insert(key, value);
+		
+		assertFalse(hashTable.isEmpty());
+		
+	}
+		
+	//------------------------------------------------------------------------------------
+	@Test
+	void isEmptyTest3() {
+		
+		setup1();
+		
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer(1000);
+		
+		@SuppressWarnings("unchecked")
+		V value = (V) new Integer(200);
+		
+		@SuppressWarnings("unchecked")
+		K key1 = (K) new Integer(50);
+		
+		@SuppressWarnings("unchecked")
+		V value1 = (V) new Integer(8);
+		
+		@SuppressWarnings("unchecked")
+		K key2 = (K) new Integer(2);
+		
+		@SuppressWarnings("unchecked")
+		V value2 = (V) new Integer(56);
+		
+		hashTable.insert(key, value);
+		hashTable.insert(key, value);
+		hashTable.insert(key1, value1);
+		hashTable.insert(key2, value2);
 		
 		assertFalse(hashTable.isEmpty());
 		
