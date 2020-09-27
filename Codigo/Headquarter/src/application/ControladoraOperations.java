@@ -175,6 +175,12 @@ public class ControladoraOperations {
 		Parent addContactPane = fxmlLoader.load();
 		
 		controladoraPagar.setBank(bank);
+		
+		if(cards.getValue().isEmpty()==false)
+			controladoraPagar.getData(cards.getValue());
+		else {
+			alert();
+		}
     	
 		panelSecundario.getChildren().clear();
 		
