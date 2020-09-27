@@ -81,13 +81,23 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 		
 		heapSize++;	
 		
-		for(int i = heapSize - 1; i >= 0 ; i = parent(i)) {
+		boolean check = false;
+		
+		for(int i = heapSize - 1; i >= 0 && !check ; i = parent(i)) {
+			int parent = parent(i);
 			
-			maxHeapify(parent(i));
-			
-		}
+			if(comparator.compare(heap[i],heap[parent]) > 0) {
+				E temp = heap[parent];
 				
-		maxHeapify(parent(heapSize));	
+				heap[parent] = heap[i];
+				
+				heap[i] = temp;
+			}
+			else {
+				check = true;
+			}
+			
+		}	
 		
 	}
 	
