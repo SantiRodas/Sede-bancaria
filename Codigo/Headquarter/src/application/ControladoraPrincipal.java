@@ -7,22 +7,24 @@
 package application;
 
 import java.io.IOException;
-import java.time.LocalDate;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.ActiveClient;
 import model.Bank;
 
@@ -34,25 +36,37 @@ public class ControladoraPrincipal {
 	
 	private Bank bank;
 	
-	ControladoraAdd controladoraAdd = new ControladoraAdd();
+	private ControladoraAdd controladoraAdd;
 	
-	ControladoraAssign controladoraAssign = new ControladoraAssign(this);
+	private ControladoraAssign controladoraAssign;
 	
-	ControladoraInformation controladoraInformation = new ControladoraInformation();
+	private ControladoraInformation controladoraInformation;
 	
-	ControladoraOperations controladoraOperations = new ControladoraOperations();
-	
+	private ControladoraOperations controladoraOperations;
+		
 	//------------------------------------------------------------------------------------
 	
 	//Attributes of the ControladoraPrincipal class
 	
 	@FXML
+    private Tab addTab;
+	
+	@FXML
+    private Tab assignTab;
+	
+	@FXML
+    private Tab informationTab;
+	
+    @FXML
+    private Tab operationsTab;
+	
+	@FXML
+	private Tab generalTab;
+	
+	@FXML
 	private Pane panel;
 	
 	@FXML
-    private BorderPane principalPane;
-
-    @FXML
     private TableView<ActiveClient> lineTable;
 
     @FXML
@@ -66,14 +80,47 @@ public class ControladoraPrincipal {
     
     @FXML
     private Button nextButton;
+    
+    @FXML
+    private Button loadTabsButton;
+    
+    @FXML
+    private AnchorPane addClientAPane;
 
+    @FXML
+    private AnchorPane assignQueueAPane;
+
+    @FXML
+    private AnchorPane clientInformationAPane;
+
+    @FXML
+    private AnchorPane operationsAPane;
+
+    @FXML
+    private AnchorPane generalInfAPane;
+    
+    @FXML
+    private Button openTableButton;
+    
+    @FXML
+    private Label currentClientLabel;
+
+    //------------------------------------------------------------------------------------
+    
+    //Constructor
+    
+    public ControladoraPrincipal() {
+		controladoraAdd = new ControladoraAdd();
+		controladoraAssign = new ControladoraAssign(this);
+		controladoraInformation = new ControladoraInformation();
+		controladoraOperations = new ControladoraOperations();
+	}
     
     //------------------------------------------------------------------------------------
     
     //Add method
     
-    @FXML
-    public void add(ActionEvent event) throws IOException {
+    public void add() throws IOException {
     	
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddClient.fxml"));
 		
@@ -83,18 +130,17 @@ public class ControladoraPrincipal {
 		
 		controladoraAdd.setBank(bank);
     	
-		principalPane.getChildren().clear();
+		addClientAPane.getChildren().clear();
 		
-		principalPane.setCenter(addContactPane);
+		addClientAPane.getChildren().setAll(addContactPane);
 
     }
     
     //------------------------------------------------------------------------------------
     
     //Assign method
-
-    @FXML
-    public void assign(ActionEvent event) throws IOException {
+   
+    public void assign() throws IOException {
     	
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AsignClient.fxml"));
 		
@@ -104,9 +150,9 @@ public class ControladoraPrincipal {
 		
 		controladoraAssign.setBank(bank);
     	
-		principalPane.getChildren().clear();
+		assignQueueAPane.getChildren().clear();
 		
-		principalPane.setCenter(addContactPane);
+		assignQueueAPane.getChildren().setAll(addContactPane);
 
     }
     
@@ -114,17 +160,10 @@ public class ControladoraPrincipal {
     
     //GeneralInformation method
 
-    @FXML
-    public void generalInformation(ActionEvent event) throws IOException {
+    public void generalInformation() throws IOException {
     	
-    	ControladoraGeneral controladoraGeneral = new ControladoraGeneral();
-    	
-        Stage stage = (Stage) panel.getScene().getWindow(); 
-        
-        stage.close();
-        
-        // ******************************************
-    	
+    	ControladoraGeneral controladoraGeneral = new ControladoraGeneral(this);
+    	    	
     	Stage primaryStage = new Stage();
     	
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GeneralInformation.fxml"));
@@ -139,11 +178,19 @@ public class ControladoraPrincipal {
 		
 		primaryStage.setScene(scene);
 		
-		primaryStage.setTitle("Sede bancaria");
+		primaryStage.setTitle("Sede bancaria");		
+		
+		controladoraGeneral.initializeTableView();
 		
 		primaryStage.show();
 		
-		controladoraGeneral.initializeTableView();
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                updateOpenTableButton();                
+            }
+        }); 
+		
+		updateOpenTableButton();
 
     }
     
@@ -151,8 +198,7 @@ public class ControladoraPrincipal {
     
     //Information method
 
-    @FXML
-    public void information(ActionEvent event) throws IOException {
+    public void information() throws IOException {
     	
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InformationClient.fxml"));
 		
@@ -162,18 +208,17 @@ public class ControladoraPrincipal {
 		
 		controladoraInformation.setBank(bank);
     	
-		principalPane.getChildren().clear();
+		clientInformationAPane.getChildren().clear();
 		
-		principalPane.setCenter(addContactPane);
+		clientInformationAPane.getChildren().setAll(addContactPane);
 
     }
     
     //------------------------------------------------------------------------------------
     
     //Operations method
-
-    @FXML
-    void operations(ActionEvent event) throws IOException {
+    
+    void operations() throws IOException {
     	
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OperationsClient.fxml"));
 		
@@ -183,9 +228,9 @@ public class ControladoraPrincipal {
 
 		controladoraOperations.setBank(bank);
     	
-		principalPane.getChildren().clear();
+		operationsAPane.getChildren().clear();
 		
-		principalPane.setCenter(addContactPane);
+		operationsAPane.getChildren().setAll(addContactPane);
 
     }
     
@@ -219,11 +264,57 @@ public class ControladoraPrincipal {
 	
 	//------------------------------------------------------------------------------------
 	
-    @FXML
-    public void next(ActionEvent event) {
-
-    }
+    
 	
 	//------------------------------------------------------------------------------------
 	
+	@FXML
+    void loadTabs(ActionEvent event) throws IOException {
+		add();
+		assign();
+		information();
+		operations();
+		loadTabsButton.setVisible(false);
+		addTab.setDisable(false);
+		assignTab.setDisable(false);
+		informationTab.setDisable(false);
+		operationsTab.setDisable(false);
+		generalTab.setDisable(false);
+    }
+
+	@FXML
+    void openTable(ActionEvent event) throws IOException {
+		generalInformation();
+    }
+	
+    @FXML
+    void next(ActionEvent event) {
+    	boolean attend = bank.attendNextClient();
+    	
+    	if(attend) {
+    		currentClientLabel.setText(bank.getCurrentActiveClient().getId());
+    		initializeTableView();
+    	}
+    	else {
+    		currentClientLabel.setText("None");
+    	}
+    	    	
+    	
+    }
+    
+    public void updateOpenTableButton() {
+    	
+    	if(openTableButton.isDisable()) {
+    		
+    		openTableButton.setDisable(false);
+    		
+    	}
+    	else {
+    		
+    		openTableButton.setDisable(true);
+    		
+    	}
+    	
+    }
+    
 }

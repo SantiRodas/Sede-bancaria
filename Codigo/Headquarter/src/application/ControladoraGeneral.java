@@ -13,9 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -41,9 +38,9 @@ public class ControladoraGeneral {
 	
 	//------------------------------------------------------------------------------------
 	
-	public ControladoraGeneral() {
+	public ControladoraGeneral(ControladoraPrincipal cP) {
 		
-		controladora = new ControladoraPrincipal();
+		controladora = cP;
 		
 	}
 	
@@ -97,30 +94,11 @@ public class ControladoraGeneral {
     @FXML
     public void comeBack(ActionEvent event) throws IOException {
     	
-    	Stage stage = (Stage) panel1.getScene().getWindow(); 
+    	Stage stage = (Stage) panel1.getScene().getWindow();     	
         
-        stage.close();
+        stage.close();   
         
-        // ******************************************
-    	
-    	Stage primaryStage = new Stage();
-    	
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Principal.fxml"));
-
-		fxmlLoader.setController(controladora);
-		
-		Parent root = fxmlLoader.load();
-		
-		controladora.setBank(bank);
-		
-		Scene scene = new Scene(root);
-		
-		primaryStage.setScene(scene);
-		
-		primaryStage.setTitle("Sede bancaria");
-		
-		primaryStage.show();
-
+        controladora.updateOpenTableButton();
     }
     
     //------------------------------------------------------------------------------------

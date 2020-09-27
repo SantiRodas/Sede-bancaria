@@ -10,8 +10,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
 import java.util.Comparator;
-
 import collections.*;
+
 
 public class Bank {
 	
@@ -393,18 +393,28 @@ public class Bank {
 	
 	//Method to attend a client in a queue
 	
-	public void attendNextClient() {
+	public boolean attendNextClient() {
 		
-		if(priorityQueue.isEmpty()) {
+		if(queue.isEmpty() && priorityQueue.isEmpty()) {
+			currentActiveClient = null;
 			
-			currentActiveClient = queue.poll();
-			
-		} else {
-			
-			currentActiveClient = priorityQueue.heapExtractMax();
-			
+			return false;
 		}
-		
+		else {
+			if(priorityQueue.isEmpty()) {
+				
+				currentActiveClient = queue.poll();
+				
+				return true;
+				
+			} else {
+				
+				currentActiveClient = priorityQueue.heapExtractMax();
+				
+				return true;
+				
+			}			
+		}
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -780,5 +790,9 @@ public class Bank {
 		}
 		
 		return ac;		
+	}
+
+	public ActiveClient getCurrentActiveClient() {
+		return currentActiveClient;
 	}
 }

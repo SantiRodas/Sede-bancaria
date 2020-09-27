@@ -34,16 +34,16 @@ public class ControladoraOperations {
 	
 	private Bank bank;
 	
-	ControladoraRetirar controladoraRetirar = new ControladoraRetirar();
+	private ControladoraRetirar controladoraRetirar;
 	
-	ControladoraConsignar controladoraConsignar = new ControladoraConsignar();
+	private ControladoraConsignar controladoraConsignar;
 	
-	ControladoraCancelar controladoraCancelar = new ControladoraCancelar();
+	private ControladoraCancelar controladoraCancelar;
 	
-	ControladoraPagar controladoraPagar = new ControladoraPagar();
+	private ControladoraPagar controladoraPagar;
 	
-	ControladoraDeshacer controladoraDeshacer = new ControladoraDeshacer();
-	
+	private ControladoraDeshacer controladoraDeshacer;
+		
 	//------------------------------------------------------------------------------------
 	
 	//Attributes
@@ -83,6 +83,23 @@ public class ControladoraOperations {
 
     @FXML
     private BorderPane panelSecundario;
+    
+    //------------------------------------------------------------------------------------
+    
+    //Constructor
+    
+    public ControladoraOperations() {
+    	
+		controladoraRetirar = new ControladoraRetirar();
+		
+		controladoraConsignar = new ControladoraConsignar();
+		
+		controladoraCancelar = new ControladoraCancelar();
+		
+		controladoraPagar = new ControladoraPagar();
+		
+		controladoraDeshacer = new ControladoraDeshacer();
+	}
 	
 	//------------------------------------------------------------------------------------
     
