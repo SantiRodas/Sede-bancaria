@@ -44,10 +44,7 @@ public class ControladoraConsignar {
 	
     @FXML
     public void consignar(ActionEvent event) {
-    	boolean x = bank.payCreditCard(cardNumber, Double.parseDouble(consignarText.getText()));
-    	if(x==false) {
-    		bank.addSavings(cardNumber, Double.parseDouble(consignarText.getText()));
-    	}
+    	bank.addSavings(cardNumber, Double.parseDouble(consignarText.getText()));
     	bank.saveAction();
     }
 
