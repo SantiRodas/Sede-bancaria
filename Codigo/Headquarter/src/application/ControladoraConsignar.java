@@ -8,8 +8,10 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import model.Bank;
 
 public class ControladoraConsignar {
@@ -44,8 +46,18 @@ public class ControladoraConsignar {
 	
     @FXML
     public void consignar(ActionEvent event) {
-    	bank.addSavings(cardNumber, Double.parseDouble(consignarText.getText()));
-    	bank.saveAction();
+    	if(consignarText.getText().isEmpty()==false) {
+    		bank.addSavings(cardNumber, Double.parseDouble(consignarText.getText()));
+    		bank.saveAction();
+    	}
+    	else {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Alerta");
+        	alert.setHeaderText("Campo vacío");
+        	alert.setContentText("Por favor digite el monto que desea consignar");
+
+        	alert.showAndWait();
+    	}
     }
 
 	public void getData(String cardNumber) {

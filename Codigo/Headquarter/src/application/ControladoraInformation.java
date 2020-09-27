@@ -58,40 +58,50 @@ public class ControladoraInformation {
     
     @FXML
     public void search(ActionEvent event) {
-    	ActiveClient aux = bank.searchActiveClientById(searchText.getText());
-    	if(aux != null) {
-	    	nameLabel.setText(aux.getName());
-	    	idLabel.setText(aux.getId());
-	    	dateStartLabel.setText(aux.getStartDate().toString());
+    	if(searchText.getText().isEmpty()==false) {
+    		ActiveClient aux = bank.searchActiveClientById(searchText.getText());
+    		if(aux != null) {
+    			nameLabel.setText(aux.getName());
+	    		idLabel.setText(aux.getId());
+	    		dateStartLabel.setText(aux.getStartDate().toString());
 	    	
-	    	if(aux.getCreditCardNumbers() != null) {	    				    	
-		    	amountCreditCard.setText(aux.toStringCreditCards());
-	    	}
-	    	else {
-	    		amountCreditCard.setText("N/A");
-	    	}
+	    		if(aux.getCreditCardNumbers() != null) {	    				    	
+		    		amountCreditCard.setText(aux.toStringCreditCards());
+	    		}
+	    		else {
+	    			amountCreditCard.setText("N/A");
+	    		}
 	    	
-	    	if(aux.getLastCreditCardPayDate() != null) {
-	    		datePayLabel.setText(aux.getLastCreditCardPayDate().toString());
-	    	}
-	    	else {
-	    		datePayLabel.setText("N/A");
-	    	}
+	    		if(aux.getLastCreditCardPayDate() != null) {
+	    			datePayLabel.setText(aux.getLastCreditCardPayDate().toString());
+	    		}
+	    		else {
+	    			datePayLabel.setText("N/A");
+	    		}
 	    	
-	    	if(aux.getSavingsAccountsNumbers() != null) {
-	    		balanceLabel.setText(aux.toStringSavingsAccounts());
-	    	}
-	    	else {
-	    		balanceLabel.setText("N/A");
-	    	}
+	    		if(aux.getSavingsAccountsNumbers() != null) {
+	    			balanceLabel.setText(aux.toStringSavingsAccounts());
+	    		}
+	    		else {
+	    			balanceLabel.setText("N/A");
+	    		}
 	    	
+    		}
+    		else {
+    			Alert alert = new Alert(AlertType.ERROR);
+    			alert.setTitle("Client not found");
+    			alert.setHeaderText("Error");
+    			alert.setContentText("A client with the given id not found!");
+    			alert.showAndWait();
+    		}
     	}
     	else {
-    		Alert alert = new Alert(AlertType.ERROR);
-    		alert.setTitle("Client not found");
-    		alert.setHeaderText("Error");
-    		alert.setContentText("A client with the given id not found!");
-    		alert.showAndWait();
+    		Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Alerta");
+        	alert.setHeaderText("Campo vacío");
+        	alert.setContentText("Por favor llene todos los campos");
+
+        	alert.showAndWait();
     	}
     }
 

@@ -8,8 +8,10 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import model.Bank;
 
 public class ControladoraRetirar {
@@ -50,11 +52,21 @@ public class ControladoraRetirar {
     
     @FXML
     public void retirar(ActionEvent event) {
-    	boolean x = bank.retrieveCredit(cardNumber, Double.parseDouble(retirarText.getText()));
-    	if(x==false) {
-    		bank.retrieveSavings(cardNumber, Double.parseDouble(retirarText.getText()));
+    	if(retirarText.getText().isEmpty()==false) {
+    		boolean x = bank.retrieveCredit(cardNumber, Double.parseDouble(retirarText.getText()));
+    		if(x==false) {
+    			bank.retrieveSavings(cardNumber, Double.parseDouble(retirarText.getText()));
+    		}
+    		bank.saveAction();
     	}
-    	bank.saveAction();
+    	else {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Alerta");
+        	alert.setHeaderText("Campo vacío");
+        	alert.setContentText("Por favor ingrese el monto que desea retirar");
+
+        	alert.showAndWait();
+    	}
     }
 	
 	//------------------------------------------------------------------------------------

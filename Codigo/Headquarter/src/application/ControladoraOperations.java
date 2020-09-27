@@ -15,12 +15,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -102,6 +104,8 @@ public class ControladoraOperations {
 		Parent addContactPane = fxmlLoader.load();
 		
 		controladoraCancelar.setBank(bank);
+		
+		controladoraCancelar.getId(idText.getText());
     	
 		panelSecundario.getChildren().clear();
 		
@@ -124,7 +128,11 @@ public class ControladoraOperations {
 		
 		controladoraConsignar.setBank(bank);
 		
-		controladoraConsignar.getData(cards.getValue());
+		if(cards.getValue().isEmpty()==false)
+			controladoraConsignar.getData(cards.getValue());
+		else{
+			alert();
+		}
     	
 		panelSecundario.getChildren().clear();
 		
@@ -189,7 +197,11 @@ public class ControladoraOperations {
 		
 		controladoraRetirar.setBank(bank);
 		
-		controladoraRetirar.getData(cards.getValue());
+		if(cards.getValue().isEmpty()==false)
+			controladoraRetirar.getData(cards.getValue());
+		else {
+			alert();
+		}
 		
 		panelSecundario.getChildren().clear();
 		
@@ -203,25 +215,40 @@ public class ControladoraOperations {
 
     @FXML
     public void search(ActionEvent event) {
-    	ActiveClient aux = bank.searchActiveClientById(idText.getText());
-    	nameLabel.setText(aux.getName());
-    	String[] cc = aux.getCreditCardNumbers();
-    	String[] sa = aux.getSavingsAccountsNumbers();
+    	if(!idText.getText().equals("")) {
+    		ActiveClient aux = bank.searchActiveClientById(idText.getText());
+    		nameLabel.setText(aux.getName());
+    		String[] cc = aux.getCreditCardNumbers();
+    		String[] sa = aux.getSavingsAccountsNumbers();
     	
-    	int i = 0;
-    	while(i<cc.length) {
-    		cards.getItems().add(cc[i]);
-    		i++;
-    	}
+    		int i = 0;
+    		while(i<cc.length) {
+    			cards.getItems().add(cc[i]);
+    			i++;
+    		}	
     	
-    	int j = 0;
-    	while(j<sa.length) {
-    		cards.getItems().add(sa[j]);
-    		j++;
+    		int j = 0;
+    		while(j<sa.length) {
+    			cards.getItems().add(sa[j]);
+    			j++;
+    		}
     	}
+    	else {
+    		alert();
+    	}
+    }
+    
+    //------------------------------------------------------------------------------------
+    
+    public void alert() {
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	alert.setTitle("Alerta");
+    	alert.setHeaderText("Campo vacío");
+    	alert.setContentText("Es necesario que llene todos los campos para poder realizar la operación");
+
+    	alert.showAndWait();
     	
     }
-    	
     
     //------------------------------------------------------------------------------------
 
