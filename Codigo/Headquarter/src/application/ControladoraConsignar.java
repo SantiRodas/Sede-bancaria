@@ -30,6 +30,8 @@ public class ControladoraConsignar {
     @FXML
     private Button consignarButton;
     
+    private String cardNumber;
+    
   //------------------------------------------------------------------------------------
     
     public void setBank(Bank bank) {
@@ -42,8 +44,13 @@ public class ControladoraConsignar {
 	
     @FXML
     public void consignar(ActionEvent event) {
-
+    	bank.addSavings(cardNumber, Double.parseDouble(consignarText.getText()));
+    	bank.saveAction();
     }
+
+	public void getData(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
     
 	//------------------------------------------------------------------------------------
 
