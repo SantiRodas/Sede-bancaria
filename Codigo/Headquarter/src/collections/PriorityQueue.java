@@ -93,6 +93,7 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 			System.out.println(heap[parent] == null);
 			System.out.println(comparator==null);
 			if(comparator.compare(heap[i],heap[parent]) > 0) {
+				
 				E temp = heap[parent];
 				
 				heap[parent] = heap[i];

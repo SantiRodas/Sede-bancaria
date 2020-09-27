@@ -6,6 +6,10 @@
 
 package collections;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class TestPriorityQueue<E> {
@@ -33,7 +37,13 @@ class TestPriorityQueue<E> {
 	@Test
 	void maxHeapInsertTest1() {
 		
+		setup1();
 		
+		E node = null;
+		
+		priorityQueue.maxHeapInsert(node);
+		
+		assertTrue(priorityQueue.heapSize() == 1);
 		
 	}
 	
@@ -43,6 +53,21 @@ class TestPriorityQueue<E> {
 	void maxHeapInsertTest2() {
 		
 		setup1();
+		
+		assertTrue(priorityQueue.heapSize() == 0);
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void maxHeapInsertTest3() {
+		
+		setup1();
+		
+		assertTrue(priorityQueue.heapSize() == 0);
+		
+		assertTrue(priorityQueue.isEmpty());
 		
 	}
 	
@@ -55,6 +80,8 @@ class TestPriorityQueue<E> {
 		
 		setup1();
 		
+		assertNull(priorityQueue.heapExtractMax());
+		
 	}
 	
 	//****************************************
@@ -64,25 +91,28 @@ class TestPriorityQueue<E> {
 		
 		setup1();
 		
-	}
-	
-	//------------------------------------------------------------------------------------
-	
-	//Test heap max
-	
-	@Test
-	void heapMaxTest1() {
+		E node = null;
 		
-		setup1();
+		priorityQueue.maxHeapInsert(node);
+		
+		assertNull(priorityQueue.heapExtractMax());
 		
 	}
 	
 	//****************************************
 	
 	@Test
-	void heapMaxTest2() {
+	void heapExtractMaxTest3() {
 		
 		setup1();
+		
+		E node = null;
+		
+		priorityQueue.maxHeapInsert(node);
+		
+		assertNull(priorityQueue.heapExtractMax());
+		
+		assertEquals(priorityQueue.heapSize(), 0);
 		
 	}
 	
@@ -95,6 +125,8 @@ class TestPriorityQueue<E> {
 		
 		setup1();
 		
+		assertNull(priorityQueue.heapMax());
+		
 	}
 	
 	//****************************************
@@ -104,45 +136,16 @@ class TestPriorityQueue<E> {
 		
 		setup1();
 		
-	}
-	
-	//------------------------------------------------------------------------------------
-	
-	//Test heap sort
-	
-	@Test
-	void heapSortTest1() {
-		
-		setup1();
+		assertEquals(priorityQueue.heapMax(), null);
 		
 	}
 	
-	//****************************************
-	
 	@Test
-	void heapSortTest2() {
+	void maxHeapifyTest3() {
 		
 		setup1();
 		
-	}
-	
-	//------------------------------------------------------------------------------------
-	
-	//Test ensure size
-	
-	@Test
-	void ensureSizeTest1() {
-		
-		setup1();
-		
-	}
-	
-	//****************************************
-	
-	@Test
-	void ensureSizeTest2() {
-		
-		setup1();
+		assertTrue(priorityQueue.heapMax() == null);
 		
 	}
 	
@@ -155,6 +158,8 @@ class TestPriorityQueue<E> {
 		
 		setup1();
 		
+		assertEquals(priorityQueue.isEmpty(), true);
+		
 	}
 	
 	//****************************************
@@ -163,6 +168,29 @@ class TestPriorityQueue<E> {
 	void isEmptyTest2() {
 		
 		setup1();
+		
+		E node = null;
+		
+		priorityQueue.maxHeapInsert(node);
+		
+		assertFalse(priorityQueue.isEmpty());
+		
+	}
+	
+	//****************************************
+	
+	@Test
+	void isEmptyTest3() {
+		
+		setup1();
+		
+		E node = null;
+		
+		priorityQueue.maxHeapInsert(node);
+		
+		assertFalse(priorityQueue.isEmpty());
+		
+		assertEquals(priorityQueue.heapSize(), 1);
 		
 	}
 	
