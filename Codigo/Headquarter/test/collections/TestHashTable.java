@@ -6,15 +6,25 @@
 
 package collections;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 class TestHashTable<K,V> {
 	
 	//------------------------------------------------------------------------------------
 	
+	//Relation with HashTable
+	
 	HashTable<K, V> hashTable;
 	
 	//------------------------------------------------------------------------------------
+	
+	//Setup 1
 	
 	void setup1() {
 		
@@ -24,10 +34,24 @@ class TestHashTable<K,V> {
 	
 	//------------------------------------------------------------------------------------
 	
+	//Insert test
+	
 	@Test
 	void insertTest1() {
 		
 		setup1();
+		
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer((int) (Math.random()*10));
+		
+		@SuppressWarnings("unchecked")
+		V value = (V) new Integer((int) (Math.random()*10));
+		
+		hashTable.insert(key, value);
+		
+		int size = hashTable.size();
+		
+		assertEquals(size, 1);
 		
 	}
 	
@@ -38,14 +62,37 @@ class TestHashTable<K,V> {
 		
 		setup1();
 		
+		for(int i = 0 ; i < 5 ; i ++) {
+			
+			@SuppressWarnings("unchecked")
+			K key = (K) new Integer((int) (Math.random()*10));
+			
+			@SuppressWarnings("unchecked")
+			V value = (V) new Integer((int) (Math.random()*10));
+			
+			hashTable.insert(key, value);
+			
+		}
+
+		int size = hashTable.size();
+		
+		assertEquals(size, 5);
+		
 	}
 	
 	//------------------------------------------------------------------------------------
+	
+	//Delete test
 	
 	@Test
 	void deleteTest1() {
 		
 		setup1();
+		
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer((int) (Math.random()*10));
+		
+		assertNull(hashTable.delete(key));
 		
 	}
 	
@@ -56,14 +103,37 @@ class TestHashTable<K,V> {
 		
 		setup1();
 		
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer(100);
+		
+		@SuppressWarnings("unchecked")
+		V value = (V) new Integer(200);
+		
+		hashTable.insert(key, value);
+		
+		int size = hashTable.size();
+		
+		assertEquals(size, 1);
+		
+		hashTable.delete(key);
+		
+		assertTrue(hashTable.size() == 0);
+		
 	}
 	
 	//------------------------------------------------------------------------------------
+	
+	//Search test
 	
 	@Test
 	void searchTest1() {
 		
 		setup1();
+		
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer(100);
+		
+		assertNull(hashTable.search(key));
 		
 	}
 	
@@ -74,32 +144,32 @@ class TestHashTable<K,V> {
 		
 		setup1();
 		
-	}
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer(100);
+		
+		@SuppressWarnings("unchecked")
+		V value = (V) new Integer(200);
+		
+		hashTable.insert(key, value);
+		
+		int size = hashTable.size();
+		
+		assertEquals(size, 1);
+		
+		assertNotNull(hashTable.search(key));
+		
+	}	
 	
 	//------------------------------------------------------------------------------------
 	
-	@Test
-	void hashTest1() {
-		
-		
-		
-	}
-	
-	//****************************************
-	
-	@Test
-	void hashTest2() {
-		
-		
-		
-	}
-	
-	//------------------------------------------------------------------------------------
+	//IsEmpty test
 	
 	@Test
 	void isEmptyTest1() {
 		
 		setup1();
+		
+		assertEquals(hashTable.isEmpty(), true);
 		
 	}
 	
@@ -110,26 +180,18 @@ class TestHashTable<K,V> {
 		
 		setup1();
 		
-	}
-	
-	//------------------------------------------------------------------------------------
-	
-	@Test
-	void getAllTest1() {
+		@SuppressWarnings("unchecked")
+		K key = (K) new Integer(100);
 		
-		setup1();
+		@SuppressWarnings("unchecked")
+		V value = (V) new Integer(200);
 		
-	}
-	
-	//****************************************
-	
-	@Test
-	void getAllTest2() {
+		hashTable.insert(key, value);
 		
-		setup1();
+		assertFalse(hashTable.isEmpty());
 		
 	}
-	
+		
 	//------------------------------------------------------------------------------------
 	
 }

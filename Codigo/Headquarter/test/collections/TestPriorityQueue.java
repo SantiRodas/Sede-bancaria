@@ -8,13 +8,13 @@ package collections;
 
 import org.junit.jupiter.api.Test;
 
-class TestPriorityQueue<T> {
+class TestPriorityQueue<E> {
 	
 	//------------------------------------------------------------------------------------
 	
 	//Relation with priority Queue
 	
-	PriorityQueue<T> priorityQueue;
+	PriorityQueue<E> priorityQueue;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -22,30 +22,10 @@ class TestPriorityQueue<T> {
 	
 	void setup1() {
 		
-		priorityQueue = new PriorityQueue<T>(null);
+		priorityQueue = new PriorityQueue<E>(null);
 		
 	}
-	
-	//------------------------------------------------------------------------------------
-	
-	//Test build heap 
-	
-	@Test
-	void buildHeapTest1() {
 		
-		setup1();
-		
-	}
-	
-	//****************************************
-	
-	@Test
-	void buildHeapTest2() {
-		
-		setup1();
-		
-	}
-	
 	//------------------------------------------------------------------------------------
 	
 	//Test max heap insert
@@ -53,7 +33,7 @@ class TestPriorityQueue<T> {
 	@Test
 	void maxHeapInsertTest1() {
 		
-		setup1();
+		
 		
 	}
 	
