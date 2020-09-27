@@ -63,6 +63,28 @@ class TestStack<T> {
 	
 	//------------------------------------------------------------------------------------
 	
+	@Test
+	void popTest3() {
+		
+		setup1();
+		Stack<Integer> h = new Stack<Integer>();
+		
+		int t = 9;
+		int e = 54;
+		int r = 32;
+		
+		h.push(t);
+		h.push(e);
+		h.push(r);
+		
+		assertTrue(h.size() == 3);
+		
+		assertTrue(h.pop() == 32);
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
 	//Push test
 	
 	@Test
@@ -103,6 +125,27 @@ class TestStack<T> {
 	
 	//------------------------------------------------------------------------------------
 	
+	@Test
+	void pushTest3() {
+		
+		Stack<Double> c = new Stack<Double>();
+		
+		Double o = 3.5;
+		
+		Double u = 9.1;
+		
+		c.push(o);
+		
+		c.push(u);
+		
+		int size = c.size();
+		
+		assertTrue(size == 2);
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
 	//Peek test
 	
 	@Test
@@ -135,6 +178,23 @@ class TestStack<T> {
 			
 	//------------------------------------------------------------------------------------
 	
+	@Test
+	void peekTest3() {
+		
+		Stack<String> p = new Stack<String>();
+		
+		String f = "testString1";
+		String g = "testString2";
+		
+		p.push(f);
+		p.push(g);
+		
+		assertTrue(p.peek().equals("testString2"));
+		
+	}
+			
+	//------------------------------------------------------------------------------------
+	
 	//IsEmpty test
 	
 	@Test
@@ -158,6 +218,24 @@ class TestStack<T> {
 		stack.push(node);
 		
 		assertFalse(stack.isEmpty());
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
+	@Test
+	void isEmptyTest3() {
+		
+		
+		Stack<Integer> s = new Stack<Integer>();
+		
+		int x = 2;
+		int y = 6;
+		
+		s.push(x);
+		s.push(y);
+		
+		assertFalse(s.isEmpty());
 		
 	}
 	
