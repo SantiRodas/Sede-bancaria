@@ -123,6 +123,8 @@ public class ControladoraOperations {
 		Parent addContactPane = fxmlLoader.load();
 		
 		controladoraConsignar.setBank(bank);
+		
+		controladoraConsignar.getData(cards.getValue());
     	
 		panelSecundario.getChildren().clear();
 		

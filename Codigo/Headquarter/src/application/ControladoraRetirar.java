@@ -54,7 +54,7 @@ public class ControladoraRetirar {
     	if(x==false) {
     		bank.retrieveSavings(cardNumber, Double.parseDouble(retirarText.getText()));
     	}
-
+    	bank.saveAction();
     }
 	
 	//------------------------------------------------------------------------------------
