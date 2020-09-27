@@ -71,6 +71,27 @@ class TestQueue<T> {
 	
 	//------------------------------------------------------------------------------------
 	
+	@Test
+	void offerTest3() {
+		
+		Queue<String> theQueue = new Queue<String>();
+		
+		theQueue.offer("I hate everything about you");
+		
+		theQueue.offer("Why do I love you?");
+		
+		theQueue.offer("You hate everything about me");
+		
+		theQueue.offer("Why do you love me?");
+		
+		int size = theQueue.size();
+		
+		assertTrue(size == 4);
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
 	//Test poll
 	
 	@Test
@@ -98,6 +119,28 @@ class TestQueue<T> {
 		assertTrue(size == 1);
 		
 		assertTrue(queue.poll() == null);
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
+	@Test
+	void pollTest3() {
+		
+		Queue<Double> v = new Queue<Double>();
+		
+		T node = null;
+		
+		v.offer(545.2);
+		v.offer(90.8);
+		v.offer(6.55);
+		v.offer(7.7);
+		
+		int size = v.size();
+		
+		assertTrue(size == 4);
+		
+		assertTrue(v.poll() == 545.2);
 		
 	}
 	
@@ -137,6 +180,27 @@ class TestQueue<T> {
 	
 	//------------------------------------------------------------------------------------
 	
+	@Test
+	void peekTest3() {
+		
+		Queue<String> q = new Queue<String>();
+		
+		q.offer("Texto de prueba");
+		q.offer("The path I walk is in the wrong direction");
+		q.offer("Your tears don't fall, they crash around me");
+		
+		int size = q.size();
+		
+		assertTrue(size == 3);
+		
+		assertFalse(size == 2);
+		
+		assertTrue(q.peek() == "Texto de prueba");
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
 	//Test isEmpty
 	
 	@Test
@@ -164,6 +228,28 @@ class TestQueue<T> {
 		assertTrue(size == 1);
 		
 		assertFalse(queue.isEmpty());
+		
+	}
+	
+	//------------------------------------------------------------------------------------
+	
+	@Test
+	void isEmptyTest3() {
+		
+		setup1();
+		Queue<Integer> q = new Queue<Integer>();
+		
+		int d = 9;
+		int w = 87;
+		
+		q.offer(d);
+		q.offer(w);
+		
+		int size = q.size();
+		
+		assertTrue(size == 2);
+		
+		assertFalse(q.isEmpty());
 		
 	}
 	
