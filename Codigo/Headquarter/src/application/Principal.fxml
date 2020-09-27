@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -28,7 +29,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <SplitPane dividerPositions="0.6683544303797468, 0.8430379746835444" prefHeight="537.0" prefWidth="751.0">
+            <SplitPane dividerPositions="0.6683544303797468, 0.8430379746835444, 0.5" prefHeight="537.0" prefWidth="643.0">
                <items>
                   <BorderPane fx:id="principalPane" prefHeight="537.0" prefWidth="520.0">
                      <center>
@@ -39,16 +40,17 @@
                         </ImageView>
                      </center>
                   </BorderPane>
-                  <TableView fx:id="lineTable" prefHeight="537.0" prefWidth="64.0">
+                  <TableView fx:id="lineTable" minWidth="-Infinity" prefHeight="537.0" prefWidth="121.0">
                      <columns>
                         <TableColumn fx:id="line1" editable="false" prefWidth="132.0" sortable="false" text="Fila 1" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="pLineTable" prefHeight="537.0" prefWidth="101.0">
+                  <TableView fx:id="pLineTable" minWidth="-Infinity" prefHeight="537.0" prefWidth="121.0">
                      <columns>
                         <TableColumn fx:id="line2" prefWidth="121.0" text="Fila 2 (P)" />
                      </columns>
                   </TableView>
+                  <Button fx:id="nextButton" mnemonicParsing="false" onAction="#next" text="." />
                </items>
             </SplitPane>
         </items>
