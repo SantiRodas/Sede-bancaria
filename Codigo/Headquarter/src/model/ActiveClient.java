@@ -68,9 +68,25 @@ public class ActiveClient extends Client implements Cloneable {
 		return lastCreditCardPayDate;
 	}
 	
+	public CreditCard[] getcCards() {
+		return cCards;
+	}
+	
+	public SavingsAccount[] getsAccounts() {
+		return sAccounts;
+	}
+	
 	//------------------------------------------------------------------------------------
 	
 	// Set's methods of the ActiveClient class
+
+	public void setcCards(CreditCard[] cCards) {
+		this.cCards = cCards;
+	}
+
+	public void setsAccounts(SavingsAccount[] sAccounts) {
+		this.sAccounts = sAccounts;
+	}
 
 	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
