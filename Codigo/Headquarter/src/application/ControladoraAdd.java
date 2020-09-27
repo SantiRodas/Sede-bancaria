@@ -66,11 +66,14 @@ public class ControladoraAdd {
     		boolean check = bank.addNewActiveClient(nameText.getText(), idText.getText(), bornDate.getValue(), LocalDate.now());
     	
     		if(check) {
-    			Alert alert = new Alert(AlertType.ERROR);
+    			Alert alert = new Alert(AlertType.INFORMATION);
         		alert.setTitle("Client added succesfully");
         		alert.setHeaderText("Information");
         		alert.setContentText("The given client has been added!");
         		alert.showAndWait();
+        		nameText.clear();
+            	idText.clear();
+            	bornDate.setValue(null);
     		}
     		else {
     			Alert alert = new Alert(AlertType.ERROR);

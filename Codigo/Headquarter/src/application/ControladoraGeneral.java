@@ -64,10 +64,7 @@ public class ControladoraGeneral {
     private TableColumn<ActiveClient, String> columnId;
 
     @FXML
-    private TableColumn<ActiveClient, LocalDate> columnDateStart;
-
-    @FXML
-    private TableColumn<ActiveClient, LocalDate> columnDatePay;
+    private TableColumn<ActiveClient, LocalDate> columnDateStart;    
 
     @FXML
     private TableColumn<ActiveClient, LocalDate> columnBirthday;
@@ -128,7 +125,7 @@ public class ControladoraGeneral {
     
     //------------------------------------------------------------------------------------
     
-    private void initializeTableView() {
+    public void initializeTableView() {
     	ObservableList<ActiveClient> observableList = FXCollections.observableArrayList(bank.getActiveClientsArray());
     	
     	clientsTable.setItems(observableList);
@@ -136,8 +133,7 @@ public class ControladoraGeneral {
     	columnName.setCellValueFactory(new PropertyValueFactory<ActiveClient,String>("name"));
     	columnId.setCellValueFactory(new PropertyValueFactory<ActiveClient,String>("id")); 
     	columnDateStart.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("startDate"));
-    	columnDatePay.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("lastCreditCardPayDate"));
-     	columnBirthday.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("birthday"));
+    	columnBirthday.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("birthday"));
     }
     
   //------------------------------------------------------------------------------------

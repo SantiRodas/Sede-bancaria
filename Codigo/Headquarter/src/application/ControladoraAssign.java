@@ -24,6 +24,8 @@ public class ControladoraAssign {
 	
 	private Bank bank;
 	
+	private ControladoraPrincipal controladoraPrincipal;
+	
 	//------------------------------------------------------------------------------------
 	
 	//Attributes
@@ -36,6 +38,13 @@ public class ControladoraAssign {
 
     @FXML
     private Label lineLabel;
+    //------------------------------------------------------------------------------------
+    
+    //Constructor
+    
+    public ControladoraAssign(ControladoraPrincipal cP) {
+    	controladoraPrincipal = cP;
+    }
     
     //------------------------------------------------------------------------------------
     
@@ -46,6 +55,8 @@ public class ControladoraAssign {
     	int q = bank.assignClientToQueue(idText.getText());
     	if(q!=0) {
     		lineLabel.setText(q+"");
+    		
+    		controladoraPrincipal.initializeTableView();
     	}
     	else {
     		Alert alert = new Alert(AlertType.INFORMATION);

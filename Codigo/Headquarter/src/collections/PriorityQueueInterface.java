@@ -33,5 +33,7 @@ public interface PriorityQueueInterface<E> {
 	
 	//------------------------------------------------------------------------------------
 	
+	public int heapSize();
+	
 	
 }

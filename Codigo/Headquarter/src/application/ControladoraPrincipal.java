@@ -7,6 +7,10 @@
 package application;
 
 import java.io.IOException;
+import java.time.LocalDate;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -30,7 +35,7 @@ public class ControladoraPrincipal {
 	
 	ControladoraAdd controladoraAdd = new ControladoraAdd();
 	
-	ControladoraAssign controladoraAssign = new ControladoraAssign();
+	ControladoraAssign controladoraAssign = new ControladoraAssign(this);
 	
 	ControladoraInformation controladoraInformation = new ControladoraInformation();
 	
@@ -53,7 +58,11 @@ public class ControladoraPrincipal {
     private TableColumn<ActiveClient, String> line1;
 
     @FXML
+    private TableView<ActiveClient> pLineTable;
+
+    @FXML
     private TableColumn<ActiveClient, String> line2;
+
     
     //------------------------------------------------------------------------------------
     
@@ -129,6 +138,8 @@ public class ControladoraPrincipal {
 		primaryStage.setTitle("Sede bancaria");
 		
 		primaryStage.show();
+		
+		controladoraGeneral.initializeTableView();
 
     }
     
@@ -187,4 +198,20 @@ public class ControladoraPrincipal {
     
     //------------------------------------------------------------------------------------
 
+	public void initializeTableView() {
+    	ObservableList<ActiveClient> observableList1 = FXCollections.observableArrayList(bank.getQueue());
+    	   	
+    	lineTable.setItems(observableList1);
+    	
+    	line1.setCellValueFactory(new PropertyValueFactory<ActiveClient,String>("id")); 
+    	
+    	ObservableList<ActiveClient> observableList2 = FXCollections.observableArrayList(bank.getPriorityQueue());
+    	
+    	pLineTable.setItems(observableList2);
+    	
+    	line2.setCellValueFactory(new PropertyValueFactory<ActiveClient,String>("id")); 
+    	
+    }
+	
+	//------------------------------------------------------------------------------------
 }

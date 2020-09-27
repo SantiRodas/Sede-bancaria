@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -10,39 +11,47 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="Cliente">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#add" text="Agregar cliente" />
-                  <MenuItem mnemonicParsing="false" onAction="#assign" text="Asignar fila" />
-                  <MenuItem mnemonicParsing="false" onAction="#information" text="Informacion cliente" />
-                  <MenuItem mnemonicParsing="false" onAction="#operations" text="Operaciones bancarias" />
-                  <MenuItem mnemonicParsing="false" onAction="#generalInformation" text="Informacion general" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Pane layoutX="4.0" layoutY="30.0" prefHeight="537.0" prefWidth="520.0">
-         <children>
-            <TableView fx:id="lineTable" layoutX="524.0" prefHeight="521.0" prefWidth="219.0">
-              <columns>
-                <TableColumn fx:id="line1" prefWidth="109.0" text="Fila 1" />
-                <TableColumn fx:id="line2" prefWidth="131.0" text="Fila 2 (P)" />
-              </columns>
-            </TableView>
-            <BorderPane fx:id="principalPane" prefHeight="537.0" prefWidth="520.0">
-               <center>
-                  <ImageView fitHeight="263.0" fitWidth="498.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                     <image>
-                        <Image url="@logo-bancolombia.png" />
-                     </image>
-                  </ImageView>
-               </center>
-            </BorderPane>
-         </children>
-      </Pane>
+      <SplitPane dividerPositions="0.00528169014084507" orientation="VERTICAL" prefHeight="570.0" prefWidth="792.0">
+        <items>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Cliente">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#add" text="Agregar cliente" />
+                        <MenuItem mnemonicParsing="false" onAction="#assign" text="Asignar fila" />
+                        <MenuItem mnemonicParsing="false" onAction="#information" text="Informacion cliente" />
+                        <MenuItem mnemonicParsing="false" onAction="#operations" text="Operaciones bancarias" />
+                        <MenuItem mnemonicParsing="false" onAction="#generalInformation" text="Informacion general" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <SplitPane dividerPositions="0.6683544303797468, 0.8430379746835444" prefHeight="537.0" prefWidth="751.0">
+               <items>
+                  <BorderPane fx:id="principalPane" prefHeight="537.0" prefWidth="520.0">
+                     <center>
+                        <ImageView fitHeight="263.0" fitWidth="498.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@logo-bancolombia.png" />
+                           </image>
+                        </ImageView>
+                     </center>
+                  </BorderPane>
+                  <TableView fx:id="lineTable" prefHeight="537.0" prefWidth="64.0">
+                     <columns>
+                        <TableColumn fx:id="line1" editable="false" prefWidth="132.0" sortable="false" text="Fila 1" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="pLineTable" prefHeight="537.0" prefWidth="101.0">
+                     <columns>
+                        <TableColumn fx:id="line2" prefWidth="121.0" text="Fila 2 (P)" />
+                     </columns>
+                  </TableView>
+               </items>
+            </SplitPane>
+        </items>
+      </SplitPane>
    </children>
 </Pane>

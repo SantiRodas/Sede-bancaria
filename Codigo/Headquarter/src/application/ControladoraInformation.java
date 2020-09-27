@@ -8,9 +8,11 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import model.ActiveClient;
 import model.Bank;
 
@@ -57,12 +59,40 @@ public class ControladoraInformation {
     @FXML
     public void search(ActionEvent event) {
     	ActiveClient aux = bank.searchActiveClientById(searchText.getText());
-    	nameLabel.setText(aux.getName());
-    	idLabel.setText(aux.getId());
-    	dateStartLabel.setText(aux.getStartDate().toString());
-    	datePayLabel.setText(aux.getLastCreditCardPayDate().toString());
-    	balanceLabel.setText(aux.toStringSavingsAccounts());
-    	amountCreditCard.setText(aux.toStringCreditCards());
+    	if(aux != null) {
+	    	nameLabel.setText(aux.getName());
+	    	idLabel.setText(aux.getId());
+	    	dateStartLabel.setText(aux.getStartDate().toString());
+	    	
+	    	if(aux.getCreditCardNumbers() != null) {	    				    	
+		    	amountCreditCard.setText(aux.toStringCreditCards());
+	    	}
+	    	else {
+	    		amountCreditCard.setText("N/A");
+	    	}
+	    	
+	    	if(aux.getLastCreditCardPayDate() != null) {
+	    		datePayLabel.setText(aux.getLastCreditCardPayDate().toString());
+	    	}
+	    	else {
+	    		datePayLabel.setText("N/A");
+	    	}
+	    	
+	    	if(aux.getSavingsAccountsNumbers() != null) {
+	    		balanceLabel.setText(aux.toStringSavingsAccounts());
+	    	}
+	    	else {
+	    		balanceLabel.setText("N/A");
+	    	}
+	    	
+    	}
+    	else {
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("Client not found");
+    		alert.setHeaderText("Error");
+    		alert.setContentText("A client with the given id not found!");
+    		alert.showAndWait();
+    	}
     }
 
 	public void setBank(Bank bank) {

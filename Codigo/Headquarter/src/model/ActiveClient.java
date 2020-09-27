@@ -50,6 +50,10 @@ public class ActiveClient extends Client implements Cloneable {
 		
 		this.startDate = startDate;	
 
+		cAccounts = new CurrentAccount[MAX_CREDIT_CARDS];
+		cCards = new CreditCard[MAX_CREDIT_CARDS];
+		sAccounts = new SavingsAccount[MAX_DEBIT_CARDS];
+		dCards = new DebitCard[MAX_DEBIT_CARDS];
 	}
 	
 	//------------------------------------------------------------------------------------

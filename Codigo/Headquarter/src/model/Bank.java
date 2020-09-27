@@ -742,4 +742,40 @@ public class Bank {
 	}
 	
 	//------------------------------------------------------------------------------------
+	
+	//Returns queue and priority queue
+	
+	public ActiveClient[] getQueue(){
+		
+		ActiveClient[] ac = new ActiveClient[queue.size()];		
+		
+		if(queue.size() > 0) {
+			for(int i = 0; i < ac.length; i++) {
+				ac[i] = queue.poll();
+			}
+			
+			for(int i = 0; i < ac.length; i++) {
+				queue.offer(ac[i]);
+			}
+		}
+		
+		return ac;		
+	}
+	
+	public ActiveClient[] getPriorityQueue(){
+		
+		ActiveClient[] ac = new ActiveClient[queue.size()];		
+		
+		if(priorityQueue.heapSize() > 0) {
+			for(int i = 0; i < ac.length; i++) {
+				ac[i] = priorityQueue.heapExtractMax();
+			}
+			
+			for(int i = 0; i < ac.length; i++) {
+				priorityQueue.maxHeapInsert(ac[i]);
+			}
+		}
+		
+		return ac;		
+	}
 }
