@@ -189,11 +189,15 @@ public class ActiveClient extends Client implements Cloneable {
 			
 			int emptySlotIndex = -1;
 			
-			for (int i = 0; i < sAccounts.length; i++) {
+			boolean check = false;
+			
+			for (int i = 0; i < sAccounts.length && !check; i++) {
 				
 				if(sAccounts[i] == null) {
 					
 					emptySlotIndex = i;
+					
+					check = true;
 					
 				}
 				
@@ -232,7 +236,7 @@ public class ActiveClient extends Client implements Cloneable {
 		
 		for (int i = 0 ; i < sAccounts.length ; i++) {
 		
-			if(sAccounts[i].getNumber().equals(accountNumber)) {
+			if(sAccounts[i] != null && sAccounts[i].getNumber().equals(accountNumber)) {
 				
 				return i;
 				
@@ -253,11 +257,17 @@ public class ActiveClient extends Client implements Cloneable {
 			
 			int emptySlotIndex = -1;
 			
-			for (int i = 0; i < cCards.length; i++) {
+			boolean check = false;
+			
+			for (int i = 0; i < cCards.length && !check; i++) {
+				
+				
 				
 				if(cCards[i] == null) {
 					
 					emptySlotIndex = i;
+					
+					check = true;
 					
 				}
 				
@@ -296,7 +306,7 @@ public class ActiveClient extends Client implements Cloneable {
 		
 		for (int i = 0 ; i < cCards.length ; i++) {
 		
-			if(cCards[i].getNumber().equals(cardNumber)) {
+			if(cAccounts[i] != null && cCards[i].getNumber().equals(cardNumber)) {
 				
 				return i;
 				
