@@ -58,52 +58,73 @@ public class ControladoraInformation {
     
     @FXML
     public void search(ActionEvent event) {
+    	
     	if(searchText.getText().isEmpty()==false) {
+    		
     		ActiveClient aux = bank.searchActiveClientById(searchText.getText());
+    		
     		if(aux != null) {
+    			
     			nameLabel.setText(aux.getName());
 	    		idLabel.setText(aux.getId());
 	    		dateStartLabel.setText(aux.getStartDate().toString());
 	    	
-	    		if(aux.getCreditCardNumbers() != null) {	    				    	
+	    		if(aux.getCreditCardNumbers() != null) {	
+	    			
 		    		amountCreditCard.setText(aux.toStringCreditCards());
-	    		}
-	    		else {
+		    		
+	    		} else {
+	    			
 	    			amountCreditCard.setText("N/A");
+	    			
 	    		}
 	    	
 	    		if(aux.getLastCreditCardPayDate() != null) {
+	    			
 	    			datePayLabel.setText(aux.getLastCreditCardPayDate().toString());
-	    		}
-	    		else {
+	    			
+	    		} else {
+	    			
 	    			datePayLabel.setText("N/A");
+	    			
 	    		}
 	    	
 	    		if(aux.getSavingsAccountsNumbers() != null) {
+	    			
 	    			balanceLabel.setText(aux.toStringSavingsAccounts());
-	    		}
-	    		else {
+	    			
+	    		} else {
+	    			
 	    			balanceLabel.setText("N/A");
+	    			
 	    		}
 	    	
-    		}
-    		else {
+    		} else {
+    			
     			Alert alert = new Alert(AlertType.ERROR);
-    			alert.setTitle("Client not found");
+    			alert.setTitle("Cliente no encontrado");
     			alert.setHeaderText("Error");
-    			alert.setContentText("A client with the given id not found!");
+    			alert.setContentText("La id no esta registrada en el sistema");
     			alert.showAndWait();
+    			
     		}
-    	}
-    	else {
+    		
+    	} else {
+    		
     		Alert alert = new Alert(AlertType.INFORMATION);
         	alert.setTitle("Alerta");
         	alert.setHeaderText("Campo vacío");
         	alert.setContentText("Por favor llene todos los campos");
 
         	alert.showAndWait();
+        	
     	}
+    	
     }
+    
+    //------------------------------------------------------------------------------------
+    
+    //Method set bank
 
 	public void setBank(Bank bank) {
 		this.bank = bank;

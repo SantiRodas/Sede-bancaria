@@ -35,12 +35,16 @@ public class ControladoraRetirar {
     private String cardNumber;
     
     //------------------------------------------------------------------------------------
+    
+    //Method set bank
 	
   	public void setBank(Bank bank) {
   		this.bank = bank;
   	}
   	
 	//------------------------------------------------------------------------------------
+  	
+  	//Method to get data
   	
   	public void getData(String cn) {
   		cardNumber = cn;
@@ -52,21 +56,30 @@ public class ControladoraRetirar {
     
     @FXML
     public void retirar(ActionEvent event) {
+    	
     	if(retirarText.getText().isEmpty()==false) {
+    		
     		boolean x = bank.retrieveCredit(cardNumber, Double.parseDouble(retirarText.getText()));
+    		
     		if(x==false) {
+    			
     			bank.retrieveSavings(cardNumber, Double.parseDouble(retirarText.getText()));
+    			
     		}
+    		
     		bank.saveAction();
-    	}
-    	else {
+    		
+    	} else {
+    		
     		Alert alert = new Alert(AlertType.INFORMATION);
         	alert.setTitle("Alerta");
         	alert.setHeaderText("Campo vacío");
         	alert.setContentText("Por favor ingrese el monto que desea retirar");
 
         	alert.showAndWait();
+        	
     	}
+    	
     }
 	
 	//------------------------------------------------------------------------------------

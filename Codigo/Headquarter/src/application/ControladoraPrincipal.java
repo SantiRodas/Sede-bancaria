@@ -110,10 +110,12 @@ public class ControladoraPrincipal {
     //Constructor
     
     public ControladoraPrincipal() {
+    	
 		controladoraAdd = new ControladoraAdd();
 		controladoraAssign = new ControladoraAssign(this);
 		controladoraInformation = new ControladoraInformation();
 		controladoraOperations = new ControladoraOperations();
+		
 	}
     
     //------------------------------------------------------------------------------------
@@ -185,9 +187,13 @@ public class ControladoraPrincipal {
 		primaryStage.show();
 		
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			
             public void handle(WindowEvent we) {
-                updateOpenTableButton();                
+            	
+                updateOpenTableButton(); 
+                
             }
+            
         }); 
 		
 		updateOpenTableButton();
@@ -236,18 +242,27 @@ public class ControladoraPrincipal {
     
     //------------------------------------------------------------------------------------
     
+    //Initialize method
+    
     @FXML
     void initialize() {
 		bank = new Bank("Bancolombia");
     }
+    
+    //------------------------------------------------------------------------------------
+    
+    //Method set bank
 
 	public void setBank(Bank bank) {
 		this.bank = bank;
 	}
     
     //------------------------------------------------------------------------------------
+	
+	//Initialize table view
 
 	public void initializeTableView() {
+		
     	ObservableList<ActiveClient> observableList1 = FXCollections.observableArrayList(bank.getQueue());
     	   	
     	lineTable.setItems(observableList1);
@@ -264,43 +279,60 @@ public class ControladoraPrincipal {
 	
 	//------------------------------------------------------------------------------------
 	
-    
-	
-	//------------------------------------------------------------------------------------
+	//Method to load tabs
 	
 	@FXML
-    void loadTabs(ActionEvent event) throws IOException {
+    public void loadTabs(ActionEvent event) throws IOException {
+		
 		add();
 		assign();
 		information();
 		operations();
+		
 		loadTabsButton.setVisible(false);
 		addTab.setDisable(false);
 		assignTab.setDisable(false);
 		informationTab.setDisable(false);
 		operationsTab.setDisable(false);
 		generalTab.setDisable(false);
+		
     }
+	
+	//------------------------------------------------------------------------------------
+	
+	//Method to open the table
 
 	@FXML
-    void openTable(ActionEvent event) throws IOException {
+    public void openTable(ActionEvent event) throws IOException {
 		generalInformation();
     }
 	
+	//------------------------------------------------------------------------------------
+	
+	//Method next
+	
     @FXML
-    void next(ActionEvent event) {
+    public void next(ActionEvent event) {
+    	
     	boolean attend = bank.attendNextClient();
     	
     	if(attend) {
+    		
     		currentClientLabel.setText(bank.getCurrentActiveClient().getId());
+    		
     		initializeTableView();
-    	}
-    	else {
+    		
+    	} else {
+    		
     		currentClientLabel.setText("None");
+    		
     	}
     	    	
-    	
     }
+    
+    //------------------------------------------------------------------------------------
+    
+    //Method to update
     
     public void updateOpenTableButton() {
     	
@@ -308,13 +340,14 @@ public class ControladoraPrincipal {
     		
     		openTableButton.setDisable(false);
     		
-    	}
-    	else {
+    	} else {
     		
     		openTableButton.setDisable(true);
     		
     	}
     	
     }
+    
+    //------------------------------------------------------------------------------------
     
 }

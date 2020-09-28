@@ -46,19 +46,28 @@ public class ControladoraCancelar {
 
     @FXML
     public void cancel(ActionEvent event) {
+    	
     	if(cancelText.getText().isEmpty()==false) {
+    		
     		bank.removeActiveClient(id, cancelText.getText());
     		bank.saveAction();
-    	}
-    	else {
+    		
+    	} else {
+    		
     		Alert alert = new Alert(AlertType.INFORMATION);
         	alert.setTitle("Alerta");
         	alert.setHeaderText("Campo vacío");
         	alert.setContentText("Por favor escriba su causa de cancelación");
 
         	alert.showAndWait();
+        	
     	}
+    	
     }
+    
+    //------------------------------------------------------------------------------------
+    
+    //Method set bank
 
 	public void getId(String id) {
 		this.id = id;

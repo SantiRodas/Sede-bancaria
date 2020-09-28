@@ -38,6 +38,8 @@ public class ControladoraGeneral {
 	
 	//------------------------------------------------------------------------------------
 	
+	//Constructor method
+	
 	public ControladoraGeneral(ControladoraPrincipal cP) {
 		
 		controladora = cP;
@@ -83,6 +85,8 @@ public class ControladoraGeneral {
     
     //------------------------------------------------------------------------------------
     
+    //Method set bank
+    
     public void setBank(Bank b) {
     	bank = b;
     }
@@ -99,11 +103,15 @@ public class ControladoraGeneral {
         stage.close();   
         
         controladora.updateOpenTableButton();
+        
     }
     
     //------------------------------------------------------------------------------------
     
+    //Method to initialize the table view
+    
     public void initializeTableView() {
+    	
     	ObservableList<ActiveClient> observableList = FXCollections.observableArrayList(bank.getActiveClientsArray());
     	
     	clientsTable.setItems(observableList);
@@ -112,89 +120,105 @@ public class ControladoraGeneral {
     	columnId.setCellValueFactory(new PropertyValueFactory<ActiveClient,String>("id")); 
     	columnDateStart.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("startDate"));
     	columnBirthday.setCellValueFactory(new PropertyValueFactory<ActiveClient,LocalDate>("birthday"));
+    
     }
     
-  //------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------
+    
+    //Method to go
     
     @FXML
 	public void go(ActionEvent event) throws IOException {
 		
 			if(choiceBoxSort.getValue().equals("")) {
+				
 					Alert alert = new Alert(AlertType.INFORMATION);
-				    alert.setTitle("Warning at sorting");
-				    alert.setHeaderText("The choice box is empty");
-				    alert.setContentText("Please select an option of the choice box if you want to sort the clients");
+				    alert.setTitle("Error");
+				    alert.setHeaderText("La seleccion esta vacia");
+				    alert.setContentText("Por favor selecciona un metodo de ordenamiento");
 				
 				    alert.showAndWait();
-			}
-			
-			else {
+				    
+			} else {
 				
-				if(choiceBoxSort.getValue().equals("Sort by name")) {
+				if(choiceBoxSort.getValue().equals("Ordenar por nombre")) {
+					
 					bank.getSortedClients(SortCriteria.NAME);
-				}
-				else if(choiceBoxSort.getValue().equals("Sort by start date")) {
+					
+				} else if(choiceBoxSort.getValue().equals("Ordenar por fecha")) {
+					
 					bank.getSortedClients(SortCriteria.START_DATE);
-				}
-				else if(choiceBoxSort.getValue().equals("Sort by id")) {
+					
+				} else if(choiceBoxSort.getValue().equals("Ordenar por id")) {
+					
 					bank.getSortedClients(SortCriteria.ID);
-				}
-				else if(choiceBoxSort.getValue().equals("Sort by birthdate")) {
+					
+				} else if(choiceBoxSort.getValue().equals("Ordenar por cumpleaños")) {
+					
 					bank.getSortedClients(SortCriteria.BIRTHDAY);
+					
 				}
 				
 				initializeTableView();
+				
 			}
 			
-	//------------------------------------------------------------------------------------
-		
 	}
+    
+    //------------------------------------------------------------------------------------
+    
+    //Method to search a user
     
     @FXML
 	public void search() {
+    	
 		String s = textFieldSearch.getText();
 		
 			if(s.equals("")) {
+				
 				Alert alert = new Alert(AlertType.INFORMATION);
-			    alert.setTitle("Warning");
-			    alert.setHeaderText("Some fields are empty");
-			    alert.setContentText("Please fill the fields if you want to search for a client");
+			    alert.setTitle("Error");
+			    alert.setHeaderText("Algunos campos estan vacios");
+			    alert.setContentText("Por favor llena los campos");
 			
 			    alert.showAndWait();
-			}
-			
-			else {
+			    
+			} else {
 				ActiveClient aux = (ActiveClient)bank.searchActiveClientById(s);
 					
 				if(aux!=null) {
+					
 					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("User found");
+					alert.setTitle("Usuario encontrado");
 					alert.setContentText(aux.toString());
 					
 					alert.showAndWait();
-				}
-				else {
+					
+				} else {
 					Alert alert = new Alert(AlertType.INFORMATION);		   
 					alert.setTitle("Error");
-					alert.setContentText("The wanted user doesn't exist in the database");
+					alert.setContentText("El usuario buscado no existe en el sistema");
 						
 					alert.showAndWait();
+					
 				}
+				
 			}
+			
 	}
     
-  //------------------------------------------------------------------------------------
-
+    //------------------------------------------------------------------------------------
     
+    //Method to initialize
+
     @FXML
     void initialize() {
 		
-    	choiceBoxSort.getItems().add("Sort by name");
-    	choiceBoxSort.getItems().add("Sort by start date");
-    	choiceBoxSort.getItems().add("Sort by id");
-    	choiceBoxSort.getItems().add("Sort by birthdate");
+    	choiceBoxSort.getItems().add("Ordenar por nombre");
+    	choiceBoxSort.getItems().add("Ordenar por nombre");
+    	choiceBoxSort.getItems().add("Ordenar por id");
+    	choiceBoxSort.getItems().add("Ordenar por cumpleaños");
     	
-
     }
     
     //------------------------------------------------------------------------------------

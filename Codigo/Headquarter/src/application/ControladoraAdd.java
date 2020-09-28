@@ -48,44 +48,54 @@ public class ControladoraAdd {
 
     @FXML
     public void addClient(ActionEvent event) {
+    	
     	if(nameText.getText().equals("") || idText.getText().equals("") || bornDate.getValue() == null) {
+    		
     		Alert alert = new Alert(AlertType.ERROR);
-    		alert.setTitle("Missing data fields");
+    		alert.setTitle("Faltan campos por llenar");
     		alert.setHeaderText("Error");
-    		alert.setContentText("At least one fields is missing, please be sure all the fields are filled!");
+    		alert.setContentText("Asegurese de que todos los campos esten llenos");
     		alert.showAndWait();
-    	}
-    	else if(bornDate.getValue().isAfter(LocalDate.now())) {
+    		
+    	} else if(bornDate.getValue().isAfter(LocalDate.now())) {
     		Alert alert = new Alert(AlertType.ERROR);
-    		alert.setTitle("Unvalid date");
+    		alert.setTitle("Fecha incorrecta");
     		alert.setHeaderText("Error");
-    		alert.setContentText("Are you a time traveller? please check your birth day!");
+    		alert.setContentText("Por favor analiza el tiempo digitado");
     		alert.showAndWait();
-    	}
-    	else {
+    		
+    	} else {
+    		
     		boolean check = bank.addNewActiveClient(nameText.getText(), idText.getText(), bornDate.getValue(), LocalDate.now());
     	
     		if(check) {
+    			
     			Alert alert = new Alert(AlertType.INFORMATION);
-        		alert.setTitle("Client added succesfully");
-        		alert.setHeaderText("Information");
-        		alert.setContentText("The given client has been added!");
+        		alert.setTitle("Cliente agregado correctamente");
+        		alert.setHeaderText("Informacion");
+        		alert.setContentText("Operacion resuelta");
         		alert.showAndWait();
         		nameText.clear();
             	idText.clear();
             	bornDate.setValue(null);
-    		}
-    		else {
+            	
+    		} else {
+    			
     			Alert alert = new Alert(AlertType.ERROR);
-        		alert.setTitle("Client Already exists");
+        		alert.setTitle("El cliente existe");
         		alert.setHeaderText("Error");
-        		alert.setContentText("A client with the given id already exists!");
+        		alert.setContentText("El cliente con esta informacion ya existe");
         		alert.showAndWait();
+        		
     		}
     	
     	}
     	
     }
+    
+    //------------------------------------------------------------------------------------
+    
+    //Method set bank
 
 	public void setBank(Bank bank) {
 		this.bank = bank;		

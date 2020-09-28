@@ -46,19 +46,28 @@ public class ControladoraConsignar {
 	
     @FXML
     public void consignar(ActionEvent event) {
+    	
     	if(consignarText.getText().isEmpty()==false) {
+    		
     		bank.addSavings(cardNumber, Double.parseDouble(consignarText.getText()));
     		bank.saveAction();
-    	}
-    	else {
+    		
+    	} else {
+    		
     		Alert alert = new Alert(AlertType.INFORMATION);
         	alert.setTitle("Alerta");
         	alert.setHeaderText("Campo vacío");
         	alert.setContentText("Por favor digite el monto que desea consignar");
 
         	alert.showAndWait();
+        	
     	}
+    	
     }
+    
+	//------------------------------------------------------------------------------------
+    
+    //Method get data
 
 	public void getData(String cardNumber) {
 		this.cardNumber = cardNumber;

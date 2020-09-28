@@ -42,11 +42,15 @@ public class ControladoraDeshacer {
     
     @FXML
     public void deshacer(ActionEvent event) {
+    	
     	boolean aux = bank.undoLastAction();
+    	
     	if(aux==true)
     		deshacerLabel.setText("La operación se ha realizado con éxito");
+    	
     	else
     		deshacerLabel.setText("La operación no se ha podido realizar");
+    	
     }
 	
 	//------------------------------------------------------------------------------------

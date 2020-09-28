@@ -99,12 +99,17 @@ public class ControladoraOperations {
 		controladoraPagar = new ControladoraPagar();
 		
 		controladoraDeshacer = new ControladoraDeshacer();
+		
 	}
 	
 	//------------------------------------------------------------------------------------
     
+    //Method set bank
+    
     public void setBank(Bank b) {
+    	
     	bank = b;
+    	
     }
     
     //------------------------------------------------------------------------------------
@@ -147,8 +152,10 @@ public class ControladoraOperations {
 		
 		if(cards.getValue().isEmpty()==false)
 			controladoraConsignar.getData(cards.getValue());
+		
 		else{
 			alert();
+			
 		}
     	
 		panelSecundario.getChildren().clear();
@@ -195,8 +202,10 @@ public class ControladoraOperations {
 		
 		if(cards.getValue().isEmpty()==false)
 			controladoraPagar.getData(cards.getValue());
+		
 		else {
 			alert();
+			
 		}
     	
 		panelSecundario.getChildren().clear();
@@ -222,8 +231,10 @@ public class ControladoraOperations {
 		
 		if(cards.getValue().isEmpty()==false)
 			controladoraRetirar.getData(cards.getValue());
+		
 		else {
 			alert();
+			
 		}
 		
 		panelSecundario.getChildren().clear();
@@ -238,32 +249,49 @@ public class ControladoraOperations {
 
     @FXML
     public void search(ActionEvent event) {
+    	
     	if(!idText.getText().equals("")) {
+    		
     		ActiveClient aux = bank.searchActiveClientById(idText.getText());
+    		
     		nameLabel.setText(aux.getName());
+    		
     		String[] cc = aux.getCreditCardNumbers();
     		String[] sa = aux.getSavingsAccountsNumbers();
     	
     		int i = 0;
+    		
     		while(i<cc.length) {
+    			
     			cards.getItems().add(cc[i]);
+    			
     			i++;
+    			
     		}	
-    	
+    		
     		int j = 0;
+    		
     		while(j<sa.length) {
+    			
     			cards.getItems().add(sa[j]);
+    			
     			j++;
     		}
-    	}
-    	else {
+    		
+    	} else {
+    		
     		alert();
+    		
     	}
+    	
     }
     
     //------------------------------------------------------------------------------------
     
+    //Alert method
+    
     public void alert() {
+    	
     	Alert alert = new Alert(AlertType.INFORMATION);
     	alert.setTitle("Alerta");
     	alert.setHeaderText("Campo vacío");

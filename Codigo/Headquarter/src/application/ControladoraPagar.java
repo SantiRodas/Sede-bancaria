@@ -54,6 +54,8 @@ public class ControladoraPagar {
     
     //------------------------------------------------------------------------------------
     
+    //Method set bank
+    
     public void setBank(Bank bank) {
     	this.bank = bank;
     }
@@ -64,55 +66,77 @@ public class ControladoraPagar {
     
     @FXML
     public void pagar(ActionEvent event) {
+    	
     	if(cantidadText.getText().isEmpty()==false) {
+    		
     		 if(efectivoChoice.isSelected()==true || efectivoChoice.isSelected()==true) {
+    			 
     			if(efectivoChoice.isSelected()==true) {
+    				
     				bank.payCreditCard(cardNumber, Double.parseDouble(cantidadText.getText()));
-    			}
-    			else { //si va a pagar desde alguna cuenta
+    				
+    			} else { //SI SE VA A PAGAR CON ALGUNA CUENTA
+    				
     				numCuentTexto.setVisible(true);
+    				
     		    	numCuenta.setVisible(true);
+    		    	
     		    	if(numCuenta.getText().isEmpty()==false) {
+    		    		
     		    		bank.retrieveSavings(numCuenta.getText(), Double.parseDouble(cantidadText.getText()));
+    		    		
     		    		bank.payCreditCard(cardNumber, Double.parseDouble(cantidadText.getText()));
-    		    	}
-    		    	else {
+    		    	
+    		    	} else {
+    		    		
     		    		Alert alert = new Alert(AlertType.INFORMATION);
     		    		alert.setTitle("Alerta");
         	        	alert.setHeaderText("Campo vacío");
         	        	alert.setContentText("Por favor digite el número de cuenta");
 
         	        	alert.showAndWait();
+        	        	
     		    	}
+    		    	
     			}
+    			
     			bank.saveAction();
-    		}
-    		 else {
-    			 Alert alert = new Alert(AlertType.INFORMATION);
-    	        	alert.setTitle("Alerta");
-    	        	alert.setHeaderText("Campo vacío");
-    	        	alert.setContentText("Por favor seleccione alguna de las opciones de pago");
+    			
+    		} else {
+    			
+    			Alert alert = new Alert(AlertType.INFORMATION);
+    	        alert.setTitle("Alerta");
+    	        alert.setHeaderText("Campo vacío");
+    	        alert.setContentText("Por favor seleccione alguna de las opciones de pago");
 
-    	        	alert.showAndWait();
+    	        alert.showAndWait();
+    	        
     		 }
-    	}
-    	else {
+    		 
+    	} else {
+    		
     		Alert alert = new Alert(AlertType.INFORMATION);
         	alert.setTitle("Alerta");
         	alert.setHeaderText("Campo vacío");
         	alert.setContentText("Por favor digite el monto que desea pagar");
 
         	alert.showAndWait();
+        	
     	}
+    	
     }
     
     //------------------------------------------------------------------------------------
+    
+    //Method to get data
     
     public void getData(String cardNumber) {
     	this.cardNumber = cardNumber;
     }
 	
 	//------------------------------------------------------------------------------------
+    
+    //Method to initialize
     
     @FXML
     void initialize() {

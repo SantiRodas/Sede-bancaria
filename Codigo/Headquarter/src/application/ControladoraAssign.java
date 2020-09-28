@@ -52,37 +52,48 @@ public class ControladoraAssign {
 
     @FXML
     public void asignClient(ActionEvent event) {
+    	
     	if(idText.getText().isEmpty()==false) {
+    		
     		int q = bank.assignClientToQueue(idText.getText());
+    		
     		if(q!=0) {
     			lineLabel.setText(q+"");
     		
     			controladoraPrincipal.initializeTableView();
-    		}
-    		else {
+    			
+    		} else {
+    			
     			Alert alert = new Alert(AlertType.INFORMATION);
     			alert.setTitle("Error");
-		    	alert.setHeaderText("Client not found");
-		    	alert.setContentText("The client with the id '" + idText.getText() + "' is not registered in the bank");
+		    	alert.setHeaderText("Cliente no encontrado");
+		    	alert.setContentText("El cliente con el id '" + idText.getText() + "' no esta registrado");
 		
 		    	alert.showAndWait();
     		}
-    	}
-    	else {
+    		
+    	} else {
+    		
     		Alert alert = new Alert(AlertType.INFORMATION);
         	alert.setTitle("Alerta");
         	alert.setHeaderText("Campo vacío");
         	alert.setContentText("Por favor llene todos los campos");
 
         	alert.showAndWait();
+        	
     	}
+    	
     }
+    
+    //------------------------------------------------------------------------------------
+    
+    //Method set bank
 
 	public void setBank(Bank bank) {
 		this.bank = bank;
 		
 	}
     
-  //------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------
 
 }
