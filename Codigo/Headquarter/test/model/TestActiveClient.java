@@ -50,78 +50,108 @@ class TestActiveClient {
 	
 	@Test
 	void testPayCreditCard1() {
-		
+		setup1();
+		assertFalse(ac.payCreditCard("39024FG4", 800000));
 	}
 	
 	@Test
 	void testPayCreditCard2() {
-		
+		setup2();
+		card1.setAssociatedCAccount(new CurrentAccount("AC9000"));
+		card1.getCurrentAccount().setBalanceToPay(40000);
+		assertTrue(ac.retrieveCredit("TC39857", 34000));
 	}
 	
 	@Test
 	void testPayCreditCard3() {
-		
+		//not implemented yet
 	}
 	
 	@Test
 	void testRetrieveCredit1() {
-		
+		setup1();
+		assertFalse(ac.retrieveCredit("32487GG", 2000000));
 	}
 	
 	@Test
 	void testRetrieveCredit2() {
-		
+		setup2();
+		card1.setAssociatedCAccount(new CurrentAccount("AC9000"));
+		card1.getCurrentAccount().setAvailableCredit(50000);
+		assertTrue(ac.retrieveCredit("TC39857", 34000));
 	}
 	
 	@Test
 	void testRetrieveCredit3() {
-		
+		setup3();
+		card2.setAssociatedCAccount(new CurrentAccount("AC34782"));
+		card2.getCurrentAccount().setAvailableCredit(67000);
+		assertTrue(ac.retrieveCredit("TC987432", 4000));
 	}
 	
 	@Test
 	void retrieveSavings1() {
-		
+		setup1();
+		assertFalse(ac.retrieveSavings("347CJOA", 130000));
 	}
 	
 	@Test
 	void retrieveSavings2() {
+		setup2();
+		assertFalse(ac.retrieveSavings("3892JD", 9300));
 		
+		ac.addSavings("CA23874", 25000);
+		assertTrue(ac.retrieveSavings("CA23874", 10000));
 	}
 	
 	@Test
 	void retrieveSavings3() {
-		
+		setup3();
+		ac.addSavings("CA23874", 25000);
+		assertFalse(ac.retrieveSavings("CA23874", 100000));
+		ac.addSavings("CA23460", 70000);
+		assertTrue(ac.retrieveSavings("CA23460", 24000));
+		assertTrue(ac.retrieveSavings("CA23460", 40000));
 	}
 	
 	@Test
 	void testAddSavings1() {
-		
+		setup1();
+
+		assertFalse(ac.addSavings("CA72", 25000));
 	}
 	
 	@Test
 	void testAddSavings2() {
-		
+		setup2();
+		assertTrue(ac.addSavings("CA23874", 17500));
+		assertFalse(ac.addSavings("ON86734", 2400));
 	}
 	
 	@Test
 	void testAddSavings3() {
-		
+		setup3();
+		assertTrue(ac.addSavings("CA23874", 5000));
+		assertTrue(ac.addSavings("CA23460", 78000));
 	}
 
 	@Test
 	void testCreateSavingsAccount1() {
 		setup1();
-		//ac.createSavingsAccount("CA8976", "CN12324");
+		assertTrue(ac.createSavingsAccount("CA8976", "CN12324"));
 	}
 	
 	@Test
 	void testCreateSavingsAccount2() {
-		
+		setup2();
+		assertTrue(ac.createSavingsAccount("ASFJ998", ""));
+		assertFalse(ac.createSavingsAccount("", "FHEI23FF"));
 	}
 	
 	@Test
 	void testCreateSavingsAccount3() {
-		
+		setup3();
+		assertFalse(ac.createSavingsAccount("NFSAO34","392483"));
 	}
 	
 	@Test
@@ -133,7 +163,9 @@ class TestActiveClient {
 	
 	@Test
 	void testCreateCreditCard2() {
-		
+		setup2();
+		assertTrue(ac.createCreditCard("NEFNDI45","9347BM"));
+		assertTrue(ac.createCreditCard("","4353F487"));
 	}
 	
 	@Test
@@ -141,6 +173,9 @@ class TestActiveClient {
 		setup3();
 		
 		assertTrue(ac.createCreditCard("TC987432",""));
+		assertTrue(ac.createCreditCard("TC063542","HIH28347"));
+		assertTrue(ac.createCreditCard("000003","32085DF"));
+		assertFalse(ac.createCreditCard("NASN3487S","PEHCDGKE"));
 	}
 	
 	@Test
