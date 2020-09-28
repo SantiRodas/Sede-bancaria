@@ -343,9 +343,11 @@ public class Bank {
 			activeClients.insert(currentActiveClient.getId(), currentActiveClient);
 			
 			return true;
-		}
-		else {
+			
+		} else {
+			
 			return false;
+			
 		}
 		
 	}
@@ -396,11 +398,13 @@ public class Bank {
 	public boolean attendNextClient() {
 		
 		if(queue.isEmpty() && priorityQueue.isEmpty()) {
+			
 			currentActiveClient = null;
 			
 			return false;
-		}
-		else {
+			
+		} else {
+			
 			if(priorityQueue.isEmpty()) {
 				
 				currentActiveClient = queue.poll();
@@ -674,7 +678,9 @@ public class Bank {
 	//Method to search a client by id
 	
 	public ActiveClient searchActiveClientById(String id) {
-		return activeClients.search(id);		
+		
+		return activeClients.search(id);
+		
 	}
 	
 	//------------------------------------------------------------------------------------
