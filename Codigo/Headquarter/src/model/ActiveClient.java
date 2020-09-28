@@ -448,14 +448,18 @@ public class ActiveClient extends Client implements Cloneable {
 		copyAC.setLastCreditCardPayDate(this.lastCreditCardPayDate);
 		
 		for (int i = 0; i < cCards.length; i++) {
-			copyAC.createCreditCard(cCards[i].getNumber(), cAccounts[i].getNumber());
-			copyAC.cCards[i].getCurrentAccount().setAvailableCredit(cCards[i].getAvailableCredit());
-			copyAC.cCards[i].getCurrentAccount().setBalanceToPay(cCards[i].getBalanceToPay());
+			if(cCards[i]!=null && cAccounts[i]!=null){
+				copyAC.createCreditCard(cCards[i].getNumber(), cAccounts[i].getNumber());
+				copyAC.cCards[i].getCurrentAccount().setAvailableCredit(cCards[i].getAvailableCredit());
+				copyAC.cCards[i].getCurrentAccount().setBalanceToPay(cCards[i].getBalanceToPay());
+			}
 		}
 		
 		for (int i = 0; i < dCards.length; i++) {
-			copyAC.createSavingsAccount(sAccounts[i].getNumber(), dCards[i].getNumber());
-			copyAC.dCards[i].getSavingAccount().setBalance(sAccounts[i].getBalance());			
+			if(sAccounts[i]!=null && dCards[i]!=null){
+				copyAC.createSavingsAccount(sAccounts[i].getNumber(), dCards[i].getNumber());
+				copyAC.dCards[i].getSavingAccount().setBalance(sAccounts[i].getBalance());			
+			}
 		}
 		
 		return copyAC;
