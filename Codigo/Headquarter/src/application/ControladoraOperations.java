@@ -43,6 +43,8 @@ public class ControladoraOperations {
 	private ControladoraPagar controladoraPagar;
 	
 	private ControladoraDeshacer controladoraDeshacer;
+	
+	private ControladoraCrear controladoraCrear;
 		
 	//------------------------------------------------------------------------------------
 	
@@ -84,6 +86,9 @@ public class ControladoraOperations {
     @FXML
     private BorderPane panelSecundario;
     
+    @FXML
+    private RadioButton createAccountButton;
+    
     //------------------------------------------------------------------------------------
     
     //Constructor
@@ -99,6 +104,8 @@ public class ControladoraOperations {
 		controladoraPagar = new ControladoraPagar();
 		
 		controladoraDeshacer = new ControladoraDeshacer();
+		
+		controladoraCrear = new ControladoraCrear();
 		
 	}
 	
@@ -150,7 +157,7 @@ public class ControladoraOperations {
 		
 		controladoraConsignar.setBank(bank);
 		
-		if(cards.getValue().isEmpty()==false)
+		if(cards.getValue().isEmpty() == false)
 			controladoraConsignar.getData(cards.getValue());
 		
 		else{
@@ -200,7 +207,7 @@ public class ControladoraOperations {
 		
 		controladoraPagar.setBank(bank);
 		
-		if(cards.getValue().isEmpty()==false)
+		if(cards.getValue().isEmpty() == false)
 			controladoraPagar.getData(cards.getValue());
 		
 		else {
@@ -229,7 +236,7 @@ public class ControladoraOperations {
 		
 		controladoraRetirar.setBank(bank);
 		
-		if(cards.getValue().isEmpty()==false)
+		if(cards.getValue().isEmpty() == false)
 			controladoraRetirar.getData(cards.getValue());
 		
 		else {
@@ -299,6 +306,27 @@ public class ControladoraOperations {
 
     	alert.showAndWait();
     	
+    }
+    
+    //------------------------------------------------------------------------------------
+    
+    //Create account method
+    
+    @FXML
+    public void createAccount(ActionEvent event) throws IOException {
+    	
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Crear.fxml"));
+		
+		fxmlLoader.setController(controladoraCrear);    
+		
+		Parent addContactPane = fxmlLoader.load();
+		
+		controladoraDeshacer.setBank(bank);
+    	
+		panelSecundario.getChildren().clear();
+		
+		panelSecundario.setCenter(addContactPane);
+
     }
     
     //------------------------------------------------------------------------------------

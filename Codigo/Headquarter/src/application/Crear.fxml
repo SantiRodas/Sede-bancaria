@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="newAccountButton" layoutX="149.0" layoutY="161.0" mnemonicParsing="false" onAction="#newAccount" text="Realizar" />
+      <RadioButton fx:id="creditRB" layoutX="121.0" layoutY="68.0" mnemonicParsing="false" text="Tarjeta de credito">
+         <toggleGroup>
+            <ToggleGroup fx:id="creador" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="debitRB" layoutX="121.0" layoutY="115.0" mnemonicParsing="false" text="Tarjeta debito" toggleGroup="$creador" />
+      <Label fx:id="exitLabel" layoutX="174.0" layoutY="227.0" text="..." />
+   </children>
+</Pane>

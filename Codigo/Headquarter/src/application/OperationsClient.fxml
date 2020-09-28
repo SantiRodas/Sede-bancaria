@@ -21,20 +21,25 @@
       <TextField fx:id="idText" layoutX="186.0" layoutY="14.0" />
       <Label fx:id="nameLabel" layoutX="256.0" layoutY="117.0" text="..." />
       <ChoiceBox fx:id="cards" layoutX="185.0" layoutY="178.0" prefWidth="150.0" />
-      <RadioButton fx:id="takeChoice" layoutX="31.0" layoutY="277.0" mnemonicParsing="false" onAction="#retirar" text="Retirar">
+      <RadioButton fx:id="takeChoice" layoutX="31.0" layoutY="251.0" mnemonicParsing="false" onAction="#retirar" text="Retirar">
          <toggleGroup>
             <ToggleGroup fx:id="operaciones" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="recordChoice" layoutX="31.0" layoutY="323.0" mnemonicParsing="false" onAction="#consignar" text="Consignar" toggleGroup="$operaciones" />
-      <RadioButton fx:id="cancelChoice" layoutX="31.0" layoutY="368.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar cuenta" toggleGroup="$operaciones" />
-      <RadioButton fx:id="payChoice" layoutX="31.0" layoutY="413.0" mnemonicParsing="false" onAction="#pago" text="Pago tarjeta" toggleGroup="$operaciones" />
-      <RadioButton fx:id="breakChoice" layoutX="33.0" layoutY="460.0" mnemonicParsing="false" onAction="#deshacer" text="Deshacer" toggleGroup="$operaciones" />
+      <RadioButton fx:id="recordChoice" layoutX="31.0" layoutY="297.0" mnemonicParsing="false" onAction="#consignar" text="Consignar" toggleGroup="$operaciones" />
+      <RadioButton fx:id="cancelChoice" layoutX="31.0" layoutY="342.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar cuenta" toggleGroup="$operaciones" />
+      <RadioButton fx:id="payChoice" layoutX="31.0" layoutY="387.0" mnemonicParsing="false" onAction="#pago" text="Pago tarjeta" toggleGroup="$operaciones" />
+      <RadioButton fx:id="breakChoice" layoutX="33.0" layoutY="434.0" mnemonicParsing="false" onAction="#deshacer" text="Deshacer" toggleGroup="$operaciones" />
       <Pane fx:id="secundaryPane" layoutX="151.0" layoutY="225.0" prefHeight="297.0" prefWidth="355.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="297.0" stroke="BLACK" strokeType="INSIDE" width="355.0" />
             <BorderPane fx:id="panelSecundario" layoutX="2.0" layoutY="1.0" prefHeight="297.0" prefWidth="355.0" />
          </children>
       </Pane>
+      <RadioButton fx:id="createAccountButton" layoutX="33.0" layoutY="479.0" mnemonicParsing="false" onAction="#createAccount" text="Crear cuenta">
+         <toggleGroup>
+            <ToggleGroup fx:id="operaciones1" />
+         </toggleGroup>
+      </RadioButton>
    </children>
 </Pane>
