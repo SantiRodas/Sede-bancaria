@@ -1,7 +1,7 @@
 # Sede bancaria
 
 Este programa funcional permite tener un mayor control de tiempo en cada una de las operaciones bancarias que un banco puede realizar.
-Desde el manejo de las filas con prioridas, hasta la utilizacion de una base de datos del sistema, el software optimiza una sede bancaria.
+Desde el manejo de las filas con prioridas, hasta la utilizacion de una base de datos del sistema, el software optimiza de manera exponencial el tiempo.
 Ademas, una interfaz simple y minimalista permite el correcto uso para los usuarios que la manejan. 
 
 ## Requisitos del programa
