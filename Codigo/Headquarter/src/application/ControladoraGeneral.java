@@ -167,7 +167,7 @@ public class ControladoraGeneral {
     	
 		String s = textFieldSearch.getText();
 		
-			if(s.equals("")) {
+			if(s.isEmpty()==true) {
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 			    alert.setTitle("Error");

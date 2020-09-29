@@ -201,7 +201,7 @@ public class ControladoraPrincipal {
 
     public void information() throws IOException {
     	
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InformationClient.fxml"));
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InformationClientWithTable.fxml"));
 		
 		fxmlLoader.setController(controladoraInformation);    
 		
