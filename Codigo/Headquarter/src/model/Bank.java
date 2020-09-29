@@ -240,6 +240,14 @@ public class Bank {
 	
 	//Method to create
 	
+	public StackInterface<ActiveClient> getCurrentClientActions() {
+		return currentClientActions;
+	}
+
+	public void setCurrentClientActions(StackInterface<ActiveClient> currentClientActions) {
+		this.currentClientActions = currentClientActions;
+	}
+
 	public boolean createSavingsAccount() {
 		
 		if(currentActiveClient != null) {
@@ -780,36 +788,60 @@ public class Bank {
 		ActiveClient[] ac = new ActiveClient[queue.size()];		
 		
 		if(queue.size() > 0) {
+			
 			for(int i = 0; i < ac.length; i++) {
+				
 				ac[i] = queue.poll();
+				
 			}
 			
 			for(int i = 0; i < ac.length; i++) {
+				
 				queue.offer(ac[i]);
+				
 			}
+			
 		}
 		
-		return ac;		
+		return ac;	
+		
 	}
+	
+	//------------------------------------------------------------------------------------
 	
 	public ActiveClient[] getPriorityQueue(){
 		
 		ActiveClient[] ac = new ActiveClient[priorityQueue.heapSize()];		
 		
 		if(priorityQueue.heapSize() > 0) {
+			
 			for(int i = 0; i < ac.length; i++) {
+				
 				ac[i] = priorityQueue.heapExtractMax();
+				
 			}
 			
 			for(int i = 0; i < ac.length; i++) {
+				
 				priorityQueue.maxHeapInsert(ac[i]);
+				
 			}			
+			
 		}
 		
 		return ac;		
+		
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	//Method to get current active client
 
 	public ActiveClient getCurrentActiveClient() {
 		return currentActiveClient;
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	
 }
