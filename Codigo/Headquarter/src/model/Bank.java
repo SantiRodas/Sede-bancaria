@@ -16,10 +16,10 @@ import collections.*;
 public class Bank {
 	
 	//For 7 digit account number
-	public static final long MAX_ACCOUNTS_NUMBER = 9999990; 
+	public static final double MAX_ACCOUNTS_NUMBER = 8999999.0; 
 	
 	//For 16 digit card number
-	public static final long MAX_CARDS_NUMBER = Long.parseLong("9999999999999990");
+	public static final double MAX_CARDS_NUMBER = 8999999999999999.0;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -56,7 +56,7 @@ public class Bank {
 	// Constructor method of the Bank class
 
 	public Bank(String n) {
-		
+				
 		bankName = n;
 		
 		activeClients = new HashTable<>();
@@ -262,7 +262,7 @@ public class Bank {
 		
 		if(currentActiveClient != null) {
 			
-			return currentActiveClient.createCreditCard(generateNewCurrentAccountNumber(), generateNewCreditCardNumber());
+			return currentActiveClient.createCreditCard(generateNewCreditCardNumber(), generateNewCurrentAccountNumber());
 		
 		} else {
 			
@@ -330,7 +330,7 @@ public class Bank {
 	//------------------------------------------------------------------------------------
 	
 	//Method to know the last action in the system
-	//Only works for bank operations except remove client
+	//Works for bank operations except remove client and create credit card or savings account
 	
 	public boolean undoLastAction() {
 		
@@ -702,9 +702,13 @@ public class Bank {
 	private String generateNewSavingsAccountNumber() {
 		if(usedSavingAccountNumbers.size() + usedCurrentAccountNumbers.size() < MAX_ACCOUNTS_NUMBER) {
 			String number;
+						
 			do {
-				number = Long.toString((long)Math.random()*((MAX_ACCOUNTS_NUMBER) + (long)1) + (long)1000000);
-			}while(usedSavingAccountNumbers.search(number) != null && usedCurrentAccountNumbers.search(number) != null);
+				
+				number = Long.toString((long)(Math.random()*((MAX_ACCOUNTS_NUMBER) + 1.0) + 1000000.0));
+				
+			} while(usedSavingAccountNumbers.search(number) != null && usedCurrentAccountNumbers.search(number) != null);
+			
 			usedSavingAccountNumbers.insert(number, number);
 			return number;
 		}
@@ -719,7 +723,10 @@ public class Bank {
 		if(usedCreditCardNumbers.size() + usedDebitCardNumbers.size() < MAX_CARDS_NUMBER) {
 			String number;
 			do {
-				number = Long.toString((long)Math.random()*((MAX_CARDS_NUMBER) + (long)1) + Long.parseLong("1000000000000000"));
+				
+				number = Long.toString((long)(Math.random()*((MAX_CARDS_NUMBER) + 1.0) + 1000000000000000.0));
+								
+				
 			}while(usedCreditCardNumbers.search(number) != null && usedDebitCardNumbers.search(number) != null);
 			usedCreditCardNumbers.insert(number, number);
 			return number;
@@ -735,7 +742,9 @@ public class Bank {
 		if(usedCreditCardNumbers.size() + usedDebitCardNumbers.size() < MAX_CARDS_NUMBER) {
 			String number;
 			do {
-				number = Long.toString((long)Math.random()*((MAX_CARDS_NUMBER) + (long)1) + Long.parseLong("1000000000000000"));
+				
+				number = Long.toString((long)(Math.random()*((MAX_CARDS_NUMBER) + 1.0) + 1000000000000000.0));
+				
 			}while(usedCreditCardNumbers.search(number) != null && usedDebitCardNumbers.search(number) != null);
 			usedDebitCardNumbers.insert(number, number);
 			return number;
@@ -751,7 +760,9 @@ public class Bank {
 		if(usedSavingAccountNumbers.size() + usedCurrentAccountNumbers.size() < MAX_ACCOUNTS_NUMBER) {
 			String number;
 			do {
-				number = Long.toString((long)Math.random()*((MAX_ACCOUNTS_NUMBER) + (long)1) + (long)1000000);
+
+				number = Long.toString((long)(Math.random()*((MAX_ACCOUNTS_NUMBER) + 1.0) + 1000000.0));
+				
 			}while(usedSavingAccountNumbers.search(number) != null && usedCurrentAccountNumbers.search(number) != null);
 			usedCurrentAccountNumbers.insert(number, number);
 			return number;

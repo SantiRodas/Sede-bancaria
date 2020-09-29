@@ -32,8 +32,8 @@ public class ControladoraDeshacer {
 	
 	//------------------------------------------------------------------------------------
     
-    public void setBank(Bank bank) {
-    	this.bank = bank;
+    public ControladoraDeshacer(Bank b) {
+    	bank = b;
     }
     
     //------------------------------------------------------------------------------------

@@ -95,7 +95,7 @@ public class CurrentAccount {
 
 	public boolean use(double amount) {
 		
-		if(availableCredit > 0) {
+		if(availableCredit > 0 && availableCredit - amount >= 0) {
 			
 			availableCredit -= amount;
 			

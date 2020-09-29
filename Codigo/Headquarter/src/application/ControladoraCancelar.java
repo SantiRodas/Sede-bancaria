@@ -36,9 +36,9 @@ public class ControladoraCancelar {
     
     //------------------------------------------------------------------------------------
     
-    public void setBank(Bank bank) {
-    	this.bank = bank;
-    }
+    public ControladoraCancelar(Bank b) {
+		bank = b;
+	}
 	
 	//------------------------------------------------------------------------------------
     

@@ -19,6 +19,7 @@ public class ControladoraConsignar {
 	//------------------------------------------------------------------------------------
 	
 	//Relations
+	private ControladoraOperations controladoraOperations;
 	
 	private Bank bank;
 	
@@ -32,13 +33,12 @@ public class ControladoraConsignar {
     @FXML
     private Button consignarButton;
     
-    private String cardNumber;
+    //------------------------------------------------------------------------------------
     
-  //------------------------------------------------------------------------------------
-    
-    public void setBank(Bank bank) {
-    	this.bank = bank;
-    }
+    public ControladoraConsignar(ControladoraOperations cO, Bank b) {
+		bank = b;
+		controladoraOperations = cO;
+	}
     
 	//------------------------------------------------------------------------------------
     
@@ -47,10 +47,59 @@ public class ControladoraConsignar {
     @FXML
     public void consignar(ActionEvent event) {
     	
-    	if(consignarText.getText().isEmpty()==false) {
+    	String amountText =  consignarText.getText();
+    	String accountNumber = controladoraOperations.getCurrentCardsSelection();
+    	
+    	if(!amountText.isEmpty()) {
+    		    		
+    		try {
+    			double amount =Double.parseDouble(consignarText.getText());
+    			
+    			if(amount < 0) {
+    				throw new NumberFormatException("Negative Number");
+    			}
+    			if(accountNumber != null && !accountNumber.isEmpty()) {
+	    			boolean success = bank.addSavings(accountNumber, amount );
+	    			
+	    			if(success) {
+	    				bank.saveAction();
+	    				bank.saveAction();
+						Alert alert = new Alert(AlertType.INFORMATION);
+	                	alert.setTitle("Alerta");
+	                	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
+	                	alert.setContentText("El nuevo de saldo de su cuenta es de: $" + bank.getCurrentActiveClient().getBalanceFromSavingsAccount(accountNumber));
+	
+	                	alert.showAndWait();
+	    			}       
+	    			else {
+	    				Alert alert = new Alert(AlertType.ERROR);
+	                	alert.setTitle("Alerta");
+	                	alert.setHeaderText("La operacion que ha solicitado no fue realizada");
+	                	alert.setContentText("Por razones desconocidas su consignacion no fue proceda, por favor contacte al administrador de sistemas!");
+	
+	                	alert.showAndWait();
+	    			}
+    			}
+    			else {
+    				Alert alert = new Alert(AlertType.ERROR);
+                	alert.setTitle("Alerta");
+                	alert.setHeaderText("No hay una seleccion cuenta de ahorros");
+                	alert.setContentText("Por favor verifique que ha seleccionado una cuenta de ahorros!");
+
+                	alert.showAndWait(); 
+    			}
+        		
+    		}
+    		catch(NumberFormatException ex) {
+    			Alert alert = new Alert(AlertType.ERROR);
+            	alert.setTitle("Alerta");
+            	alert.setHeaderText("La cantidad de dinero ingresada no es valida");
+            	alert.setContentText("Por favor verifique que el valor indicado en el campo sea una cantidad de dinero valida!");
+
+            	alert.showAndWait();
+    		}
+    		    		    		
     		
-    		bank.addSavings(cardNumber, Double.parseDouble(consignarText.getText()));
-    		bank.saveAction();
     		
     	} else {
     		
@@ -64,14 +113,6 @@ public class ControladoraConsignar {
     	}
     	
     }
-    
-	//------------------------------------------------------------------------------------
-    
-    //Method get data
-
-	public void getData(String cardNumber) {
-		this.cardNumber = cardNumber;
-	}
     
 	//------------------------------------------------------------------------------------
 

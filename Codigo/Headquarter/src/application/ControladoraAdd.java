@@ -46,7 +46,11 @@ public class ControladoraAdd {
     
     //Add method
 
-    @FXML
+    public ControladoraAdd(Bank b) {
+		bank = b;
+	}
+
+	@FXML
     public void addClient(ActionEvent event) {
     	
     	if(nameText.getText().equals("") || idText.getText().equals("") || bornDate.getValue() == null) {
@@ -93,14 +97,6 @@ public class ControladoraAdd {
     	
     }
     
-    //------------------------------------------------------------------------------------
-    
-    //Method set bank
-
-	public void setBank(Bank bank) {
-		this.bank = bank;		
-	}
-    
-    //------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------    
 
 }

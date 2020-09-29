@@ -39,18 +39,19 @@ public class ControladoraCrear {
     
     private Bank bank;
     
+    private ControladoraOperations cO;
+    
+    public ControladoraCrear(ControladoraOperations cO, Bank b) {
+    	this.cO = cO;
+    	bank = b;
+    }
+    
     //------------------------------------------------------------------------------------
     
     //Bank method's
     
 	public Bank getBank() {
 		return bank;
-	}
-	
-	//****************************************
-
-	public void setBank(Bank bank) {
-		this.bank = bank;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -61,7 +62,7 @@ public class ControladoraCrear {
     public void newAccount(ActionEvent event) {
     	
     	if(creditRB.isSelected()) {
-    		
+    		    		
     		boolean validacion = bank.createCreditCard();
     		
     		if(validacion == true) {
@@ -69,7 +70,9 @@ public class ControladoraCrear {
     			bank.createCreditCard();
     			
     			exitLabel.setText("La cuenta se creo correctamente");
-    			
+    			    			
+    			cO.refreshAvailability();
+    			    			
     		} else {
     			
     			exitLabel.setText("La cuenta no fue creada");
@@ -86,6 +89,7 @@ public class ControladoraCrear {
     			
     			exitLabel.setText("La cuenta se creo correctamente");
     			
+    			cO.refreshAvailability();
     		} else {
     			
     			exitLabel.setText("La cuenta no fue creada");
@@ -98,7 +102,6 @@ public class ControladoraCrear {
 	        alert.setTitle("Alerta");
 	        alert.setHeaderText("Campo vacío");
 	        alert.setContentText("Por favor seleccione alguna de las opciones de tarjeta");
-
 	        alert.showAndWait();
     		
     	}

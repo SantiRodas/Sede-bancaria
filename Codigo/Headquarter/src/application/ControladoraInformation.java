@@ -56,7 +56,11 @@ public class ControladoraInformation {
     
     //Search method
     
-    @FXML
+    public ControladoraInformation(Bank b) {
+		bank = b;
+	}
+
+	@FXML
     public void search(ActionEvent event) {
     	
     	if(searchText.getText().isEmpty()==false) {
@@ -121,15 +125,6 @@ public class ControladoraInformation {
     	}
     	
     }
-    
-    //------------------------------------------------------------------------------------
-    
-    //Method set bank
-
-	public void setBank(Bank bank) {
-		this.bank = bank;
-		
-	}
 	
 	//------------------------------------------------------------------------------------
 

@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -24,6 +25,8 @@ public class ControladoraPagar {
 	//Relations
 
 	private Bank bank;
+	
+	private ControladoraOperations controladoraOperations;
 	
 	//------------------------------------------------------------------------------------
 	
@@ -45,20 +48,19 @@ public class ControladoraPagar {
     private TextField cantidadText;
     
     @FXML
-    private TextField numCuenta;
-
-    @FXML
     private Text numCuentTexto;
     
-    private String cardNumber;
-    
+    @FXML
+    private ChoiceBox<String> accountsChoiceBox;
+        
     //------------------------------------------------------------------------------------
     
     //Method set bank
     
-    public void setBank(Bank bank) {
-    	this.bank = bank;
-    }
+    public ControladoraPagar(ControladoraOperations cO, Bank b) {
+		bank = b;
+		controladoraOperations = cO;
+	}
 	
 	//------------------------------------------------------------------------------------
     
@@ -67,42 +69,114 @@ public class ControladoraPagar {
     @FXML
     public void pagar(ActionEvent event) {
     	
-    	if(cantidadText.getText().isEmpty()==false) {
-    		
-    		 if(efectivoChoice.isSelected()==true || efectivoChoice.isSelected()==true) {
-    			 
-    			if(efectivoChoice.isSelected()==true) {
+    	String creditCardNumber = controladoraOperations.getCurrentCardsSelection();
+    	String amountText = cantidadText.getText();
+    	
+    	if(!amountText.isEmpty()) {
+    		if(efectivoChoice.isSelected() || efectivoChoice.isSelected()) {
+    			try {
     				
-    				bank.payCreditCard(cardNumber, Double.parseDouble(cantidadText.getText()));
-    				
-    			} else { //SI SE VA A PAGAR CON ALGUNA CUENTA
-    				
-    				numCuentTexto.setVisible(true);
-    				
-    		    	numCuenta.setVisible(true);
-    		    	
-    		    	if(numCuenta.getText().isEmpty()==false) {
-    		    		
-    		    		bank.retrieveSavings(numCuenta.getText(), Double.parseDouble(cantidadText.getText()));
-    		    		
-    		    		bank.payCreditCard(cardNumber, Double.parseDouble(cantidadText.getText()));
-    		    	
-    		    	} else {
-    		    		
-    		    		Alert alert = new Alert(AlertType.INFORMATION);
-    		    		alert.setTitle("Alerta");
-        	        	alert.setHeaderText("Campo vacío");
-        	        	alert.setContentText("Por favor digite el número de cuenta");
+    				double amount = Double.parseDouble(amountText);
+    				 
+    				if(amount < 0) {
+    					throw new NumberFormatException("Negative Number");
+    				}
+    				 
+    				if(creditCardNumber != null && !creditCardNumber.isEmpty()) {
+    					if(efectivoChoice.isSelected()) {
+	    					 
+    						boolean success = bank.payCreditCard(creditCardNumber, amount);
+	    					 
+    						if(success) {
+    							bank.saveAction();
+    	    					Alert alert = new Alert(AlertType.INFORMATION);
+    	                    	alert.setTitle("Alerta");
+    	                    	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
+    	                    	alert.setContentText("El nuevo de credito disponible de su tarjeta es: $" + bank.getCurrentActiveClient().getBalanceFromCreditCard(creditCardNumber)
+    	                    			+ " Debe un total de: $" + bank.getCurrentActiveClient().getAmountToPayFromCreditCard(creditCardNumber));
+    	                    	alert.showAndWait();
+    						}
+    						else {
+    							Alert alert = new Alert(AlertType.ERROR);
+    	                    	alert.setTitle("Alerta");
+    	                    	alert.setHeaderText("La operacion que ha solicitado no fue realizada");
+    	                    	alert.setContentText("Por favor verifique que la cantidad a pagar no supere la cantidad que debe de su tarjeta de credito!");
 
-        	        	alert.showAndWait();
-        	        	
-    		    	}
-    		    	
+    	                    	alert.showAndWait();
+    						}
+			    				
+    					} 
+	    				else { //SI SE VA A PAGAR CON ALGUNA CUENTA
+	    					String accountNumber = accountsChoiceBox.getValue();	
+	    					
+	    					if(!accountNumber.isEmpty()) {
+	    						boolean success1 = bank.retrieveSavings(accountNumber, amount);
+	    						
+	    						if(success1) {
+	    							boolean success2 = bank.payCreditCard(creditCardNumber, amount);
+	    							if(success2) {
+	    								bank.saveAction();
+
+	    								Alert alert = new Alert(AlertType.INFORMATION);
+	        	                    	alert.setTitle("Alerta");
+	        	                    	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
+	        	                    	alert.setContentText("El nuevo de credito disponible de su tarjeta es: $" + bank.getCurrentActiveClient().getBalanceFromCreditCard(creditCardNumber)
+	        	                    			+ " Debe un total de: $" + bank.getCurrentActiveClient().getAmountToPayFromCreditCard(creditCardNumber));
+	        	                    	alert.showAndWait();
+	        	                    	
+	        	                    	alert = new Alert(AlertType.INFORMATION);
+	        	                    	alert.setTitle("Alerta");
+	        	                    	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
+	        	                    	alert.setContentText("El nuevo de saldo de su cuenta de ahorros es de: $" + bank.getCurrentActiveClient().getBalanceFromSavingsAccount(accountNumber));
+	        	                    	alert.showAndWait();
+	    							}
+	    							else {
+	    								Alert alert = new Alert(AlertType.ERROR);
+	        	                    	alert.setTitle("Alerta");
+	        	                    	alert.setHeaderText("La operacion que ha solicitado no fue realizada");
+	        	                    	alert.setContentText("Por favor verifique que la cantidad a pagar no supere la cantidad que debe de su tarjeta de credito!");
+	        	                    	alert.showAndWait();
+	    							}
+	    						}
+	    						else {
+	    							Alert alert = new Alert(AlertType.ERROR);
+	    	                    	alert.setTitle("Alerta");
+	    	                    	alert.setHeaderText("La operacion que ha solicitado no fue realizada");
+	    	                    	alert.setContentText("Por favor verifique que el saldo de su cuenta de ahorros sea mayor a la cantidad a pagar!");
+	    	                    	alert.showAndWait();
+	    						}
+			    		    	
+	    					}    					
+	    					else {			    		     		
+	    						Alert alert = new Alert(AlertType.INFORMATION);
+	    						alert.setTitle("Alerta");
+			        	        alert.setHeaderText("Campo vacío");
+			        	        alert.setContentText("Por favor digite el número de cuenta");
+			     	        	alert.showAndWait();
+			        	        	
+	    					}
+			    		    	
+	    				}
+    				}
+    				else {
+    					Alert alert = new Alert(AlertType.ERROR);
+                    	alert.setTitle("Alerta");
+                    	alert.setHeaderText("No hay una seleccion de tarjeta");
+                    	alert.setContentText("Por favor verifique que ha seleccionado una tarjeta de credito a pagar!");
+
+                    	alert.showAndWait();   				 
+    				}
     			}
-    			
-    			bank.saveAction();
-    			
-    		} else {
+    			catch(NumberFormatException ex) {
+    				Alert alert = new Alert(AlertType.ERROR);
+                	alert.setTitle("Alerta");
+                	alert.setHeaderText("La cantidad de dinero ingresada no es valida");
+                	alert.setContentText("Por favor verifique que el valor indicado en el campo sea una cantidad de dinero valida!");
+
+                	alert.showAndWait();
+    			}	    			
+    		}
+    		else {
     			
     			Alert alert = new Alert(AlertType.INFORMATION);
     	        alert.setTitle("Alerta");
@@ -111,9 +185,10 @@ public class ControladoraPagar {
 
     	        alert.showAndWait();
     	        
-    		 }
+    		}
     		 
-    	} else {
+    	}
+    	else {
     		
     		Alert alert = new Alert(AlertType.INFORMATION);
         	alert.setTitle("Alerta");
@@ -125,25 +200,12 @@ public class ControladoraPagar {
     	}
     	
     }
-    
-    //------------------------------------------------------------------------------------
-    
-    //Method to get data
-    
-    public void getData(String cardNumber) {
-    	this.cardNumber = cardNumber;
-    }
 	
 	//------------------------------------------------------------------------------------
     
-    //Method to initialize
-    
-    @FXML
-    void initialize() {
-    	numCuentTexto.setVisible(false);
-    	numCuenta.setVisible(false);
+    public void fillAccountsChoiceBox() {
+    	String[] accounts = bank.getCurrentActiveClient().getSavingsAccountsNumbers();
+    	accountsChoiceBox.getItems().addAll(accounts);
     }
-
-    //------------------------------------------------------------------------------------
 
 }

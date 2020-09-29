@@ -42,8 +42,9 @@ public class ControladoraAssign {
     
     //Constructor
     
-    public ControladoraAssign(ControladoraPrincipal cP) {
+    public ControladoraAssign(ControladoraPrincipal cP, Bank b) {
     	controladoraPrincipal = cP;
+    	bank = b;
     }
     
     //------------------------------------------------------------------------------------
@@ -84,15 +85,6 @@ public class ControladoraAssign {
     	}
     	
     }
-    
-    //------------------------------------------------------------------------------------
-    
-    //Method set bank
-
-	public void setBank(Bank bank) {
-		this.bank = bank;
-		
-	}
     
 	//------------------------------------------------------------------------------------
 

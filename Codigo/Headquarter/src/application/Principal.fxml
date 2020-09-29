@@ -97,12 +97,12 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="Current Client: ">
+                        <Label text="Cliente Actual: ">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="currentClientLabel" text="None" />
+                        <Label fx:id="currentClientLabel" text="Ninguno" />
                      </children>
                   </HBox>
                </children>

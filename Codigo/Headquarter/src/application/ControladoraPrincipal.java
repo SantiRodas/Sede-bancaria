@@ -109,12 +109,13 @@ public class ControladoraPrincipal {
     
     //Constructor
     
-    public ControladoraPrincipal() {
+    public ControladoraPrincipal(Bank b) {
     	
-		controladoraAdd = new ControladoraAdd();
-		controladoraAssign = new ControladoraAssign(this);
-		controladoraInformation = new ControladoraInformation();
-		controladoraOperations = new ControladoraOperations();
+    	bank = b;
+		controladoraAdd = new ControladoraAdd(bank);
+		controladoraAssign = new ControladoraAssign(this, bank);
+		controladoraInformation = new ControladoraInformation(bank);
+		controladoraOperations = new ControladoraOperations(bank);
 		
 	}
     
@@ -130,8 +131,6 @@ public class ControladoraPrincipal {
 		
 		Parent addContactPane = fxmlLoader.load();
 		
-		controladoraAdd.setBank(bank);
-    	
 		addClientAPane.getChildren().clear();
 		
 		addClientAPane.getChildren().setAll(addContactPane);
@@ -149,9 +148,7 @@ public class ControladoraPrincipal {
 		fxmlLoader.setController(controladoraAssign);    
 		
 		Parent addContactPane = fxmlLoader.load();
-		
-		controladoraAssign.setBank(bank);
-    	
+		    	
 		assignQueueAPane.getChildren().clear();
 		
 		assignQueueAPane.getChildren().setAll(addContactPane);
@@ -164,7 +161,7 @@ public class ControladoraPrincipal {
 
     public void generalInformation() throws IOException {
     	
-    	ControladoraGeneral controladoraGeneral = new ControladoraGeneral(this);
+    	ControladoraGeneral controladoraGeneral = new ControladoraGeneral(this, bank);
     	    	
     	Stage primaryStage = new Stage();
     	
@@ -173,9 +170,7 @@ public class ControladoraPrincipal {
 		fxmlLoader.setController(controladoraGeneral);
 		
 		Parent root = fxmlLoader.load();
-		
-		controladoraGeneral.setBank(bank);
-		
+				
 		Scene scene = new Scene(root);
 		
 		primaryStage.setScene(scene);
@@ -212,8 +207,6 @@ public class ControladoraPrincipal {
 		
 		Parent addContactPane = fxmlLoader.load();
 		
-		controladoraInformation.setBank(bank);
-    	
 		clientInformationAPane.getChildren().clear();
 		
 		clientInformationAPane.getChildren().setAll(addContactPane);
@@ -230,33 +223,14 @@ public class ControladoraPrincipal {
 		
 		fxmlLoader.setController(controladoraOperations);  
 		
-		Parent addContactPane = fxmlLoader.load();
-
-		controladoraOperations.setBank(bank);
+		Parent addContactPane = fxmlLoader.load();	
     	
 		operationsAPane.getChildren().clear();
 		
 		operationsAPane.getChildren().setAll(addContactPane);
 
     }
-    
-    //------------------------------------------------------------------------------------
-    
-    //Initialize method
-    
-    @FXML
-    void initialize() {
-		bank = new Bank("Bancolombia");
-    }
-    
-    //------------------------------------------------------------------------------------
-    
-    //Method set bank
-
-	public void setBank(Bank bank) {
-		this.bank = bank;
-	}
-    
+      
     //------------------------------------------------------------------------------------
 	
 	//Initialize table view
@@ -316,16 +290,33 @@ public class ControladoraPrincipal {
     	
     	boolean attend = bank.attendNextClient();
     	
+    	ActiveClient currentClient = bank.getCurrentActiveClient();
+    	
     	if(attend) {
     		
-    		currentClientLabel.setText(bank.getCurrentActiveClient().getId());
+    		currentClientLabel.setText(currentClient.getId());
     		
     		initializeTableView();
     		
-    	} else {
+    		boolean[] visibilities = {false, false, true, false, false, true, true, true , true};
     		
-    		currentClientLabel.setText("None");
+    		controladoraOperations.setOperationsAvailability(visibilities);
     		
+    		controladoraOperations.clearCards();
+    		
+    		controladoraOperations.updateCurrentClient(currentClient.getName(),currentClient.getId());
+    	}
+    	else {
+    		
+    		currentClientLabel.setText("Ninguno");
+    		
+    		boolean[] visibilities = {false, false, false, false, false, false, false, false , false};
+    		
+    		controladoraOperations.setOperationsAvailability(visibilities);
+    		
+    		controladoraOperations.clearCards();
+    		
+    		controladoraOperations.updateCurrentClient(null,null);
     	}
     	    	
     }

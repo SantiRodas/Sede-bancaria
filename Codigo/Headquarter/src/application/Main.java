@@ -9,6 +9,7 @@ package application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import model.Bank;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -20,13 +21,16 @@ public class Main extends Application {
 	
 	private ControladoraPrincipal controladora;
 	
+	private Bank bank;
+	
 	//------------------------------------------------------------------------------------
 	
 	//Method Main
 	
 	public Main() {
 		
-		controladora = new ControladoraPrincipal();
+		bank = new Bank("Bancolombia");
+		controladora = new ControladoraPrincipal(bank);
 				
 	}
 	
@@ -49,7 +53,7 @@ public class Main extends Application {
 			
 			primaryStage.setScene(scene);
 			
-			primaryStage.setTitle("Sede bancaria");
+			primaryStage.setTitle(bank.getBankName());
 			
 			primaryStage.show();
 			

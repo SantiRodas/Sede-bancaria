@@ -262,7 +262,6 @@ public class ActiveClient extends Client implements Cloneable {
 			for (int i = 0; i < cCards.length && !check; i++) {
 				
 				
-				
 				if(cCards[i] == null) {
 					
 					emptySlotIndex = i;
@@ -306,7 +305,7 @@ public class ActiveClient extends Client implements Cloneable {
 		
 		for (int i = 0 ; i < cCards.length ; i++) {
 		
-			if(cAccounts[i] != null && cCards[i].getNumber().equals(cardNumber)) {
+			if(cCards[i] != null && cCards[i].getNumber().equals(cardNumber)) {
 				
 				return i;
 				
@@ -421,7 +420,7 @@ public class ActiveClient extends Client implements Cloneable {
 			
 			if(cCards[i] != null) {
 				
-				msg+= "Account number " + cCards[i].getNumber() + " - Balance to pay:" + cCards[i].getCurrentAccount().getBalanceToPay() + "\n";
+				msg+= "Credit Card #: " + cCards[i].getNumber() + " -Available Credit: $" + cCards[i].getAvailableCredit() + " - Balance to pay: $" + cCards[i].getCurrentAccount().getBalanceToPay() + "\n";
 				
 			}
 			
@@ -465,6 +464,21 @@ public class ActiveClient extends Client implements Cloneable {
 		return copyAC;
 	}
 	
+	
 	//------------------------------------------------------------------------------------
+	
+	//Both methods suppose that the client has the card or account number
+	
+	public String getBalanceFromCreditCard(String cardNumber) {
+		return Double.toString(cCards[searchCreditCard(cardNumber)].getAvailableCredit());
+	}
+	
+	public String getBalanceFromSavingsAccount(String accountNumber) {
+		return Double.toString(sAccounts[searchSavingsAccount(accountNumber)].getBalance());
+	}
+
+	public String getAmountToPayFromCreditCard(String cardNumber) {
+		return Double.toString(cCards[searchCreditCard(cardNumber)].getBalanceToPay());
+	}
 
 }

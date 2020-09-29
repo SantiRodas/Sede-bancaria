@@ -32,7 +32,7 @@ public class ControladoraGeneral {
 	
 	//Relations
 	
-	private ControladoraPrincipal controladora;
+	private ControladoraPrincipal controladoraPrincipal;
 	
 	private Bank bank;
 	
@@ -40,9 +40,10 @@ public class ControladoraGeneral {
 	
 	//Constructor method
 	
-	public ControladoraGeneral(ControladoraPrincipal cP) {
+	public ControladoraGeneral(ControladoraPrincipal cP, Bank b) {
 		
-		controladora = cP;
+		controladoraPrincipal = cP;
+		bank = b;
 		
 	}
 	
@@ -85,14 +86,6 @@ public class ControladoraGeneral {
     
     //------------------------------------------------------------------------------------
     
-    //Method set bank
-    
-    public void setBank(Bank b) {
-    	bank = b;
-    }
-    
-    //------------------------------------------------------------------------------------
-    
     //ComeBack method
 
     @FXML
@@ -102,7 +95,7 @@ public class ControladoraGeneral {
         
         stage.close();   
         
-        controladora.updateOpenTableButton();
+        controladoraPrincipal.updateOpenTableButton();
         
     }
     

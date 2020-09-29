@@ -16,11 +16,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
@@ -49,12 +47,6 @@ public class ControladoraOperations {
 	//------------------------------------------------------------------------------------
 	
 	//Attributes
-
-    @FXML
-    private Button searchButton;
-
-    @FXML
-    private TextField idText;
 
     @FXML
     private Label nameLabel;
@@ -89,35 +81,37 @@ public class ControladoraOperations {
     @FXML
     private RadioButton createAccountButton;
     
+    @FXML
+    private ToggleGroup accounts;
+    
+    @FXML
+    private RadioButton creditCardRButton;
+    
+    @FXML
+    private RadioButton savingsAccountRButton;
+
+    
     //------------------------------------------------------------------------------------
     
     //Constructor
     
-    public ControladoraOperations() {
-    	
-		controladoraRetirar = new ControladoraRetirar();
-		
-		controladoraConsignar = new ControladoraConsignar();
-		
-		controladoraCancelar = new ControladoraCancelar();
-		
-		controladoraPagar = new ControladoraPagar();
-		
-		controladoraDeshacer = new ControladoraDeshacer();
-		
-		controladoraCrear = new ControladoraCrear();
-		
-	}
-	
-	//------------------------------------------------------------------------------------
-    
-    //Method set bank
-    
-    public void setBank(Bank b) {
+    public ControladoraOperations(Bank b) {
     	
     	bank = b;
     	
-    }
+		controladoraRetirar = new ControladoraRetirar(this, b);
+		
+		controladoraConsignar = new ControladoraConsignar(this, b);
+		
+		controladoraCancelar = new ControladoraCancelar(b);
+		
+		controladoraPagar = new ControladoraPagar(this, b);
+		
+		controladoraDeshacer = new ControladoraDeshacer(b);
+		
+		controladoraCrear = new ControladoraCrear(this,b);
+		
+	}
     
     //------------------------------------------------------------------------------------
     
@@ -131,10 +125,8 @@ public class ControladoraOperations {
 		fxmlLoader.setController(controladoraCancelar);    
 		
 		Parent addContactPane = fxmlLoader.load();
-		
-		controladoraCancelar.setBank(bank);
-		
-		controladoraCancelar.getId(idText.getText());
+				
+		//controladoraCancelar.getId(idText.getText());
     	
 		panelSecundario.getChildren().clear();
 		
@@ -154,17 +146,7 @@ public class ControladoraOperations {
 		fxmlLoader.setController(controladoraConsignar);    
 		
 		Parent addContactPane = fxmlLoader.load();
-		
-		controladoraConsignar.setBank(bank);
-		
-		if(cards.getValue().isEmpty() == false)
-			controladoraConsignar.getData(cards.getValue());
-		
-		else{
-			alert();
-			
-		}
-    	
+				
 		panelSecundario.getChildren().clear();
 		
 		panelSecundario.setCenter(addContactPane);
@@ -183,9 +165,7 @@ public class ControladoraOperations {
 		fxmlLoader.setController(controladoraDeshacer);    
 		
 		Parent addContactPane = fxmlLoader.load();
-		
-		controladoraDeshacer.setBank(bank);
-    	
+	   	
 		panelSecundario.getChildren().clear();
 		
 		panelSecundario.setCenter(addContactPane);
@@ -205,16 +185,6 @@ public class ControladoraOperations {
 		
 		Parent addContactPane = fxmlLoader.load();
 		
-		controladoraPagar.setBank(bank);
-		
-		if(cards.getValue().isEmpty() == false)
-			controladoraPagar.getData(cards.getValue());
-		
-		else {
-			alert();
-			
-		}
-    	
 		panelSecundario.getChildren().clear();
 		
 		panelSecundario.setCenter(addContactPane);
@@ -234,63 +204,10 @@ public class ControladoraOperations {
 		
 		Parent addContactPane = fxmlLoader.load();
 		
-		controladoraRetirar.setBank(bank);
-		
-		if(cards.getValue().isEmpty() == false)
-			controladoraRetirar.getData(cards.getValue());
-		
-		else {
-			alert();
-			
-		}
-		
 		panelSecundario.getChildren().clear();
 		
 		panelSecundario.setCenter(addContactPane);
 
-    }
-    
-    //------------------------------------------------------------------------------------
-    
-    //Search method
-
-    @FXML
-    public void search(ActionEvent event) {
-    	
-    	if(!idText.getText().equals("")) {
-    		
-    		ActiveClient aux = bank.searchActiveClientById(idText.getText());
-    		
-    		nameLabel.setText(aux.getName());
-    		
-    		String[] cc = aux.getCreditCardNumbers();
-    		String[] sa = aux.getSavingsAccountsNumbers();
-    	
-    		int i = 0;
-    		
-    		while(i<cc.length) {
-    			
-    			cards.getItems().add(cc[i]);
-    			
-    			i++;
-    			
-    		}	
-    		
-    		int j = 0;
-    		
-    		while(j<sa.length) {
-    			
-    			cards.getItems().add(sa[j]);
-    			
-    			j++;
-    		}
-    		
-    	} else {
-    		
-    		alert();
-    		
-    	}
-    	
     }
     
     //------------------------------------------------------------------------------------
@@ -321,14 +238,118 @@ public class ControladoraOperations {
 		
 		Parent addContactPane = fxmlLoader.load();
 		
-		controladoraDeshacer.setBank(bank);
-    	
 		panelSecundario.getChildren().clear();
 		
 		panelSecundario.setCenter(addContactPane);
 
     }
+
     
+	public void setOperationsAvailability(boolean[] visibilities) {
+		takeChoice.setDisable(!visibilities[0]);
+		recordChoice.setDisable(!visibilities[1]);
+		cancelChoice.setDisable(!visibilities[2]);
+		payChoice.setDisable(!visibilities[3]);
+		breakChoice.setDisable(!visibilities[4]);	
+		createAccountButton.setDisable(!visibilities[5]);
+		savingsAccountRButton.setDisable(!visibilities[6]);
+		creditCardRButton.setDisable(!visibilities[7]);
+		cards.setDisable(!visibilities[8]);
+	}
+	
+	@FXML
+	void loadCreditCards(ActionEvent event) {
+		ActiveClient aux = bank.getCurrentActiveClient();
+    	
+    	if(aux != null) {    			
+    		cards.getItems().clear();
+    		
+    		updateCurrentClient(aux.getName(),aux.getId());
+    		
+    		String[] cc = aux.getCreditCardNumbers();
+    		
+    		if(cc != null) {
+	    		for(String number : cc) {
+	    			if(number != null) {
+	    				cards.getItems().add(number);
+	    			}    			
+	    		}
+	    		
+	    		boolean[] visibilities = {true, false, true, true, true, true, true, true , true};
+	    		setOperationsAvailability(visibilities);
+    		}
+    		else {
+    			boolean[] visibilities = {false, false, true, false, false, true, true, true , true};
+        		
+        		setOperationsAvailability(visibilities);
+    		}    		
+    	}   
+    	else {
+    		cards.getItems().clear();
+    	}
+	}
+
+	@FXML
+	void loadSavingsAccount(ActionEvent event) {
+		ActiveClient aux = bank.getCurrentActiveClient();
+    	
+    	if(aux != null) {
+    		cards.getItems().clear();		
+    		
+    		updateCurrentClient(aux.getName(),aux.getId());
+    		
+    		String[] sa = aux.getSavingsAccountsNumbers();
+    		
+    		if(sa != null) {
+	    		for(String number : sa) {
+	    			if(number != null) {
+	    				cards.getItems().add(number);
+	    			}    			
+	    		}   
+	    		boolean[] visibilities = {true, true, true, false, true, true, true, true , true};
+	    		setOperationsAvailability(visibilities);
+    		}
+    		else {
+    			boolean[] visibilities = {false, false, true, false, false, true, true, true , true};
+        		
+        		setOperationsAvailability(visibilities);
+    		}
+    	}   
+    	else {
+    		cards.getItems().clear();
+    	}
+	}
+    
+	public void clearCards() {
+		cards.getItems().clear();
+	}
+	
+	public String getCurrentCardsSelection() {
+		return cards.getValue();
+	}
+	
+	public boolean isCreditCardSelected() {
+		return creditCardRButton.isSelected();
+	}
+	
+	public boolean isSavingsAccountSelected() {
+		return savingsAccountRButton.isSelected();
+	}
     //------------------------------------------------------------------------------------
 
+	public void updateCurrentClient(String name, String id) {
+		if(name != null && id != null) {
+			nameLabel.setText(name + " CC" + id);
+		}		
+	}
+
+	public void refreshAvailability() {
+		if(creditCardRButton.isSelected()) {
+			loadCreditCards(new ActionEvent());
+		}
+		else {
+			loadSavingsAccount(new ActionEvent());
+		}
+		
+	}
 }
