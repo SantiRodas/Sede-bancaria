@@ -552,7 +552,7 @@ class TestBank {
 		
 		setup1();
 		
-		bank.removeActiveClient("1193419196", "Ok");
+		bank.removeActiveClient("Ok");
 		
 		assertTrue(bank.getActiveClientsArray().length == 0);
 		
@@ -565,8 +565,8 @@ class TestBank {
 		
 		setup2();
 		
-		bank.removeActiveClient("159654753", "Ok");
-		
+		bank.removeActiveClient("Ok");
+				
 		assertTrue(bank.getActiveClientsArray().length == 3);
 		
 	}	

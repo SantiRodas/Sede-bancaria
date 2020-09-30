@@ -115,7 +115,7 @@ public class ControladoraPrincipal {
 		controladoraAdd = new ControladoraAdd(bank);
 		controladoraAssign = new ControladoraAssign(this, bank);
 		controladoraInformation = new ControladoraInformation(bank);
-		controladoraOperations = new ControladoraOperations(bank);
+		controladoraOperations = new ControladoraOperations(this, bank);
 		
 	}
     
@@ -161,7 +161,7 @@ public class ControladoraPrincipal {
 
     public void generalInformation() throws IOException {
     	
-    	ControladoraGeneral controladoraGeneral = new ControladoraGeneral(this, bank);
+    	ControladoraGeneral controladoraGeneral = new ControladoraGeneral(this, bank, bank.getActiveClientsArray());
     	    	
     	Stage primaryStage = new Stage();
     	
@@ -201,7 +201,7 @@ public class ControladoraPrincipal {
 
     public void information() throws IOException {
     	
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InformationClient.fxml"));
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InformationClientWithTable.fxml"));
 		
 		fxmlLoader.setController(controladoraInformation);    
 		
@@ -338,6 +338,11 @@ public class ControladoraPrincipal {
     	}
     	
     }
+
+	public void updateToRemovedUser() {
+		currentClientLabel.setText("Ninguno");
+		
+	}
     
     //------------------------------------------------------------------------------------
     

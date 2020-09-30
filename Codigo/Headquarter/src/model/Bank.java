@@ -172,7 +172,7 @@ public class Bank {
 		
 		if(currentActiveClient != null) {
 			
-			return currentActiveClient.payCreditCard(cardNumber, amount);
+			return currentActiveClient.payCreditCard(cardNumber, Math.round(amount*100.0)/100.0);
 			
 		} else {
 			
@@ -190,7 +190,7 @@ public class Bank {
 		
 		if(currentActiveClient != null) {
 			
-			return currentActiveClient.retrieveCredit(cardNumber, amount);
+			return currentActiveClient.retrieveCredit(cardNumber, Math.round(amount*100.0)/100.0);
 			
 		} else {
 			
@@ -208,7 +208,7 @@ public class Bank {
 		
 		if(currentActiveClient != null) {
 			
-			return currentActiveClient.retrieveSavings(accountNumber, amount);
+			return currentActiveClient.retrieveSavings(accountNumber, Math.round(amount*100.0)/100.0);
 						
 		} else {
 			
@@ -226,7 +226,7 @@ public class Bank {
 		
 		if(currentActiveClient != null) {
 			
-			return currentActiveClient.addSavings(accountNumber, amount);
+			return currentActiveClient.addSavings(accountNumber, Math.round(amount*100.0)/100.0);
 			
 		} else {
 			
@@ -284,7 +284,7 @@ public class Bank {
 	
 	//Method to active client in the system
 	
-	public void getSortedClients(SortCriteria sortCriteria) {
+	public ActiveClient[] getSortedClients(SortCriteria sortCriteria) {
 				
 		Object[] objA = activeClients.getAll();
 		
@@ -318,6 +318,7 @@ public class Bank {
 				
 		}
 		
+		return ac;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -433,37 +434,68 @@ public class Bank {
 	
 	//Method to remove a client given its id
 	
-	public void removeActiveClient(String id, String removalReason) {
-		
-		ActiveClient ac = activeClients.delete(id);
-		
-		if(ac != null) {
-			
-			RemovedClient rc = new RemovedClient(ac.getName(), id, ac.getBirthday(), LocalDate.now(), removalReason);
-			
-			String[] cCNumbers = ac.getCreditCardNumbers();
-			
-			String[] sANumbers = ac.getSavingsAccountsNumbers();
-			
-			for (int i = 0; i < cCNumbers.length; i++) {
+	public boolean removeActiveClient(String removalReason) {
 				
-				usedCreditCardNumbers.delete(cCNumbers[i]);
-				
-				usedCurrentAccountNumbers.delete(cCNumbers[i]);
-				
+		if(currentActiveClient != null) {
+			
+			boolean check = true;
+			
+			CreditCard[] cc = currentActiveClient.getcCards();
+			SavingsAccount[] sa = currentActiveClient.getsAccounts();
+			
+			for (int i = 0; i < sa.length && check; i++) {
+				if(sa[i] != null && sa[i].getBalance() != 0) {
+					check = false;
+				}
 			}
 			
-			for (int i = 0; i < sANumbers.length; i++) {
-				
-				usedSavingAccountNumbers.delete(sANumbers[i]);
-				
-				usedDebitCardNumbers.delete(sANumbers[i]);
-				
+			for (int i = 0; i < cc.length && check; i++) {
+				if(cc[i] != null && cc[i].getBalanceToPay() != 0) {
+					check = false;
+				}
 			}
 			
-			removedClients.insert(id, rc);
-			
-		}			
+			if(check) {
+				activeClients.delete(currentActiveClient.getId());
+				
+				RemovedClient rc = new RemovedClient(currentActiveClient.getName(), currentActiveClient.getId(), currentActiveClient.getBirthday(), LocalDate.now(), removalReason);
+				
+				String[] cCNumbers = currentActiveClient.getCreditCardNumbers();
+				
+				String[] sANumbers = currentActiveClient.getSavingsAccountsNumbers();
+				
+				if(cCNumbers != null) {
+					for (int i = 0; i < cCNumbers.length; i++) {
+						if(cCNumbers[i] != null) {
+							usedCreditCardNumbers.delete(cCNumbers[i]);
+							
+							usedCurrentAccountNumbers.delete(cCNumbers[i]);
+						}
+					}
+				}
+				
+				if(sANumbers != null) {
+					for (int i = 0; i < sANumbers.length; i++) {
+						if(sANumbers[i] != null) {
+							usedSavingAccountNumbers.delete(sANumbers[i]);
+							
+							usedDebitCardNumbers.delete(sANumbers[i]);
+						}
+					}
+				}
+					
+				
+				removedClients.insert(currentActiveClient.getId(), rc);
+				
+				return true;
+			}
+			else {
+				return false;
+			}
+		}	
+		else {
+			return false;
+		}
 		
 	}
 	
@@ -473,7 +505,7 @@ public class Bank {
 	
 	private void sortClientsByName(ActiveClient[] ac) {
 		
-		ac = PriorityQueue.heapsort(ac, new Comparator<ActiveClient>() {
+		PriorityQueue.heapsort(ac, new Comparator<ActiveClient>() {
 			
 			public int compare(ActiveClient ac1, ActiveClient ac2) {
 				
@@ -661,11 +693,11 @@ public class Bank {
 			@Override
 			public int compare(ActiveClient ac1, ActiveClient ac2) {
 				
-				if(ac1.getBirthday().compareTo(ac2.getBirthday()) > 0) {
+				if(ac1.getBirthday().isAfter(ac2.getBirthday())) {
 					
 					return 1;
 					
-				} else if(ac1.getBirthday().compareTo(ac2.getBirthday()) < 0) {
+				} else if(ac1.getBirthday().isBefore(ac2.getBirthday())) {
 					
 					return -1;
 					

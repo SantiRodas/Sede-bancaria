@@ -45,7 +45,7 @@ public class ControladoraDeshacer {
     	
     	boolean aux = bank.undoLastAction();
     	
-    	if(aux==true)
+    	if(aux)
     		deshacerLabel.setText("La operación se ha realizado con éxito");
     	
     	else

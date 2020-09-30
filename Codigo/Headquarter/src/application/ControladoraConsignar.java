@@ -59,11 +59,12 @@ public class ControladoraConsignar {
     				throw new NumberFormatException("Negative Number");
     			}
     			if(accountNumber != null && !accountNumber.isEmpty()) {
+    				bank.saveAction();
 	    			boolean success = bank.addSavings(accountNumber, amount );
 	    			
 	    			if(success) {
-	    				bank.saveAction();
-	    				bank.saveAction();
+	    				
+	    				
 						Alert alert = new Alert(AlertType.INFORMATION);
 	                	alert.setTitle("Alerta");
 	                	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
@@ -72,6 +73,7 @@ public class ControladoraConsignar {
 	                	alert.showAndWait();
 	    			}       
 	    			else {
+	    				bank.undoLastAction();
 	    				Alert alert = new Alert(AlertType.ERROR);
 	                	alert.setTitle("Alerta");
 	                	alert.setHeaderText("La operacion que ha solicitado no fue realizada");

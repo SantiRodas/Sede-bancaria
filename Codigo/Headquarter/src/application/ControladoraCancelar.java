@@ -22,6 +22,7 @@ public class ControladoraCancelar {
 	
 	private Bank bank;
 	
+	private ControladoraOperations controladoraOpertions;
 	//------------------------------------------------------------------------------------
 	
 	//Attributes
@@ -30,14 +31,13 @@ public class ControladoraCancelar {
     private Button cancelButton;
 
     @FXML
-    private TextArea cancelText;
-    
-    private String id;
+    private TextArea cancelText;   
     
     //------------------------------------------------------------------------------------
     
-    public ControladoraCancelar(Bank b) {
+    public ControladoraCancelar(ControladoraOperations cO, Bank b) {
 		bank = b;
+		controladoraOpertions = cO;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -47,10 +47,31 @@ public class ControladoraCancelar {
     @FXML
     public void cancel(ActionEvent event) {
     	
-    	if(cancelText.getText().isEmpty()==false) {
+    	if(!cancelText.getText().isEmpty()) {
     		
-    		bank.removeActiveClient(id, cancelText.getText());
-    		bank.saveAction();
+    		boolean validation = bank.removeActiveClient(cancelText.getText());
+    		
+    		if(validation) {
+    			
+    			controladoraOpertions.updateToRemovedUser();
+    			
+    			Alert alert = new Alert(AlertType.INFORMATION);
+            	alert.setTitle("Alerta");
+            	alert.setHeaderText("Su usuario ha sido removido exitosamente!");
+            	
+            	alert.showAndWait();
+    			
+    			
+    		}
+    		else {
+    			Alert alert = new Alert(AlertType.ERROR);
+            	alert.setTitle("Alerta");
+            	alert.setHeaderText("Su usuario no ha sido removido");
+            	alert.setContentText("Verifique que no tengo monto por pagar en sus tarjetas y sus cuentas de ahorros esten vacias!");
+
+            	alert.showAndWait();
+    		}
+    		
     		
     	} else {
     		
@@ -64,15 +85,6 @@ public class ControladoraCancelar {
     	}
     	
     }
-    
-    //------------------------------------------------------------------------------------
-    
-    //Method set bank
-
-	public void getId(String id) {
-		this.id = id;
-	}
-	
 	//------------------------------------------------------------------------------------
 
 }

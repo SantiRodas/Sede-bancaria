@@ -11,20 +11,20 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="pagarButton" layoutX="252.0" layoutY="136.0" mnemonicParsing="false" onAction="#pagar" text="Realizar" />
-      <RadioButton fx:id="efectivoChoice" layoutX="36.0" layoutY="121.0" mnemonicParsing="false" text="Efectivo">
+      <Button fx:id="pagarButton" disable="true" layoutX="252.0" layoutY="136.0" mnemonicParsing="false" onAction="#pagar" text="Realizar" />
+      <RadioButton fx:id="efectivoChoice" layoutX="36.0" layoutY="121.0" mnemonicParsing="false" onAction="#updateOptionToCash" text="Efectivo">
          <toggleGroup>
             <ToggleGroup fx:id="pago" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="desdeCuentaChoicen" layoutX="36.0" layoutY="160.0" mnemonicParsing="false" text="Desde cuenta personal" toggleGroup="$pago" />
-      <TextField fx:id="cantidadText" layoutX="122.0" layoutY="66.0" />
+      <RadioButton fx:id="desdeCuentaChoicen" layoutX="36.0" layoutY="160.0" mnemonicParsing="false" onAction="#updateOptionsToSavings" text="Desde cuenta personal" toggleGroup="$pago" />
+      <TextField fx:id="cantidadText" disable="true" layoutX="122.0" layoutY="66.0" />
       <Text layoutX="46.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad:" wrappingWidth="63.25136947631836">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="accountsChoiceBox" layoutX="169.0" layoutY="220.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="accountsChoiceBox" disable="true" layoutX="169.0" layoutY="220.0" prefWidth="150.0" />
       <Text fx:id="numCuentTexto" layoutX="36.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de cuenta:" wrappingWidth="123.25136947631836">
          <font>
             <Font size="14.0" />
