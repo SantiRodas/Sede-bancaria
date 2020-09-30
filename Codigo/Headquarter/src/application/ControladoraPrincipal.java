@@ -115,7 +115,7 @@ public class ControladoraPrincipal {
 		controladoraAdd = new ControladoraAdd(bank);
 		controladoraAssign = new ControladoraAssign(this, bank);
 		controladoraInformation = new ControladoraInformation(bank);
-		controladoraOperations = new ControladoraOperations(bank);
+		controladoraOperations = new ControladoraOperations(this, bank);
 		
 	}
     
@@ -338,6 +338,11 @@ public class ControladoraPrincipal {
     	}
     	
     }
+
+	public void updateToRemovedUser() {
+		currentClientLabel.setText("Ninguno");
+		
+	}
     
     //------------------------------------------------------------------------------------
     

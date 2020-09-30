@@ -65,9 +65,7 @@ public class ControladoraCrear {
     		    		
     		boolean validacion = bank.createCreditCard();
     		
-    		if(validacion == true) {
-    			
-    			bank.createCreditCard();
+    		if(validacion == true) {    			
     			
     			exitLabel.setText("La cuenta se creo correctamente");
     			    			
@@ -84,8 +82,6 @@ public class ControladoraCrear {
     		boolean validacion = bank.createSavingsAccount();
     		
     		if(validacion== true) {
-    			
-    			bank.createSavingsAccount();
     			
     			exitLabel.setText("La cuenta se creo correctamente");
     			

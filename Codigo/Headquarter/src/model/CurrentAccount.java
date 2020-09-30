@@ -79,7 +79,7 @@ public class CurrentAccount {
 			
 			balanceToPay -= amount;
 			
-			availableCredit += amount*(1/(1 + POLICY_RATE));
+			availableCredit += Math.round(amount*(1/(1 + POLICY_RATE))*100.0)/100.0;
 			
 			return true;
 			
@@ -99,7 +99,7 @@ public class CurrentAccount {
 			
 			availableCredit -= amount;
 			
-			balanceToPay += amount*(1 + POLICY_RATE);
+			balanceToPay += Math.round(amount*(1 + POLICY_RATE)*100.0)/100.0;
 			
 			return true;
 			

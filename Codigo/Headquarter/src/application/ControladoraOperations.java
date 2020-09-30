@@ -32,6 +32,8 @@ public class ControladoraOperations {
 	
 	private Bank bank;
 	
+	private ControladoraPrincipal controladoraPrincipal;
+	
 	private ControladoraRetirar controladoraRetirar;
 	
 	private ControladoraConsignar controladoraConsignar;
@@ -95,7 +97,8 @@ public class ControladoraOperations {
     
     //Constructor
     
-    public ControladoraOperations(Bank b) {
+    public ControladoraOperations(ControladoraPrincipal cP, Bank b) {
+    	controladoraPrincipal = cP;
     	
     	bank = b;
     	
@@ -103,7 +106,7 @@ public class ControladoraOperations {
 		
 		controladoraConsignar = new ControladoraConsignar(this, b);
 		
-		controladoraCancelar = new ControladoraCancelar(b);
+		controladoraCancelar = new ControladoraCancelar(this, b);
 		
 		controladoraPagar = new ControladoraPagar(this, b);
 		
@@ -340,16 +343,36 @@ public class ControladoraOperations {
 	public void updateCurrentClient(String name, String id) {
 		if(name != null && id != null) {
 			nameLabel.setText(name + " CC" + id);
-		}		
+		}	
+		else {
+			nameLabel.setText("Ninguno");
+		}
 	}
 
 	public void refreshAvailability() {
 		if(creditCardRButton.isSelected()) {
 			loadCreditCards(new ActionEvent());
 		}
-		else {
+		else if(savingsAccountRButton.isSelected()){
 			loadSavingsAccount(new ActionEvent());
 		}
+		else {
+			boolean[] visibilities = {false, false, true, false, false, true, true, true , true};
+    		
+    		setOperationsAvailability(visibilities);
+		}
+		
+	}
+
+	public void updateToRemovedUser() {
+		boolean[] visibilities = {false, false, false, false, false, false, false, false , false};
+		
+		setOperationsAvailability(visibilities);
+		
+		nameLabel.setText("Ninguno");
+		cancelChoice.setSelected(false);
+		
+		controladoraPrincipal.updateToRemovedUser();
 		
 	}
 }

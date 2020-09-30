@@ -56,32 +56,32 @@
                               <ToggleGroup fx:id="operaciones" />
                            </toggleGroup>
                            <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="20.0" right="15.0" top="20.0" />
                            </padding>
                         </RadioButton>
                         <RadioButton fx:id="recordChoice" disable="true" mnemonicParsing="false" onAction="#consignar" text="Consignar" toggleGroup="$operaciones">
                            <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="20.0" right="15.0" top="20.0" />
                            </padding>
                         </RadioButton>
-                        <RadioButton fx:id="cancelChoice" disable="true" mnemonicParsing="false" onAction="#cancelar" text="Cancelar cuenta" toggleGroup="$operaciones">
+                        <RadioButton fx:id="cancelChoice" disable="true" mnemonicParsing="false" onAction="#cancelar" text="Remover cliente" toggleGroup="$operaciones">
                            <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="20.0" right="15.0" top="20.0" />
                            </padding>
                         </RadioButton>
                         <RadioButton fx:id="payChoice" disable="true" mnemonicParsing="false" onAction="#pago" text="Pago tarjeta" toggleGroup="$operaciones">
                            <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="20.0" right="15.0" top="20.0" />
                            </padding>
                         </RadioButton>
                         <RadioButton fx:id="breakChoice" disable="true" mnemonicParsing="false" onAction="#deshacer" text="Deshacer" toggleGroup="$operaciones">
                            <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="20.0" right="15.0" top="20.0" />
                            </padding>
                         </RadioButton>
                         <RadioButton fx:id="createAccountButton" disable="true" mnemonicParsing="false" onAction="#createAccount" text="Crear cuenta" toggleGroup="$operaciones">
                            <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                              <Insets bottom="20.0" left="20.0" right="15.0" top="20.0" />
                            </padding>
                         </RadioButton>
                      </children>
@@ -89,7 +89,7 @@
                   <Pane fx:id="secundaryPane" prefHeight="297.0" prefWidth="355.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="342.0" stroke="BLACK" strokeType="INSIDE" width="355.0" />
-                        <BorderPane fx:id="panelSecundario" layoutX="2.0" layoutY="1.0" prefHeight="342.0" prefWidth="355.0" />
+                        <BorderPane fx:id="panelSecundario" layoutX="14.0" prefHeight="342.0" prefWidth="355.0" />
                      </children>
                   </Pane>
                </children>

@@ -63,10 +63,10 @@ public class ControladoraRetirar {
     				boolean success = false;
     				
     				if(controladoraOperations.isCreditCardSelected()) {
+    					bank.saveAction();
 	    				success = bank.retrieveCredit(selectedAccount,amount);
 	    			
-	    				if(success) {
-	    					bank.saveAction();
+	    				if(success) {	    					
 	    					Alert alert = new Alert(AlertType.INFORMATION);
 	                    	alert.setTitle("Alerta");
 	                    	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
@@ -76,6 +76,7 @@ public class ControladoraRetirar {
 	                    	alert.showAndWait();
 	    				}
 	    				else {
+	    					bank.undoLastAction();
 	    					Alert alert = new Alert(AlertType.ERROR);
 	                    	alert.setTitle("Alerta");
 	                    	alert.setHeaderText("La operacion que ha solicitado no fue realizada");
@@ -85,10 +86,11 @@ public class ControladoraRetirar {
 	    				}
     				}
 	    			else {
+	    				bank.saveAction();
 	    				success = bank.retrieveSavings(selectedAccount,amount);
 	    			
 	    				if(success) {
-	    					bank.saveAction();
+	    					
 	    					Alert alert = new Alert(AlertType.INFORMATION);
 	                    	alert.setTitle("Alerta");
 	                    	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
@@ -97,6 +99,7 @@ public class ControladoraRetirar {
 	                    	alert.showAndWait();
 	    				}
 	    				else {
+	    					bank.undoLastAction();
 	    					Alert alert = new Alert(AlertType.ERROR);
 	                    	alert.setTitle("Alerta");
 	                    	alert.setHeaderText("La operacion que ha solicitado no fue realizada");

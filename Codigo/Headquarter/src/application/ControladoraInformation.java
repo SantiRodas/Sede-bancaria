@@ -6,8 +6,6 @@
 
 package application;
 
-import java.time.LocalDate;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -87,7 +85,7 @@ public class ControladoraInformation {
 	@FXML
     public void search(ActionEvent event) {
     	
-    	if(searchText.getText().isEmpty()==false) {
+    	if(searchText.getText() != null && !searchText.getText().isEmpty()) {
     		
     		ActiveClient aux = bank.searchActiveClientById(searchText.getText());
     		
@@ -98,7 +96,8 @@ public class ControladoraInformation {
 	    		dateStartLabel.setText(aux.getStartDate().toString());
 	    	
 	    		initializeTableViewSA();
-	    	
+	    		tableSavingsAccount.refresh();
+	    		
 	    		if(aux.getLastCreditCardPayDate() != null) {
 	    			
 	    			datePayLabel.setText(aux.getLastCreditCardPayDate().toString());
@@ -110,7 +109,7 @@ public class ControladoraInformation {
 	    		}
 	    	
 	    		initializeTableViewCC();
-	    	
+	    		tableCredit.refresh();
     		} else {
     			
     			Alert alert = new Alert(AlertType.ERROR);

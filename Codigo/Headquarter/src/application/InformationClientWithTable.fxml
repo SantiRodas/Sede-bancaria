@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView fx:id="tableCredit" layoutX="13.0" layoutY="353.0" prefHeight="225.0" prefWidth="672.0">
         <columns>
@@ -18,7 +17,7 @@
             <TableColumn fx:id="columnSaldoDisponible" prefWidth="224.00006103515625" text="Saldo Disponible" />
         </columns>
       </TableView>
-      <TextField fx:id="textId" layoutX="25.0" layoutY="27.0" />
+      <TextField fx:id="searchText" layoutX="25.0" layoutY="27.0" />
       <Button fx:id="searchButton" layoutX="210.0" layoutY="24.0" mnemonicParsing="false" onAction="#search" text="Buscar" />
       <Label layoutX="59.0" layoutY="105.0" text="Nombre:">
          <font>

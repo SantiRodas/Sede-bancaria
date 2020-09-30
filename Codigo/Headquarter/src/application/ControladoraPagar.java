@@ -84,12 +84,11 @@ public class ControladoraPagar {
     				 
     				if(creditCardNumber != null && !creditCardNumber.isEmpty()) {
     					if(efectivoChoice.isSelected()) {
-	    					 
+    						bank.saveAction(); 
     						boolean success = bank.payCreditCard(creditCardNumber, amount);
 	    					 
     						if(success) {
-    							bank.saveAction();
-    	    					Alert alert = new Alert(AlertType.INFORMATION);
+    							Alert alert = new Alert(AlertType.INFORMATION);
     	                    	alert.setTitle("Alerta");
     	                    	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
     	                    	alert.setContentText("El nuevo de credito disponible de su tarjeta es: $" + bank.getCurrentActiveClient().getBalanceFromCreditCard(creditCardNumber)
@@ -97,6 +96,7 @@ public class ControladoraPagar {
     	                    	alert.showAndWait();
     						}
     						else {
+    							bank.undoLastAction();
     							Alert alert = new Alert(AlertType.ERROR);
     	                    	alert.setTitle("Alerta");
     	                    	alert.setHeaderText("La operacion que ha solicitado no fue realizada");
@@ -110,13 +110,14 @@ public class ControladoraPagar {
 	    					String accountNumber = accountsChoiceBox.getValue();	
 	    					
 	    					if(!accountNumber.isEmpty()) {
+	    						bank.saveAction();
 	    						boolean success1 = bank.retrieveSavings(accountNumber, amount);
 	    						
 	    						if(success1) {
+	    							
 	    							boolean success2 = bank.payCreditCard(creditCardNumber, amount);
-	    							if(success2) {
-	    								bank.saveAction();
-
+	    						
+	    							if(success2) {	    								
 	    								Alert alert = new Alert(AlertType.INFORMATION);
 	        	                    	alert.setTitle("Alerta");
 	        	                    	alert.setHeaderText("La operacion que ha solicitado fue realizada exitosamente");
@@ -131,6 +132,7 @@ public class ControladoraPagar {
 	        	                    	alert.showAndWait();
 	    							}
 	    							else {
+	    								bank.undoLastAction();
 	    								Alert alert = new Alert(AlertType.ERROR);
 	        	                    	alert.setTitle("Alerta");
 	        	                    	alert.setHeaderText("La operacion que ha solicitado no fue realizada");
@@ -139,6 +141,7 @@ public class ControladoraPagar {
 	    							}
 	    						}
 	    						else {
+	    							bank.undoLastAction();	    							
 	    							Alert alert = new Alert(AlertType.ERROR);
 	    	                    	alert.setTitle("Alerta");
 	    	                    	alert.setHeaderText("La operacion que ha solicitado no fue realizada");
@@ -206,6 +209,21 @@ public class ControladoraPagar {
     public void fillAccountsChoiceBox() {
     	String[] accounts = bank.getCurrentActiveClient().getSavingsAccountsNumbers();
     	accountsChoiceBox.getItems().addAll(accounts);
+    }
+    
+
+    @FXML
+    void updateOptionToCash(ActionEvent event) {
+    	pagarButton.setDisable(false);
+    	accountsChoiceBox.setDisable(true);
+    	cantidadText.setDisable(false);
+    }
+
+    @FXML
+    void updateOptionsToSavings(ActionEvent event) {
+    	pagarButton.setDisable(false);
+    	accountsChoiceBox.setDisable(false);
+    	cantidadText.setDisable(true);
     }
 
 }
