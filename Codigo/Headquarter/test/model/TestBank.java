@@ -162,7 +162,7 @@ class TestBank {
 		
 		setup1();
 		
-		assertNotNull(bank.getActiveClientsArray());
+		assertFalse(bank.getActiveClientsArray() == null);
 		
 	}
 	
