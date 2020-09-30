@@ -36,15 +36,17 @@ public class ControladoraGeneral {
 	
 	private Bank bank;
 	
+	private ActiveClient[] ac;
+	
 	//------------------------------------------------------------------------------------
 	
 	//Constructor method
 	
-	public ControladoraGeneral(ControladoraPrincipal cP, Bank b) {
+	public ControladoraGeneral(ControladoraPrincipal cP, Bank b, ActiveClient[] acArray) {
 		
 		controladoraPrincipal = cP;
 		bank = b;
-		
+		ac = acArray;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -105,7 +107,7 @@ public class ControladoraGeneral {
     
     public void initializeTableView() {
     	
-    	ObservableList<ActiveClient> observableList = FXCollections.observableArrayList(bank.getActiveClientsArray());
+    	ObservableList<ActiveClient> observableList = FXCollections.observableArrayList(ac);
     	
     	clientsTable.setItems(observableList);
     	
@@ -123,7 +125,7 @@ public class ControladoraGeneral {
     @FXML
 	public void go(ActionEvent event) throws IOException {
 		
-			if(choiceBoxSort.getValue().equals("")) {
+			if(choiceBoxSort.getValue() != null && choiceBoxSort.getValue().equals("")) {
 				
 					Alert alert = new Alert(AlertType.INFORMATION);
 				    alert.setTitle("Error");
@@ -136,23 +138,24 @@ public class ControladoraGeneral {
 				
 				if(choiceBoxSort.getValue().equals("Ordenar por nombre")) {
 					
-					bank.getSortedClients(SortCriteria.NAME);
+					ac = bank.getSortedClients(SortCriteria.NAME);
 					
-				} else if(choiceBoxSort.getValue().equals("Ordenar por fecha")) {
+				} else if(choiceBoxSort.getValue().equals("Ordenar por fecha de inicio")) {
 					
-					bank.getSortedClients(SortCriteria.START_DATE);
+					ac = bank.getSortedClients(SortCriteria.START_DATE);
 					
 				} else if(choiceBoxSort.getValue().equals("Ordenar por id")) {
 					
-					bank.getSortedClients(SortCriteria.ID);
+					ac = bank.getSortedClients(SortCriteria.ID);
 					
 				} else if(choiceBoxSort.getValue().equals("Ordenar por cumpleaños")) {
 					
-					bank.getSortedClients(SortCriteria.BIRTHDAY);
+					ac = bank.getSortedClients(SortCriteria.BIRTHDAY);
 					
 				}
 				
 				initializeTableView();
+				clientsTable.refresh();
 				
 			}
 			
@@ -208,7 +211,7 @@ public class ControladoraGeneral {
     void initialize() {
 		
     	choiceBoxSort.getItems().add("Ordenar por nombre");
-    	choiceBoxSort.getItems().add("Ordenar por nombre");
+    	choiceBoxSort.getItems().add("Ordenar por fecha de inicio");
     	choiceBoxSort.getItems().add("Ordenar por id");
     	choiceBoxSort.getItems().add("Ordenar por cumpleaños");
     	

@@ -161,7 +161,7 @@ public class ControladoraPrincipal {
 
     public void generalInformation() throws IOException {
     	
-    	ControladoraGeneral controladoraGeneral = new ControladoraGeneral(this, bank);
+    	ControladoraGeneral controladoraGeneral = new ControladoraGeneral(this, bank, bank.getActiveClientsArray());
     	    	
     	Stage primaryStage = new Stage();
     	

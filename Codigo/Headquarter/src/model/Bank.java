@@ -284,7 +284,7 @@ public class Bank {
 	
 	//Method to active client in the system
 	
-	public void getSortedClients(SortCriteria sortCriteria) {
+	public ActiveClient[] getSortedClients(SortCriteria sortCriteria) {
 				
 		Object[] objA = activeClients.getAll();
 		
@@ -318,6 +318,7 @@ public class Bank {
 				
 		}
 		
+		return ac;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -504,7 +505,7 @@ public class Bank {
 	
 	private void sortClientsByName(ActiveClient[] ac) {
 		
-		ac = PriorityQueue.heapsort(ac, new Comparator<ActiveClient>() {
+		PriorityQueue.heapsort(ac, new Comparator<ActiveClient>() {
 			
 			public int compare(ActiveClient ac1, ActiveClient ac2) {
 				
@@ -692,11 +693,11 @@ public class Bank {
 			@Override
 			public int compare(ActiveClient ac1, ActiveClient ac2) {
 				
-				if(ac1.getBirthday().compareTo(ac2.getBirthday()) > 0) {
+				if(ac1.getBirthday().isAfter(ac2.getBirthday())) {
 					
 					return 1;
 					
-				} else if(ac1.getBirthday().compareTo(ac2.getBirthday()) < 0) {
+				} else if(ac1.getBirthday().isBefore(ac2.getBirthday())) {
 					
 					return -1;
 					

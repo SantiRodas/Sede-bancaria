@@ -89,9 +89,7 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 				
 		for(int i = heapSize - 1; i > 0 && !check ; i = parent(i)) {
 			int parent = parent(i);
-			System.out.println(heap[i] == null);
-			System.out.println(heap[parent] == null);
-			System.out.println(comparator==null);
+			
 			if(comparator.compare(heap[i],heap[parent]) > 0) {
 				
 				E temp = heap[parent];
@@ -196,17 +194,14 @@ public class PriorityQueue<E> implements PriorityQueueInterface<E>{
 	
 	//Method to do heap sort
 	
-	public static<T> T[] heapsort(T[] array, Comparator<T> comparator){
+	public static<T> void heapsort(T[] array, Comparator<T> comparator){
 		
 		PriorityQueue<T> mH = new PriorityQueue<T>(array, array.length, comparator);
-		
-		for(int i = array.length - 1; i >= 0 ; i++) {
-			
+				
+		for(int i = array.length - 1; i >= 0 ; i--) {
 			array[i] = mH.heapExtractMax();
 			
-		}	
-		
-		return array;
+		}
 		
 	}
 	
