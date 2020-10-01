@@ -56,6 +56,10 @@ Ademas, una interfaz simple y minimalista permite el correcto uso para los usuar
 * Alejandra Diaz Parra
 * Juan Fernando Martinez
 
+## Licencia
+Este proyecto esta bajo la licencia (Creative Commons Zero v1.0 Universal) 
+Mas informacion en: https://github.com/SantiRodas/Sede-bancaria/blob/master/LICENSE
+
 ## Ejemplos de ventanas
 
 ![](https://github.com/SantiRodas/Sede-bancaria/blob/master/Extras/Imagenes/1.JPG)
