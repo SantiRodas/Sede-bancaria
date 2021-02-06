@@ -1,36 +1,36 @@
-# Sede bancaria
+# Bank headquarters
 
-Este programa funcional permite tener un mayor control de tiempo en cada una de las operaciones bancarias que un banco puede realizar.
-Desde el manejo de las filas con prioridas, hasta la utilizacion de una base de datos del sistema, el software optimiza de manera exponencial el lugar.
-Ademas, una interfaz simple y minimalista permite el correcto uso para los usuarios que la manejan. 
+This functional program allows to have a greater control of time in each one of the banking operations that a bank can carry out.
+From the management of the priority rows, to the use of a system database, the software exponentially optimizes the place.
+In addition, a simple and minimalist interface allows the correct use for the users who handle it.
 
-## Requisitos del programa
-* Software Java instalado.
-* Eclipse funcional.
+## Program requirements
+* Java software installed.
+* Eclipse functional.
 * JavaFx.
 
-## Utilizar el programa
-* Clonar el repositorio.
-* Acceder a la carpeta "Codigo/Headquarter"
-* Importar a Eclipse.
-* Ejecutar la clase Main en el paquete application.
+## Use the program
+* Clone the repository.
+* Access the folder "Codigo / Headquarter"
+* Import to Eclipse.
+* Execute the Main class in the application package.
 
-## Etapas de construccion
+## Stages of construction
 
-1. Analisis
+1. Analysis
 * https://github.com/SantiRodas/Sede-bancaria/blob/master/Documentacion/Informacion.pdf
 
-2. Diseño
+2. Design
 * https://github.com/SantiRodas/Sede-bancaria/tree/master/Documentacion
 
-3. Codigo
+3. Code
 * https://github.com/SantiRodas/Sede-bancaria/tree/master/Codigo/Headquarter/src
 
 4. Test
 * https://github.com/SantiRodas/Sede-bancaria/tree/master/Codigo/Headquarter/test
 
 
-## Pruebas unitarias
+## Unit tests
 1. (Collections)
 * Hash Table
 * Priority Queue
@@ -43,7 +43,7 @@ Ademas, una interfaz simple y minimalista permite el correcto uso para los usuar
 * Current Account
 * Savings Account
 
-## Herramientas de uso
+## Usage tools
 * Google Docs
 * Process Dashboard
 * LucidChart
@@ -51,16 +51,16 @@ Ademas, una interfaz simple y minimalista permite el correcto uso para los usuar
 * Eclipse
 * GitHub
 
-## Autores
+## Authors
 * Santiago Rodas Rodriguez
 * Alejandra Diaz Parra
 * Juan Fernando Martinez
 
-## Licencia
-Este proyecto esta bajo la licencia (Creative Commons Zero v1.0 Universal) 
-Mas informacion en: https://github.com/SantiRodas/Sede-bancaria/blob/master/LICENSE
+## License
+This project is under the license (Creative Commons Zero v1.0 Universal)
+More information in: https://github.com/SantiRodas/Sede-bancaria/blob/master/LICENSE
 
-## Ejemplos de ventanas
+## Window examples
 
 ![](https://github.com/SantiRodas/Sede-bancaria/blob/master/Extras/Imagenes/1.JPG)
 
