@@ -18,26 +18,28 @@ In addition, a simple and minimalist interface allows the correct use for the us
 ## Stages of construction
 
 1. Analysis
-* https://github.com/SantiRodas/Sede-bancaria/blob/master/Documentacion/Informacion.pdf
+* [Engineering method](https://github.com/SantiRodas/Sede-bancaria/blob/master/Documentacion/Informacion.pdf)
 
 2. Design
-* https://github.com/SantiRodas/Sede-bancaria/tree/master/Documentacion
+* [Docs](https://github.com/SantiRodas/Sede-bancaria/tree/master/Documentacion)
 
 3. Code
-* https://github.com/SantiRodas/Sede-bancaria/tree/master/Codigo/Headquarter/src
+* [src](https://github.com/SantiRodas/Sede-bancaria/tree/master/Codigo/Headquarter/src)
 
 4. Test
-* https://github.com/SantiRodas/Sede-bancaria/tree/master/Codigo/Headquarter/test
+* [Code](https://github.com/SantiRodas/Sede-bancaria/tree/master/Codigo/Headquarter/test)
 
 
 ## Unit tests
 1. (Collections)
+
 * Hash Table
 * Priority Queue
 * Queue
 * Stack
 
 2. (Model)
+
 * Active Client
 * Bank
 * Current Account
@@ -57,8 +59,7 @@ In addition, a simple and minimalist interface allows the correct use for the us
 * Juan Fernando Martinez
 
 ## License
-This project is under the license (Creative Commons Zero v1.0 Universal)
-More information in: https://github.com/SantiRodas/Sede-bancaria/blob/master/LICENSE
+* [Creative Commons Zero v1.0 Universal](https://github.com/SantiRodas/Sede-bancaria/blob/master/LICENSE)
 
 ## Window examples
 
